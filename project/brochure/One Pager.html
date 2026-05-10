@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>PRIAM — One Pager</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --teal-900: #07382C; --teal-700: #0F6E56; --teal-500: #1B9678; --teal-300: #5DCAA5; --teal-100: #C4ECDC;
+    --orange-500: #FB923C; --orange-400: #FDBA74;
+    --navy-900: #0B1220; --navy-800: #111A2E;
+    --cream-50: #F7F4EE; --cream-100: #F1ECE2; --cream-200: #E6DFCF;
+    --ink-900: #0E1216; --ink-700: #2A3038; --ink-500: #5A626E;
+    --font-sans: 'Inter', system-ui, sans-serif;
+    --font-display: 'Fraunces', Georgia, serif;
+    --font-mono: 'JetBrains Mono', ui-monospace, monospace;
+  }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; background: #2a2a2a; }
+  body { font-family: var(--font-sans); -webkit-font-smoothing: antialiased; }
+  img { display: block; max-width: 100%; }
+
+  .stage { padding: 40px; display: flex; flex-direction: column; gap: 32px; align-items: center; }
+
+  .page {
+    width: 8.5in; height: 11in;
+    background: var(--cream-50);
+    color: var(--ink-900);
+    box-shadow: 0 30px 80px rgba(0,0,0,0.4);
+    position: relative;
+    overflow: hidden;
+    page-break-after: always;
+  }
+  .page.dark { background: var(--navy-900); color: #F4F1EA; }
+
+  .mono {
+    font-family: var(--font-mono); font-size: 10px;
+    letter-spacing: 0.16em; text-transform: uppercase; color: var(--teal-700);
+  }
+  .page.dark .mono { color: var(--teal-300); }
+
+  .display {
+    font-family: var(--font-display); font-weight: 500; font-size: 56px;
+    line-height: 0.98; letter-spacing: -0.025em; margin: 0; text-wrap: balance;
+  }
+  .display em { font-style: italic; color: var(--teal-700); font-weight: 500; }
+  .page.dark .display em { color: var(--teal-300); }
+
+  .h2 { font-family: var(--font-display); font-weight: 500; font-size: 26px; line-height: 1.05; letter-spacing: -0.015em; margin: 0; }
+  .h3 { font-family: var(--font-display); font-weight: 500; font-size: 17px; line-height: 1.15; margin: 0; }
+  .lead { font-size: 14px; line-height: 1.45; color: var(--ink-700); margin: 0; text-wrap: pretty; }
+  .body { font-size: 11.5px; line-height: 1.5; color: var(--ink-700); margin: 0; text-wrap: pretty; }
+  .page.dark .lead, .page.dark .body { color: rgba(244,241,234,0.78); }
+
+  /* === FRONT === */
+  .front-pad { padding: 0.55in 0.6in; height: 100%; display: flex; flex-direction: column; }
+  .front-head { display: flex; justify-content: space-between; align-items: flex-end; padding-bottom: 24px; border-bottom: 1px solid rgba(15,110,86,0.18); }
+  .front-head img { height: 36px; }
+  .front-meta { text-align: right; }
+  .front-meta .row { font-family: var(--font-mono); font-size: 10px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--ink-500); }
+
+  .hero { padding: 36px 0 28px; display: grid; grid-template-columns: 1.05fr 0.95fr; gap: 40px; align-items: center; }
+  .hero .pill { display: inline-flex; align-items: center; gap: 6px; padding: 6px 12px; background: rgba(15,110,86,0.10); color: var(--teal-700); border-radius: 999px; font-size: 11px; font-weight: 500; margin-bottom: 16px; }
+  .hero .pill .dot { width: 6px; height: 6px; border-radius: 999px; background: var(--teal-500); }
+  .hero-shot {
+    position: relative; aspect-ratio: 4 / 3;
+    background: var(--navy-900); border-radius: 12px; overflow: hidden;
+    box-shadow: 0 18px 36px -12px rgba(7,56,44,0.32), 0 0 0 1px rgba(14,18,22,0.06);
+  }
+  .hero-shot img { width: 100%; height: 100%; object-fit: cover; object-position: top left; }
+
+  .acronym { display: grid; grid-template-columns: repeat(5, 1fr); gap: 8px; margin: 12px 0 18px; }
+  .acro {
+    background: #FFFFFF; border: 1px solid rgba(14,18,22,0.06); border-radius: 12px;
+    padding: 14px 12px; min-height: 110px; display: flex; flex-direction: column; gap: 6px;
+  }
+  .acro .L { font-family: var(--font-display); font-size: 36px; line-height: 0.9; color: var(--teal-700); font-weight: 500; letter-spacing: -0.03em; }
+  .acro .w { font-family: var(--font-mono); font-size: 9px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--ink-500); }
+  .acro .d { font-size: 10.5px; line-height: 1.35; color: var(--ink-700); margin-top: auto; }
+
+  .why-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-top: 14px; }
+  .why { padding: 14px; background: #FFFFFF; border: 1px solid rgba(14,18,22,0.06); border-radius: 10px; }
+  .why .num { font-family: var(--font-mono); font-size: 9px; letter-spacing: 0.14em; color: var(--orange-500); margin-bottom: 6px; }
+  .why h4 { font-family: var(--font-display); font-weight: 500; font-size: 15px; margin: 0 0 4px; line-height: 1.15; }
+  .why p { font-size: 11px; line-height: 1.4; color: var(--ink-700); margin: 0; }
+
+  .front-foot { margin-top: auto; padding-top: 18px; border-top: 1px solid rgba(15,110,86,0.18); display: flex; justify-content: space-between; align-items: center; }
+  .front-foot .url { font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.10em; color: var(--teal-700); }
+  .front-foot .ack { font-family: var(--font-mono); font-size: 9px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--ink-500); }
+
+  /* === BACK === */
+  .back-pad { padding: 0.55in 0.6in; height: 100%; display: flex; flex-direction: column; gap: 22px; }
+  .back-head { display: flex; justify-content: space-between; align-items: flex-end; padding-bottom: 18px; border-bottom: 1px solid rgba(196,236,220,0.14); }
+  .back-head .mono { color: var(--teal-300); }
+  .back-head img { height: 30px; }
+
+  .module {
+    display: grid; grid-template-columns: 1.1fr 1fr; gap: 18px; align-items: center;
+    padding: 14px 0;
+  }
+  .module + .module { border-top: 1px solid rgba(196,236,220,0.12); }
+  .module .copy { display: flex; flex-direction: column; gap: 6px; }
+  .module .copy .h2 { font-size: 22px; }
+  .module .copy .body { color: rgba(244,241,234,0.78); font-size: 11.5px; }
+  .module .shot {
+    border-radius: 8px; overflow: hidden;
+    box-shadow: 0 0 0 1px rgba(244,241,234,0.08);
+  }
+  .module .shot img { width: 100%; height: 130px; object-fit: cover; object-position: top left; }
+
+  .pillars { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; margin-top: 8px; }
+  .pillar { padding: 12px; background: rgba(244,241,234,0.04); border: 1px solid rgba(244,241,234,0.10); border-radius: 10px; }
+  .pillar .label { font-family: var(--font-mono); font-size: 9px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--teal-300); margin-bottom: 6px; }
+  .pillar h5 { font-family: var(--font-display); font-weight: 500; font-size: 14px; margin: 0 0 6px; line-height: 1.15; }
+  .pillar p { font-size: 10.5px; line-height: 1.35; color: rgba(244,241,234,0.72); margin: 0; }
+
+  .back-cta {
+    margin-top: auto;
+    background: linear-gradient(135deg, var(--teal-900) 0%, var(--teal-700) 100%);
+    border-radius: 12px; padding: 22px 24px;
+    display: grid; grid-template-columns: 1.4fr 1fr; gap: 24px; align-items: center;
+  }
+  .back-cta .h2 { font-size: 28px; color: #F4FBF7; }
+  .back-cta .body { color: rgba(244,251,247,0.85); font-size: 12px; }
+  .back-cta .ways { display: flex; flex-direction: column; gap: 8px; }
+  .back-cta .way { padding: 10px 12px; background: rgba(244,251,247,0.08); border: 1px solid rgba(244,251,247,0.16); border-radius: 8px; }
+  .back-cta .way .label { font-family: var(--font-mono); font-size: 9px; letter-spacing: 0.16em; text-transform: uppercase; color: var(--orange-400); margin-bottom: 3px; }
+  .back-cta .way .url { font-family: var(--font-mono); font-size: 12px; color: #FFFFFF; }
+  .back-cta .way .desc { font-size: 10px; color: rgba(244,251,247,0.72); margin-top: 2px; }
+
+  .back-foot { padding-top: 12px; border-top: 1px solid rgba(244,241,234,0.10); display: flex; justify-content: space-between; font-family: var(--font-mono); font-size: 9px; letter-spacing: 0.12em; color: rgba(244,241,234,0.5); }
+
+  /* PRINT */
+  @media print {
+    html, body { background: #FFFFFF; }
+    .stage { padding: 0; gap: 0; }
+    .page { box-shadow: none; }
+    @page { size: 8.5in 11in; margin: 0; }
+  }
+</style>
+</head>
+<body>
+<div class="stage">
+
+<!-- ============= FRONT ============= -->
+<div class="page" data-screen-label="01 Front">
+  <div class="front-pad">
+    <div class="front-head">
+      <img src="assets/priam-logo.svg" alt="PRIAM">
+      <div class="front-meta">
+        <div class="row">Risk &amp; Asset Management for SMBs</div>
+        <div class="row" style="margin-top:4px; color:var(--teal-700)">priam.app</div>
+      </div>
+    </div>
+
+    <div class="hero">
+      <div>
+        <span class="pill"><span class="dot"></span>Built for SMB owners, not GRC teams</span>
+        <h1 class="display">Risk visibility, <em>without the overhead.</em></h1>
+        <p class="lead" style="margin-top:14px">PRIAM is the simple platform for small businesses to track policies, assess risk, log incidents, and keep tabs on every asset — all in one place.</p>
+      </div>
+      <div class="hero-shot"><img src="assets/admin-dashboard.png" alt="PRIAM dashboard"></div>
+    </div>
+
+    <span class="mono">The platform · five letters, one source of truth</span>
+    <div class="acronym">
+      <div class="acro"><span class="L">P</span><span class="w">Policy</span><span class="d">Living documents — drafted, published, versioned, acknowledged.</span></div>
+      <div class="acro"><span class="L">R</span><span class="w">Risk</span><span class="d">Adaptive, industry-aware questionnaires with prioritised fixes.</span></div>
+      <div class="acro"><span class="L">I</span><span class="w">Incident</span><span class="d">Queue-based tracking with a clear owner at every stage.</span></div>
+      <div class="acro"><span class="L">A</span><span class="w">Asset</span><span class="d">People, customers, suppliers, devices — all linkable.</span></div>
+      <div class="acro"><span class="L">M</span><span class="w">Management</span><span class="d">One dashboard, role-based access, audit trail built-in.</span></div>
+    </div>
+
+    <span class="mono">Why PRIAM</span>
+    <div class="why-grid">
+      <div class="why">
+        <div class="num">01 · SIMPLICITY</div>
+        <h4>No GRC vocabulary required.</h4>
+        <p>Plain language, sensible defaults, zero implementation consultants.</p>
+      </div>
+      <div class="why">
+        <div class="num">02 · QUEUE-BASED</div>
+        <h4>Reports never stall in inboxes.</h4>
+        <p>Every incident has a clear owner at every stage — and an audit trail that writes itself.</p>
+      </div>
+      <div class="why">
+        <div class="num">03 · ADAPTIVE</div>
+        <h4>Only the questions that apply.</h4>
+        <p>Industry classification drives the questionnaire. Skip what's irrelevant; go deep where it matters.</p>
+      </div>
+      <div class="why">
+        <div class="num">04 · ASSEMBLED</div>
+        <h4>Four functions, shared data.</h4>
+        <p>Policies, risk, incidents and assets reference each other — not four spreadsheets.</p>
+      </div>
+    </div>
+
+    <div class="front-foot">
+      <span class="url">priam.app/start  ·  Free trial in 5 minutes</span>
+      <span class="ack">© 2026 PRIAM · Page 1 of 2</span>
+    </div>
+  </div>
+</div>
+
+<!-- ============= BACK ============= -->
+<div class="page dark" data-screen-label="02 Back">
+  <div class="back-pad">
+    <div class="back-head">
+      <img src="assets/priam-logo.svg" alt="PRIAM" style="filter: brightness(0) invert(1)">
+      <span class="mono">Inside the platform</span>
+    </div>
+
+    <div>
+      <div class="module">
+        <div class="copy">
+          <span class="mono">01 · Policy management</span>
+          <h2 class="h2">Policies your team actually reads.</h2>
+          <p class="body">Versioned documents with status, scheduled effective dates, and per-employee acknowledgement tracking.</p>
+        </div>
+        <div class="shot"><img src="assets/policy-mgmt.png" alt="Policy management"></div>
+      </div>
+
+      <div class="module">
+        <div class="copy">
+          <span class="mono">02 · Risk assessment</span>
+          <h2 class="h2">Built around your industry.</h2>
+          <p class="body">Adaptive DAG questionnaire by NAICS code. Headline score, likelihood-vs-impact matrix, prioritised recommendations.</p>
+        </div>
+        <div class="shot"><img src="assets/risk-results.png" alt="Risk results"></div>
+      </div>
+
+      <div class="module">
+        <div class="copy">
+          <span class="mono">03 · Incident management</span>
+          <h2 class="h2">Every report gets an owner.</h2>
+          <p class="body">Queue-based — submitted, assigned, active, resolved, closed. See patterns across the organisation, not just tickets.</p>
+        </div>
+        <div class="shot"><img src="assets/incident-analytics.png" alt="Incident analytics"></div>
+      </div>
+
+      <div class="module">
+        <div class="copy">
+          <span class="mono">+ HIPAA Assessment · Platform Administration</span>
+          <h2 class="h2">Annual HIPAA refreshers + admin control plane.</h2>
+          <p class="body">25-question, 30-minute HIPAA &amp; Data Privacy assessment with auto-issued certificates. Admins author master policy templates, define recommendation rules, and track participants from one portal.</p>
+        </div>
+        <div class="shot"><img src="assets/hipaa-admin.png" alt="HIPAA admin"></div>
+      </div>
+    </div>
+
+    <span class="mono">Multi-tenant by design</span>
+    <div class="pillars">
+      <div class="pillar">
+        <div class="label">Roles</div>
+        <h5>Five built-in roles.</h5>
+        <p>Super, Admin, Manager, Employee, Viewer — covering almost every SMB org chart.</p>
+      </div>
+      <div class="pillar">
+        <div class="label">Isolation</div>
+        <h5>Tenant ID on every record.</h5>
+        <p>Query-level enforcement. Per-tenant Firestore scoping. No cross-tenant leakage by design.</p>
+      </div>
+      <div class="pillar">
+        <div class="label">Audit</div>
+        <h5>The trail writes itself.</h5>
+        <p>Immutable assessment logs, status-change history per incident, policy version chain.</p>
+      </div>
+    </div>
+
+    <div class="back-cta">
+      <div>
+        <h2 class="h2">Set it up Monday. Run a real assessment Friday.</h2>
+        <p class="body" style="margin-top:8px">Free to start. No credit card. No implementation call.</p>
+      </div>
+      <div class="ways">
+        <div class="way">
+          <div class="label">Self-serve</div>
+          <div class="url">priam.app/start</div>
+          <div class="desc">Free trial · setup in 5 minutes</div>
+        </div>
+        <div class="way">
+          <div class="label">Guided</div>
+          <div class="url">priam.app/demo</div>
+          <div class="desc">20-minute walkthrough with sample data</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="back-foot">
+      <span>© 2026 PRIAM · ALL RIGHTS RESERVED</span>
+      <span>POLICY · RISK · INCIDENT · ASSET · MANAGEMENT</span>
+    </div>
+  </div>
+</div>
+
+</div>
+</body>
+</html>

@@ -1,0 +1,1209 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>PRIAM — Risk visibility, without the GRC team</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="PRIAM is the simple platform for small businesses to track policies, assess risk, log incidents, and keep tabs on every asset — all in one place.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+
+<style>
+  :root {
+    --font-sans: 'Inter', system-ui, -apple-system, sans-serif;
+    --font-display: 'Fraunces', Georgia, serif;
+    --font-mono: 'JetBrains Mono', ui-monospace, monospace;
+
+    --teal-900: #07382C;
+    --teal-700: #0F6E56;
+    --teal-500: #1B9678;
+    --teal-300: #5DCAA5;
+    --teal-100: #C4ECDC;
+    --mint-50:  #E9F7F1;
+
+    --orange-500: #FB923C;
+    --orange-400: #FDBA74;
+
+    --navy-900: #0B1220;
+    --navy-800: #111A2E;
+    --navy-700: #18233D;
+
+    --cream-50:  #F7F4EE;
+    --cream-100: #F1ECE2;
+    --cream-200: #E6DFCF;
+    --ink-900: #0E1216;
+    --ink-700: #2A3038;
+    --ink-500: #5A626E;
+    --ink-300: #8E96A2;
+
+    --accent: var(--teal-700);
+    --accent-soft: var(--teal-100);
+    --accent-bright: var(--teal-500);
+    --accent-on-dark: var(--teal-300);
+    --warm: var(--orange-500);
+  }
+
+  * { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; }
+  body {
+    font-family: var(--font-sans);
+    background: var(--cream-50);
+    color: var(--ink-900);
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+  }
+  img { display: block; max-width: 100%; }
+  a { color: inherit; text-decoration: none; }
+
+  /* === SECTION CHROME === */
+  .section { padding: 120px 80px; }
+  .section.tight { padding: 80px 80px; }
+  .section.huge { padding: 160px 80px; }
+  .container { max-width: 1280px; margin: 0 auto; }
+
+  .bg-cream { background: var(--cream-50); color: var(--ink-900); }
+  .bg-cream-deep { background: var(--cream-100); color: var(--ink-900); }
+  .bg-mint { background: var(--mint-50); color: var(--ink-900); }
+  .bg-white { background: #FFFFFF; color: var(--ink-900); }
+  .bg-navy { background: var(--navy-900); color: #F4F1EA; }
+  .bg-navy-soft { background: var(--navy-800); color: #F4F1EA; }
+  .bg-teal {
+    background: linear-gradient(135deg, var(--teal-900) 0%, var(--teal-700) 100%);
+    color: #F4FBF7;
+  }
+
+  /* === TYPOGRAPHY === */
+  .eyebrow {
+    font-family: var(--font-mono);
+    font-size: 14px;
+    font-weight: 500;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin: 0;
+  }
+  .bg-navy .eyebrow, .bg-navy-soft .eyebrow { color: var(--accent-on-dark); }
+  .bg-teal .eyebrow { color: var(--orange-400); }
+
+  h1.display {
+    font-family: var(--font-display);
+    font-weight: 500;
+    font-size: clamp(56px, 6.4vw, 96px);
+    line-height: 1.0;
+    letter-spacing: -0.025em;
+    margin: 0;
+    text-wrap: balance;
+  }
+  h2.title {
+    font-family: var(--font-display);
+    font-weight: 500;
+    font-size: clamp(40px, 4.4vw, 64px);
+    line-height: 1.05;
+    letter-spacing: -0.02em;
+    margin: 0;
+    text-wrap: balance;
+  }
+  h3.heading {
+    font-family: var(--font-display);
+    font-weight: 500;
+    font-size: 32px;
+    line-height: 1.15;
+    letter-spacing: -0.012em;
+    margin: 0;
+  }
+  h4.subheading {
+    font-family: var(--font-sans);
+    font-weight: 600;
+    font-size: 19px;
+    line-height: 1.3;
+    letter-spacing: -0.005em;
+    margin: 0;
+  }
+  p.lead {
+    font-size: 22px;
+    line-height: 1.45;
+    color: var(--ink-700);
+    margin: 0;
+    text-wrap: pretty;
+  }
+  .bg-navy p.lead, .bg-navy-soft p.lead, .bg-teal p.lead { color: rgba(244,241,234,0.78); }
+  p.body {
+    font-size: 17px;
+    line-height: 1.6;
+    color: var(--ink-700);
+    margin: 0;
+    text-wrap: pretty;
+  }
+  .bg-navy p.body, .bg-navy-soft p.body, .bg-teal p.body { color: rgba(244,241,234,0.72); }
+
+  /* === SECTION HEADER STYLES === */
+  .section-header { display: flex; flex-direction: column; gap: 14px; margin-bottom: 56px; }
+  .section-header .eyebrow-row { display: flex; align-items: center; gap: 14px; }
+  [data-header-style="bar"] .section-header .eyebrow-row::before {
+    content: ""; display: block; width: 36px; height: 2px; background: var(--accent);
+  }
+  .bg-navy[data-header-style="bar"] .section-header .eyebrow-row::before,
+  .bg-navy-soft[data-header-style="bar"] .section-header .eyebrow-row::before { background: var(--accent-on-dark); }
+  [data-header-style="dot"] .section-header .eyebrow-row::before {
+    content: ""; display: block; width: 10px; height: 10px; border-radius: 999px; background: var(--accent);
+  }
+  .bg-navy[data-header-style="dot"] .section-header .eyebrow-row::before,
+  .bg-navy-soft[data-header-style="dot"] .section-header .eyebrow-row::before { background: var(--accent-on-dark); }
+
+  /* === BUTTONS === */
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    height: 52px;
+    padding: 0 24px;
+    border-radius: 12px;
+    font-family: var(--font-sans);
+    font-size: 16px;
+    font-weight: 600;
+    letter-spacing: -0.005em;
+    cursor: pointer;
+    border: 1px solid transparent;
+    transition: transform .15s ease, background .15s ease, border-color .15s ease, color .15s ease;
+  }
+  .btn:hover { transform: translateY(-1px); }
+  .btn-primary { background: var(--accent); color: #FFFFFF; }
+  .btn-primary:hover { background: var(--teal-900); }
+  .btn-secondary {
+    background: transparent;
+    color: var(--ink-900);
+    border-color: rgba(14,18,22,0.16);
+  }
+  .btn-secondary:hover { background: rgba(14,18,22,0.04); border-color: rgba(14,18,22,0.32); }
+  .bg-navy .btn-secondary, .bg-navy-soft .btn-secondary, .bg-teal .btn-secondary {
+    color: #F4F1EA;
+    border-color: rgba(244,241,234,0.24);
+  }
+  .bg-navy .btn-secondary:hover { background: rgba(244,241,234,0.06); }
+  .btn-ghost {
+    height: 40px;
+    padding: 0 14px;
+    border-radius: 8px;
+    background: transparent;
+    color: var(--ink-700);
+    font-weight: 500;
+  }
+  .btn-ghost:hover { background: rgba(14,18,22,0.05); }
+
+  /* === NAV === */
+  nav.top {
+    position: sticky;
+    top: 0;
+    z-index: 50;
+    background: rgba(247,244,238,0.85);
+    backdrop-filter: saturate(140%) blur(12px);
+    -webkit-backdrop-filter: saturate(140%) blur(12px);
+    border-bottom: 1px solid rgba(14,18,22,0.06);
+  }
+  nav.top .row {
+    max-width: 1440px;
+    margin: 0 auto;
+    height: 76px;
+    padding: 0 40px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  nav.top .brand { display: flex; align-items: center; gap: 12px; }
+  nav.top .brand img { height: 36px; }
+  nav.top .links { display: flex; align-items: center; gap: 4px; }
+  nav.top .links a { font-size: 15px; color: var(--ink-700); padding: 8px 14px; border-radius: 8px; font-weight: 500; }
+  nav.top .links a:hover { background: rgba(14,18,22,0.05); color: var(--ink-900); }
+  nav.top .cta { display: flex; gap: 10px; align-items: center; }
+
+  /* === HERO === */
+  .hero {
+    padding: 80px 80px 0;
+    position: relative;
+    overflow: hidden;
+  }
+  .hero-inner {
+    max-width: 1440px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 1.05fr 1fr;
+    gap: 72px;
+    align-items: center;
+    padding-bottom: 100px;
+  }
+  .hero-copy { display: flex; flex-direction: column; gap: 28px; max-width: 640px; }
+  .hero h1 .accent { color: var(--accent); font-style: italic; }
+  .hero-cta { display: flex; gap: 14px; margin-top: 12px; }
+  .hero-meta {
+    display: flex; gap: 28px; margin-top: 20px;
+    font-family: var(--font-mono); font-size: 13px; letter-spacing: 0.08em; text-transform: uppercase;
+    color: var(--ink-500);
+  }
+  .hero-meta span::before { content: "✓"; margin-right: 8px; color: var(--accent-bright); }
+
+  .hero-visual {
+    position: relative;
+    aspect-ratio: 16 / 11;
+    border-radius: 18px;
+    overflow: visible;
+    box-shadow:
+      0 60px 120px -40px rgba(7,56,44,0.35),
+      0 20px 40px -20px rgba(11,18,32,0.18),
+      0 0 0 1px rgba(14,18,22,0.06);
+    background: var(--navy-900);
+  }
+  .hero-visual > img {
+    width: 100%; height: 100%; object-fit: cover; object-position: top left;
+    border-radius: 18px;
+    display: block;
+  }
+  .hero-visual .float-card {
+    position: absolute;
+    background: #FFFFFF;
+    border-radius: 14px;
+    padding: 18px 22px;
+    box-shadow: 0 24px 48px -16px rgba(11,18,32,0.32), 0 0 0 1px rgba(14,18,22,0.05);
+    display: flex; align-items: center; gap: 14px;
+    z-index: 2;
+  }
+  .hero-visual .float-card.tl { top: 28px; left: -38px; }
+  .hero-visual .float-card.br { bottom: 36px; right: -36px; }
+  .hero-visual .float-card .dot {
+    width: 10px; height: 10px; border-radius: 999px;
+  }
+  .hero-visual .float-card .label {
+    font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.12em; text-transform: uppercase;
+    color: var(--ink-500);
+  }
+  .hero-visual .float-card .val { font-size: 18px; font-weight: 600; color: var(--ink-900); }
+
+  /* === PROBLEM STRIP === */
+  .problem-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 24px;
+    margin-top: 48px;
+  }
+  .problem-card {
+    background: var(--cream-50);
+    border-radius: 18px;
+    padding: 32px;
+    border: 1px solid rgba(14,18,22,0.06);
+    display: flex; flex-direction: column; gap: 14px;
+    min-height: 220px;
+  }
+  .problem-card .glyph {
+    font-family: var(--font-mono);
+    font-size: 12px; letter-spacing: 0.16em; text-transform: uppercase; color: var(--ink-500);
+  }
+  .problem-card .head { font-family: var(--font-display); font-weight: 500; font-size: 28px; line-height: 1.1; letter-spacing: -0.012em; }
+  .problem-card .sub { font-size: 16px; line-height: 1.5; color: var(--ink-700); }
+  .problem-card .stat { margin-top: auto; font-family: var(--font-mono); font-size: 12px; color: var(--accent); letter-spacing: 0.08em; text-transform: uppercase; }
+
+  /* === ACRONYM === */
+  .acronym-row {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 16px;
+    margin-top: 56px;
+  }
+  .acronym-card {
+    background: #FFFFFF;
+    border: 1px solid rgba(14,18,22,0.06);
+    border-radius: 18px;
+    padding: 28px 24px 32px;
+    display: flex; flex-direction: column; gap: 14px;
+    min-height: 280px;
+    transition: transform .2s ease, box-shadow .2s ease;
+  }
+  .acronym-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 24px 48px -20px rgba(7,56,44,0.18);
+  }
+  .acronym-card .letter {
+    font-family: var(--font-display);
+    font-weight: 500;
+    font-size: 80px;
+    line-height: 0.9;
+    color: var(--accent);
+    letter-spacing: -0.03em;
+  }
+  .acronym-card .word {
+    font-family: var(--font-mono);
+    font-size: 12px; letter-spacing: 0.16em; text-transform: uppercase; color: var(--ink-500);
+  }
+  .acronym-card .name { font-family: var(--font-display); font-size: 24px; font-weight: 500; line-height: 1.1; }
+  .acronym-card .desc { font-size: 14px; line-height: 1.5; color: var(--ink-700); margin-top: auto; }
+
+  /* === MODULE BLOCK === */
+  .module {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 80px;
+    align-items: center;
+  }
+  .module.flip .module-copy { order: 2; }
+  .module-copy { display: flex; flex-direction: column; gap: 24px; max-width: 540px; }
+  .module-copy .features { display: flex; flex-direction: column; gap: 16px; margin-top: 12px; }
+  .module-copy .feature {
+    display: flex; gap: 14px; align-items: flex-start;
+    padding: 14px 0;
+    border-top: 1px solid rgba(14,18,22,0.08);
+  }
+  .module-copy .feature:last-child { border-bottom: 1px solid rgba(14,18,22,0.08); }
+  .bg-navy .module-copy .feature, .bg-navy-soft .module-copy .feature { border-color: rgba(244,241,234,0.12); }
+  .bg-navy .module-copy .feature:last-child, .bg-navy-soft .module-copy .feature:last-child { border-color: rgba(244,241,234,0.12); }
+  .module-copy .feature .num {
+    font-family: var(--font-mono); font-size: 12px; letter-spacing: 0.12em; color: var(--accent);
+    min-width: 36px; padding-top: 4px;
+  }
+  .bg-navy .module-copy .feature .num, .bg-navy-soft .module-copy .feature .num { color: var(--accent-on-dark); }
+  .module-copy .feature .body { font-size: 16px; line-height: 1.5; color: inherit; }
+  .module-copy .feature strong { font-weight: 600; }
+
+  .module-visual {
+    border-radius: 18px;
+    overflow: hidden;
+    background: var(--navy-900);
+    box-shadow: 0 40px 80px -32px rgba(7,56,44,0.28), 0 0 0 1px rgba(14,18,22,0.06);
+  }
+  .bg-navy .module-visual, .bg-navy-soft .module-visual {
+    box-shadow: 0 40px 80px -32px rgba(0,0,0,0.6), 0 0 0 1px rgba(244,241,234,0.06);
+  }
+  .module-visual img { width: 100%; height: auto; display: block; }
+
+  /* === QUEUE DIAGRAM === */
+  .queue {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 12px;
+    margin-top: 36px;
+  }
+  .queue-step {
+    background: rgba(244,241,234,0.04);
+    border: 1px solid rgba(244,241,234,0.10);
+    border-radius: 12px;
+    padding: 18px 16px;
+    display: flex; flex-direction: column; gap: 6px;
+    position: relative;
+  }
+  .queue-step .num { font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.14em; color: var(--accent-on-dark); }
+  .queue-step .label { font-size: 16px; font-weight: 600; }
+  .queue-step .who { font-family: var(--font-mono); font-size: 11px; color: rgba(244,241,234,0.55); }
+  .queue-step + .queue-step::before {
+    content: "→"; position: absolute; left: -14px; top: 50%; transform: translateY(-50%);
+    color: rgba(244,241,234,0.32); font-size: 14px;
+  }
+
+  /* === DIFFERENTIATORS === */
+  .diff-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 8px;
+    margin-top: 56px;
+  }
+  .diff-card {
+    padding: 36px;
+    border-radius: 18px;
+    background: rgba(244,251,247,0.04);
+    border: 1px solid rgba(244,251,247,0.10);
+    display: flex; flex-direction: column; gap: 14px;
+    min-height: 240px;
+  }
+  .diff-card .num {
+    font-family: var(--font-mono); font-size: 13px; letter-spacing: 0.16em; color: var(--orange-400);
+  }
+  .diff-card .head { font-family: var(--font-display); font-size: 32px; font-weight: 500; line-height: 1.1; letter-spacing: -0.012em; }
+  .diff-card .desc { font-size: 16px; line-height: 1.55; color: rgba(244,251,247,0.74); margin-top: auto; }
+
+  /* === ROLES + SECURITY === */
+  .pillars {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 24px;
+    margin-top: 56px;
+  }
+  .pillar {
+    background: rgba(244,241,234,0.04);
+    border: 1px solid rgba(244,241,234,0.10);
+    border-radius: 18px;
+    padding: 32px;
+    display: flex; flex-direction: column; gap: 14px;
+    min-height: 280px;
+  }
+  .pillar .label { font-family: var(--font-mono); font-size: 12px; letter-spacing: 0.16em; text-transform: uppercase; color: var(--accent-on-dark); }
+  .pillar .head { font-family: var(--font-display); font-size: 26px; font-weight: 500; line-height: 1.15; }
+  .pillar ul { list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 10px; margin-top: auto; }
+  .pillar li { font-size: 14px; line-height: 1.5; color: rgba(244,241,234,0.72); padding-left: 18px; position: relative; }
+  .pillar li::before { content: ""; position: absolute; left: 0; top: 9px; width: 6px; height: 6px; background: var(--accent-on-dark); border-radius: 999px; }
+
+  /* === SETUP STEPS === */
+  .steps { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; margin-top: 56px; }
+  .step {
+    background: #FFFFFF;
+    border: 1px solid rgba(14,18,22,0.08);
+    border-radius: 18px;
+    padding: 36px;
+    display: flex; flex-direction: column; gap: 14px;
+    min-height: 280px;
+  }
+  .step .num {
+    font-family: var(--font-display); font-size: 56px; font-weight: 500; line-height: 1;
+    color: var(--accent); letter-spacing: -0.02em;
+  }
+  .step .head { font-family: var(--font-display); font-size: 26px; font-weight: 500; line-height: 1.15; }
+  .step .desc { font-size: 15px; line-height: 1.55; color: var(--ink-700); margin-top: auto; }
+  .step .time { font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.14em; color: var(--ink-500); text-transform: uppercase; }
+
+  /* === FAQ === */
+  .faq-list { display: flex; flex-direction: column; gap: 0; margin-top: 56px; }
+  .faq {
+    border-top: 1px solid rgba(14,18,22,0.10);
+    padding: 28px 4px;
+    cursor: pointer;
+  }
+  .faq:last-child { border-bottom: 1px solid rgba(14,18,22,0.10); }
+  .faq summary {
+    list-style: none;
+    display: flex; align-items: center; justify-content: space-between; gap: 24px;
+    font-family: var(--font-display); font-size: 26px; font-weight: 500; line-height: 1.2;
+    letter-spacing: -0.01em;
+  }
+  .faq summary::-webkit-details-marker { display: none; }
+  .faq summary .plus {
+    width: 36px; height: 36px; border-radius: 999px;
+    border: 1px solid rgba(14,18,22,0.16);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 20px; font-weight: 400; color: var(--ink-700);
+    transition: transform .2s ease, background .2s ease;
+    flex-shrink: 0;
+  }
+  .faq[open] summary .plus { transform: rotate(45deg); background: var(--accent); color: #FFFFFF; border-color: transparent; }
+  .faq .answer {
+    font-size: 17px; line-height: 1.6; color: var(--ink-700);
+    max-width: 760px;
+    margin-top: 16px;
+  }
+
+  /* === FINAL CTA === */
+  .cta-block {
+    text-align: center;
+    display: flex; flex-direction: column; align-items: center; gap: 28px;
+  }
+  .cta-block h2 { max-width: 18ch; }
+  .cta-block .cta-row { display: flex; gap: 14px; margin-top: 12px; }
+  .cta-block .btn-primary { background: #FFFFFF; color: var(--teal-900); }
+  .cta-block .btn-primary:hover { background: var(--cream-50); }
+  .cta-block .btn-secondary { color: #FFFFFF; border-color: rgba(255,255,255,0.32); }
+
+  /* === FOOTER === */
+  footer.foot {
+    background: var(--navy-900);
+    color: rgba(244,241,234,0.7);
+    padding: 80px 80px 40px;
+  }
+  footer.foot .row {
+    max-width: 1280px; margin: 0 auto;
+    display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 64px;
+    padding-bottom: 56px;
+    border-bottom: 1px solid rgba(244,241,234,0.10);
+  }
+  footer.foot .brand { display: flex; flex-direction: column; gap: 18px; max-width: 320px; }
+  footer.foot .brand img { height: 40px; }
+  footer.foot .brand p { font-size: 14px; line-height: 1.55; color: rgba(244,241,234,0.65); }
+  footer.foot h5 { font-family: var(--font-mono); font-size: 12px; letter-spacing: 0.16em; text-transform: uppercase; color: rgba(244,241,234,0.5); margin: 0 0 18px; font-weight: 500; }
+  footer.foot ul { list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 12px; }
+  footer.foot a { font-size: 14px; color: rgba(244,241,234,0.78); }
+  footer.foot a:hover { color: #FFFFFF; }
+  footer.foot .legal {
+    max-width: 1280px; margin: 0 auto;
+    padding-top: 32px;
+    display: flex; justify-content: space-between; align-items: center;
+    font-family: var(--font-mono); font-size: 12px; letter-spacing: 0.08em; color: rgba(244,241,234,0.45);
+  }
+
+  /* === MISC === */
+  .chip {
+    display: inline-flex; align-items: center; gap: 8px;
+    height: 32px; padding: 0 14px;
+    border-radius: 999px;
+    background: var(--accent-soft);
+    color: var(--teal-900);
+    font-family: var(--font-mono); font-size: 12px; letter-spacing: 0.08em; text-transform: uppercase; font-weight: 500;
+  }
+  .pill {
+    display: inline-flex; align-items: center; gap: 8px;
+    padding: 8px 14px; border-radius: 999px;
+    background: rgba(15,110,86,0.08); color: var(--accent);
+    font-size: 13px; font-weight: 500;
+  }
+
+  @keyframes pulse {
+    0%, 100% { opacity: 1; transform: scale(1); }
+    50% { opacity: 0.6; transform: scale(0.92); }
+  }
+  .pulse { animation: pulse 2.4s ease-in-out infinite; }
+
+  html { scroll-behavior: smooth; }
+  section[id] { scroll-margin-top: 100px; }
+
+  /* === TWEAKS PANEL === */
+  #tweaks-panel {
+    position: fixed;
+    bottom: 24px;
+    right: 24px;
+    z-index: 1000;
+    background: rgba(14,18,22,0.92);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid rgba(255,255,255,0.10);
+    border-radius: 16px;
+    padding: 20px;
+    width: 240px;
+    color: #F4F1EA;
+    font-family: var(--font-sans);
+    font-size: 13px;
+    box-shadow: 0 24px 48px -16px rgba(0,0,0,0.5);
+  }
+  #tweaks-toggle {
+    position: fixed;
+    bottom: 24px;
+    right: 24px;
+    z-index: 1001;
+    width: 44px;
+    height: 44px;
+    border-radius: 999px;
+    background: var(--navy-900);
+    border: 1px solid rgba(255,255,255,0.12);
+    color: rgba(244,241,234,0.7);
+    font-size: 18px;
+    cursor: pointer;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 8px 24px -8px rgba(0,0,0,0.4);
+    transition: background .15s;
+  }
+  #tweaks-toggle:hover { background: var(--navy-800); }
+  .tweaks-header {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: rgba(244,241,234,0.45);
+    margin-bottom: 16px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .tweaks-close {
+    cursor: pointer;
+    color: rgba(244,241,234,0.4);
+    font-size: 16px;
+    line-height: 1;
+    background: none;
+    border: none;
+    padding: 0;
+    color: rgba(244,241,234,0.45);
+  }
+  .tweaks-close:hover { color: rgba(244,241,234,0.8); }
+  .tweaks-section { margin-bottom: 16px; }
+  .tweaks-section:last-child { margin-bottom: 0; }
+  .tweaks-label {
+    font-size: 12px;
+    font-weight: 600;
+    color: rgba(244,241,234,0.55);
+    margin-bottom: 10px;
+    letter-spacing: 0.02em;
+  }
+  .tweaks-options { display: flex; gap: 6px; flex-wrap: wrap; }
+  .tweaks-option {
+    padding: 6px 12px;
+    border-radius: 8px;
+    border: 1px solid rgba(255,255,255,0.12);
+    background: transparent;
+    color: rgba(244,241,234,0.65);
+    font-size: 13px;
+    font-family: var(--font-sans);
+    cursor: pointer;
+    transition: all .15s;
+  }
+  .tweaks-option:hover { border-color: rgba(255,255,255,0.25); color: #F4F1EA; }
+  .tweaks-option.active {
+    background: var(--accent);
+    border-color: var(--accent);
+    color: #FFFFFF;
+  }
+</style>
+</head>
+<body data-header-style="inline">
+
+<!-- ============== NAV ============== -->
+<nav class="top">
+  <div class="row">
+    <div class="brand">
+      <img src="../uploads/PriamLogo_dark.svg" alt="PRIAM">
+    </div>
+    <div class="links">
+      <a href="#platform">Platform</a>
+      <a href="#how">How it works</a>
+      <a href="#why">Why PRIAM</a>
+      <a href="#faq">FAQ</a>
+    </div>
+    <div class="cta">
+      <a class="btn btn-ghost" href="#login">Sign in</a>
+      <a class="btn btn-primary" href="#trial">Start free trial</a>
+    </div>
+  </div>
+</nav>
+
+<!-- ============== HERO ============== -->
+<section class="hero bg-cream">
+  <div class="hero-inner">
+    <div class="hero-copy">
+      <span class="pill">
+        <span style="width:8px;height:8px;border-radius:999px;background:var(--accent-bright);" class="pulse"></span>
+        Built for small business owners, not GRC teams
+      </span>
+      <h1 class="display">Risk visibility, <span class="accent">without</span> the overhead.</h1>
+      <p class="lead">PRIAM is the simple platform for small businesses to track policies, assess risk, log incidents, and keep tabs on every asset — all in one place.</p>
+      <div class="hero-cta">
+        <a class="btn btn-primary" href="#trial">Start free trial →</a>
+        <a class="btn btn-secondary" href="#demo">Book a 20-min walkthrough</a>
+      </div>
+      <div class="hero-meta">
+        <span>Setup in 5 min</span>
+        <span>No credit card</span>
+        <span>Cancel anytime</span>
+      </div>
+    </div>
+    <div class="hero-visual">
+      <img src="../uploads/admin-dashboard.png" alt="PRIAM dashboard">
+      <div class="float-card tl">
+        <span class="dot pulse" style="background: var(--teal-500);"></span>
+        <div>
+          <div class="label">Risk score</div>
+          <div class="val">49 <span style="font-weight:500; font-size:13px; color:var(--warm); margin-left:6px;">Medium</span></div>
+        </div>
+      </div>
+      <div class="float-card br">
+        <span class="dot" style="background: var(--orange-500);"></span>
+        <div>
+          <div class="label">Incidents this week</div>
+          <div class="val">3 open <span style="font-weight:500; font-size:13px; color:var(--ink-500); margin-left:6px;">2 resolved</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============== PROBLEM STRIP ============== -->
+<section class="section bg-cream-deep" id="problem">
+  <div class="container">
+    <div class="section-header">
+      <div class="eyebrow-row"><span class="eyebrow">The reality for SMBs</span></div>
+      <h2 class="title">Risk doesn't wait for you to be ready.</h2>
+      <p class="lead" style="max-width: 64ch;">You're running the business. Then a laptop walks out the door, a customer file ends up in the wrong inbox, or a supplier misses a deadline that was never tracked anywhere. Sound familiar?</p>
+    </div>
+    <div class="problem-grid">
+      <div class="problem-card">
+        <div class="glyph">Mon · 9:14 AM</div>
+        <div class="head">"Has anyone seen Sarah's laptop?"</div>
+        <div class="sub">No record of who had what. No procedure for what to do next. No incident to point to in your audit.</div>
+        <div class="stat">→ Asset + Incident, linked</div>
+      </div>
+      <div class="problem-card">
+        <div class="glyph">Tue · 3:42 PM</div>
+        <div class="head">"I think I clicked something I shouldn't have."</div>
+        <div class="sub">Your phishing policy lives in a PDF nobody opened. There's no queue for the IT lead to pick this up.</div>
+        <div class="stat">→ Policy + Incident, connected</div>
+      </div>
+      <div class="problem-card">
+        <div class="glyph">Fri · End of quarter</div>
+        <div class="head">"Are we sure we're compliant?"</div>
+        <div class="sub">Last risk review was a spreadsheet someone built two years ago. You don't know what changed since.</div>
+        <div class="stat">→ Risk, continuously assessed</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============== ACRONYM ============== -->
+<section class="section bg-cream" id="platform">
+  <div class="container">
+    <div class="section-header">
+      <div class="eyebrow-row"><span class="eyebrow">The platform</span></div>
+      <h2 class="title">Five letters. One source of truth.</h2>
+      <p class="lead" style="max-width: 60ch;">PRIAM stands for the four workflows every operating business already runs — just usually scattered across email, sheets, and shared drives.</p>
+    </div>
+    <div class="acronym-row">
+      <div class="acronym-card">
+        <div class="letter">P</div>
+        <div>
+          <div class="word">Policy</div>
+          <div class="name">Living documents</div>
+        </div>
+        <div class="desc">Draft, publish, version, and acknowledge — visible to your team where they work.</div>
+      </div>
+      <div class="acronym-card">
+        <div class="letter">R</div>
+        <div>
+          <div class="word">Risk</div>
+          <div class="name">Adaptive assessment</div>
+        </div>
+        <div class="desc">Industry-aware questionnaires that skip what doesn't apply to you.</div>
+      </div>
+      <div class="acronym-card">
+        <div class="letter">I</div>
+        <div>
+          <div class="word">Incident</div>
+          <div class="name">Queue-based tracking</div>
+        </div>
+        <div class="desc">Every report has a clear owner from "submitted" through "closed."</div>
+      </div>
+      <div class="acronym-card">
+        <div class="letter">A</div>
+        <div>
+          <div class="word">Asset</div>
+          <div class="name">People &amp; things</div>
+        </div>
+        <div class="desc">Employees, customers, suppliers, devices, vehicles — all linked, all searchable.</div>
+      </div>
+      <div class="acronym-card">
+        <div class="letter">M</div>
+        <div>
+          <div class="word">Management</div>
+          <div class="name">In one dashboard</div>
+        </div>
+        <div class="desc">Cross-cutting visibility, role-based access, and an audit trail that writes itself.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============== MODULE: POLICY ============== -->
+<section class="section bg-white" id="how">
+  <div class="container">
+    <div class="module">
+      <div class="module-copy">
+        <div class="section-header" style="margin-bottom: 0;">
+          <div class="eyebrow-row"><span class="eyebrow">01 · Policy management</span></div>
+          <h3 class="heading" style="font-size: 48px; line-height: 1.05; letter-spacing: -0.018em;">Policies your team actually reads.</h3>
+        </div>
+        <p class="body">Every policy is a versioned document with a status — draft, published, archived — and an acknowledgement record. When you publish a new revision, the team sees it at next sign-in and can confirm with one click.</p>
+        <div class="features">
+          <div class="feature"><span class="num">01</span><div class="body"><strong>Categories &amp; tags</strong> · HR, IT, Safety, Finance — search and filter on what matters.</div></div>
+          <div class="feature"><span class="num">02</span><div class="body"><strong>Effective dates</strong> · Schedule a policy to go live, with reminders for the next review.</div></div>
+          <div class="feature"><span class="num">03</span><div class="body"><strong>Acknowledgement tracking</strong> · See exactly who's read what, and chase the rest.</div></div>
+        </div>
+      </div>
+      <div class="module-visual">
+        <img src="../uploads/policy-mgmt-tenant.png" alt="Policy management screen">
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============== MODULE: RISK ============== -->
+<section class="section bg-cream-deep">
+  <div class="container">
+    <div class="module flip">
+      <div class="module-copy">
+        <div class="section-header" style="margin-bottom: 0;">
+          <div class="eyebrow-row"><span class="eyebrow">02 · Risk assessment</span></div>
+          <h3 class="heading" style="font-size: 48px; line-height: 1.05; letter-spacing: -0.018em;">Built around your industry, not a generic checklist.</h3>
+        </div>
+        <p class="body">Pick your NAICS code at signup and PRIAM tailors the questionnaire to operations like yours. As you answer, the engine adapts — skipping what doesn't apply and digging deeper where it matters.</p>
+        <div class="features">
+          <div class="feature"><span class="num">01</span><div class="body"><strong>Adaptive DAG engine</strong> · Each answer can reveal or hide later questions.</div></div>
+          <div class="feature"><span class="num">02</span><div class="body"><strong>Score + matrix</strong> · One headline number, plus a likelihood-vs-impact view by category.</div></div>
+          <div class="feature"><span class="num">03</span><div class="body"><strong>Prioritized fixes</strong> · Recommendations sorted by severity, not alphabet.</div></div>
+        </div>
+      </div>
+      <div class="module-visual">
+        <img src="../uploads/risk-assessment-results-1.png" alt="Risk assessment results">
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============== MODULE: INCIDENTS (DARK PROOF) ============== -->
+<section class="section bg-navy">
+  <div class="container">
+    <div class="module">
+      <div class="module-copy">
+        <div class="section-header" style="margin-bottom: 0;">
+          <div class="eyebrow-row"><span class="eyebrow">03 · Incident management</span></div>
+          <h3 class="heading" style="font-size: 48px; line-height: 1.05; letter-spacing: -0.018em; color:#F4F1EA;">Every report gets an owner. Every owner gets context.</h3>
+        </div>
+        <p class="body" style="color: rgba(244,241,234,0.78);">Incidents move through a queue, not an inbox. Anyone on the team can submit. The right person picks it up. Status changes are logged automatically — and an audit trail is built for free.</p>
+        <div class="queue">
+          <div class="queue-step"><span class="num">01</span><span class="label">Submitted</span><span class="who">Reporter</span></div>
+          <div class="queue-step"><span class="num">02</span><span class="label">Assigned</span><span class="who">Triage</span></div>
+          <div class="queue-step"><span class="num">03</span><span class="label">Active</span><span class="who">Owner</span></div>
+          <div class="queue-step"><span class="num">04</span><span class="label">Resolved</span><span class="who">Owner</span></div>
+          <div class="queue-step"><span class="num">05</span><span class="label">Closed</span><span class="who">Admin</span></div>
+        </div>
+        <div class="features" style="margin-top: 20px;">
+          <div class="feature"><span class="num">→</span><div class="body" style="color: rgba(244,241,234,0.82);"><strong>Priority + category</strong> · Critical, high, medium, low — filterable everywhere.</div></div>
+          <div class="feature"><span class="num">→</span><div class="body" style="color: rgba(244,241,234,0.82);"><strong>Private incidents</strong> · HR-style reports visible only to reporter and admins.</div></div>
+        </div>
+      </div>
+      <div class="module-visual">
+        <img src="../uploads/individual-incident.png" alt="Incident detail screen">
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============== MODULE: ANALYTICS ============== -->
+<section class="section bg-navy-soft">
+  <div class="container">
+    <div class="module flip">
+      <div class="module-copy">
+        <div class="section-header" style="margin-bottom: 0;">
+          <div class="eyebrow-row"><span class="eyebrow">Patterns over tickets</span></div>
+          <h3 class="heading" style="font-size: 48px; line-height: 1.05; letter-spacing: -0.018em; color:#F4F1EA;">See the shape of your risk over time.</h3>
+        </div>
+        <p class="body" style="color: rgba(244,241,234,0.78);">Three lost devices in a month is a procurement problem. Two phishing clicks in a week is a training problem. PRIAM surfaces the pattern, not just the ticket.</p>
+        <div class="features">
+          <div class="feature"><span class="num">→</span><div class="body" style="color: rgba(244,241,234,0.82);"><strong>30-day rolling view</strong> · Trend bars, status splits, category mix.</div></div>
+          <div class="feature"><span class="num">→</span><div class="body" style="color: rgba(244,241,234,0.82);"><strong>Open / resolved counts</strong> · Always live, always tenant-scoped.</div></div>
+          <div class="feature"><span class="num">→</span><div class="body" style="color: rgba(244,241,234,0.82);"><strong>Filter by team</strong> · IT, Operations, Data Privacy — drill in without losing context.</div></div>
+        </div>
+      </div>
+      <div class="module-visual">
+        <img src="../uploads/incident-analytics.png" alt="Incident analytics dashboard">
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============== MODULE: ASSETS ============== -->
+<section class="section bg-cream">
+  <div class="container">
+    <div class="module">
+      <div class="module-copy">
+        <div class="section-header" style="margin-bottom: 0;">
+          <div class="eyebrow-row"><span class="eyebrow">04 · Asset management</span></div>
+          <h3 class="heading" style="font-size: 48px; line-height: 1.05; letter-spacing: -0.018em;">One register for everyone and everything.</h3>
+        </div>
+        <p class="body">Employees, customers, suppliers, devices, vehicles — all stored against the same tenant, all linkable to incidents and policies.</p>
+        <div class="features">
+          <div class="feature"><span class="num">01</span><div class="body"><strong>Five asset types out of the box</strong> · No schema work to start.</div></div>
+          <div class="feature"><span class="num">02</span><div class="body"><strong>Approval workflow</strong> · Employees submit; admins verify before records go active.</div></div>
+          <div class="feature"><span class="num">03</span><div class="body"><strong>Linked to incidents</strong> · A device record shows every incident it's been part of.</div></div>
+        </div>
+      </div>
+      <div class="module-visual">
+        <img src="../uploads/company-resources.png" alt="Asset register">
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============== WHY PRIAM ============== -->
+<section class="section huge bg-teal" id="why">
+  <div class="container">
+    <div class="section-header">
+      <div class="eyebrow-row"><span class="eyebrow">Why PRIAM</span></div>
+      <h2 class="title" style="color:#F4FBF7;">Built different, on purpose.</h2>
+      <p class="lead" style="color: rgba(244,251,247,0.78); max-width: 60ch;">There are bigger platforms, and there are simpler ones. PRIAM is the simplest that still does the job — and the only one designed end-to-end for small business owners.</p>
+    </div>
+    <div class="diff-grid">
+      <div class="diff-card">
+        <span class="num">01 · SIMPLICITY</span>
+        <div class="head">No GRC vocabulary required.</div>
+        <div class="desc">Plain language, sensible defaults, zero implementation consultants. If you can use a project tool, you can use PRIAM.</div>
+      </div>
+      <div class="diff-card">
+        <span class="num">02 · QUEUE-BASED INCIDENTS</span>
+        <div class="head">Reports never get stuck in someone's inbox.</div>
+        <div class="desc">Every incident has a clear owner at every stage. Status changes are auditable, not just messages someone forgot.</div>
+      </div>
+      <div class="diff-card">
+        <span class="num">03 · ADAPTIVE QUESTIONNAIRES</span>
+        <div class="head">Only the questions that apply to you.</div>
+        <div class="desc">Your industry classification drives the questionnaire. Skip the parts that aren't relevant; go deep where they are.</div>
+      </div>
+      <div class="diff-card">
+        <span class="num">04 · ASSEMBLED, NOT BOLTED ON</span>
+        <div class="head">Four functions designed to share data.</div>
+        <div class="desc">Policies, risk, incidents and assets all reference each other. One source of truth, not four spreadsheets.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============== ROLES + SECURITY ============== -->
+<section class="section bg-navy">
+  <div class="container">
+    <div class="section-header">
+      <div class="eyebrow-row"><span class="eyebrow">Multi-tenant by design</span></div>
+      <h2 class="title" style="color:#F4F1EA;">Roles you understand. Isolation you can trust.</h2>
+      <p class="lead" style="color: rgba(244,241,234,0.78); max-width: 60ch;">Five built-in roles cover almost every SMB org chart. Tenant isolation is enforced at the database query level — not bolted on after the fact.</p>
+    </div>
+    <div class="pillars">
+      <div class="pillar">
+        <span class="label">Roles</span>
+        <div class="head">From owner to viewer, sensibly.</div>
+        <ul>
+          <li>Super · full system access</li>
+          <li>Admin · tenant-wide administration</li>
+          <li>Manager · department / team scope</li>
+          <li>Employee · standard user</li>
+          <li>Viewer · read-only</li>
+        </ul>
+      </div>
+      <div class="pillar">
+        <span class="label">Isolation</span>
+        <div class="head">Every record carries a tenant ID.</div>
+        <ul>
+          <li>Query-level enforcement</li>
+          <li>Per-tenant Firestore scoping</li>
+          <li>No cross-tenant leakage by design</li>
+          <li>Single sign-on per tenant</li>
+        </ul>
+      </div>
+      <div class="pillar">
+        <span class="label">Audit</span>
+        <div class="head">An audit trail that writes itself.</div>
+        <ul>
+          <li>Immutable assessment logs</li>
+          <li>Status-change history per incident</li>
+          <li>Policy version + acknowledgement chain</li>
+          <li>Six-month retention by default</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============== SETUP STEPS ============== -->
+<section class="section bg-cream" id="setup">
+  <div class="container">
+    <div class="section-header">
+      <div class="eyebrow-row"><span class="eyebrow">Get started</span></div>
+      <h2 class="title">Up and running in five minutes.</h2>
+      <p class="lead" style="max-width: 56ch;">No demo call required. The tailored questionnaire and dashboard are ready the moment you finish signup.</p>
+    </div>
+    <div class="steps">
+      <div class="step">
+        <div class="num">01</div>
+        <div class="head">Register your company</div>
+        <div class="desc">Email, industry, state, and a short list of operational characteristics — that's the entire signup form.</div>
+        <div class="time">~ 90 seconds</div>
+      </div>
+      <div class="step">
+        <div class="num">02</div>
+        <div class="head">Invite your team</div>
+        <div class="desc">Add employees by email and pick a role. They land on a guided onboarding the first time they sign in.</div>
+        <div class="time">~ 2 minutes</div>
+      </div>
+      <div class="step">
+        <div class="num">03</div>
+        <div class="head">Run your first assessment</div>
+        <div class="desc">The questionnaire is already tailored to your industry. Answer at your own pace; results are saved as you go.</div>
+        <div class="time">~ 15 minutes, when you're ready</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============== FAQ ============== -->
+<section class="section bg-white" id="faq">
+  <div class="container" style="max-width: 960px;">
+    <div class="section-header">
+      <div class="eyebrow-row"><span class="eyebrow">Common questions</span></div>
+      <h2 class="title">Answers before you ask.</h2>
+    </div>
+    <div class="faq-list">
+      <details class="faq" open>
+        <summary>Do I need a compliance background to use PRIAM?<span class="plus">+</span></summary>
+        <div class="answer">Not at all. PRIAM was designed for owners and operations leads — the people who already wear the compliance hat without the title. The questionnaires use plain language, and every recommendation tells you what to do next.</div>
+      </details>
+      <details class="faq">
+        <summary>How is this different from a project tool or shared drive?<span class="plus">+</span></summary>
+        <div class="answer">A shared drive stores documents. A project tool tracks tasks. PRIAM connects policies, risks, incidents, and assets so a change in one updates the others — and gives you an audit trail neither of those produces on its own.</div>
+      </details>
+      <details class="faq">
+        <summary>What size businesses is PRIAM built for?<span class="plus">+</span></summary>
+        <div class="answer">PRIAM is built for small and growing businesses — typically 5 to 250 employees. The platform scales gracefully as you add departments, but the experience stays geared toward teams without a dedicated GRC function.</div>
+      </details>
+      <details class="faq">
+        <summary>Is my data private to my company?<span class="plus">+</span></summary>
+        <div class="answer">Yes. PRIAM is multi-tenant: every record carries your tenant ID and isolation is enforced at the database query level. No cross-tenant access by design, and private incidents are visible only to the reporter and admins.</div>
+      </details>
+      <details class="faq">
+        <summary>Can I import my existing policies?<span class="plus">+</span></summary>
+        <div class="answer">Yes. Bring your existing policies in as drafts, version them inside PRIAM, and publish when you're ready. The acknowledgement chain starts the moment you publish.</div>
+      </details>
+      <details class="faq">
+        <summary>What if I just want to track incidents to start?<span class="plus">+</span></summary>
+        <div class="answer">That's a perfectly common starting point. Use the incident queue on its own — when you're ready, layer in policies, the risk assessment, or the asset register. Each module stands on its own and gets richer when combined.</div>
+      </details>
+    </div>
+  </div>
+</section>
+
+<!-- ============== FINAL CTA ============== -->
+<section class="section huge bg-teal" id="trial">
+  <div class="container">
+    <div class="cta-block">
+      <span class="eyebrow" style="color: var(--orange-400);">Start tracking risk this week</span>
+      <h2 class="title" style="color:#F4FBF7; font-size: clamp(48px, 5.6vw, 84px);">Set it up Monday. Run a real assessment Friday.</h2>
+      <p class="lead" style="color: rgba(244,251,247,0.82); max-width: 56ch;">Free to start. No credit card. No implementation call. Just sign up and go.</p>
+      <div class="cta-row">
+        <a class="btn btn-primary" href="#" style="height: 60px; padding: 0 28px; font-size: 17px;">Start free trial →</a>
+        <a class="btn btn-secondary" href="#" style="height: 60px; padding: 0 28px; font-size: 17px;">Book a 20-min walkthrough</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============== FOOTER ============== -->
+<footer class="foot">
+  <div class="row">
+    <div class="brand">
+      <img src="../uploads/PriamLogo_dark.svg" alt="PRIAM">
+      <p>Policy, Risk, Incident &amp; Asset Management for small businesses. Built so you can focus on the business, not the binder.</p>
+    </div>
+    <div>
+      <h5>Platform</h5>
+      <ul>
+        <li><a href="#">Policy management</a></li>
+        <li><a href="#">Risk assessment</a></li>
+        <li><a href="#">Incident management</a></li>
+        <li><a href="#">Asset register</a></li>
+      </ul>
+    </div>
+    <div>
+      <h5>Company</h5>
+      <ul>
+        <li><a href="#">About</a></li>
+        <li><a href="#">Contact</a></li>
+        <li><a href="#">Trust &amp; security</a></li>
+        <li><a href="#">Status</a></li>
+      </ul>
+    </div>
+    <div>
+      <h5>Resources</h5>
+      <ul>
+        <li><a href="#">Documentation</a></li>
+        <li><a href="#">Pricing</a></li>
+        <li><a href="#">Changelog</a></li>
+        <li><a href="#">Support</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="legal">
+    <span>© 2026 PRIAM · ALL RIGHTS RESERVED</span>
+    <span>POLICY · RISK · INCIDENT · ASSET · MANAGEMENT</span>
+  </div>
+</footer>
+
+<!-- ============== TWEAKS PANEL ============== -->
+<button id="tweaks-toggle" aria-label="Open tweaks panel">⚙</button>
+<div id="tweaks-panel">
+  <div class="tweaks-header">
+    Tweaks
+    <button class="tweaks-close" id="tweaks-close-btn" aria-label="Close">✕</button>
+  </div>
+  <div class="tweaks-section">
+    <div class="tweaks-label">Theme</div>
+    <div class="tweaks-options" id="theme-options">
+      <button class="tweaks-option active" data-theme="forest">Forest</button>
+      <button class="tweaks-option" data-theme="navy">Navy</button>
+      <button class="tweaks-option" data-theme="warm">Warm</button>
+    </div>
+  </div>
+  <div class="tweaks-section">
+    <div class="tweaks-label">Section headers</div>
+    <div class="tweaks-options" id="header-options">
+      <button class="tweaks-option active" data-header="inline">Inline</button>
+      <button class="tweaks-option" data-header="bar">Bar</button>
+      <button class="tweaks-option" data-header="dot">Dot</button>
+    </div>
+  </div>
+</div>
+
+<script>
+  const THEMES = {
+    forest: {
+      "--accent": "#0F6E56",
+      "--accent-soft": "#C4ECDC",
+      "--accent-bright": "#1B9678",
+      "--accent-on-dark": "#5DCAA5",
+      "--teal-900": "#07382C",
+      "--teal-700": "#0F6E56",
+      "--cream-50": "#F7F4EE",
+      "--cream-100": "#F1ECE2",
+      "--navy-900": "#0B1220",
+      "--navy-800": "#111A2E"
+    },
+    navy: {
+      "--accent": "#1E40AF",
+      "--accent-soft": "#DBEAFE",
+      "--accent-bright": "#3B82F6",
+      "--accent-on-dark": "#93C5FD",
+      "--teal-900": "#0B1B3A",
+      "--teal-700": "#1E40AF",
+      "--cream-50": "#F6F7FB",
+      "--cream-100": "#EBEEF6",
+      "--navy-900": "#0B1220",
+      "--navy-800": "#111A2E"
+    },
+    warm: {
+      "--accent": "#B7410E",
+      "--accent-soft": "#FCE7D6",
+      "--accent-bright": "#E5651D",
+      "--accent-on-dark": "#FDBA74",
+      "--teal-900": "#3A1A09",
+      "--teal-700": "#B7410E",
+      "--cream-50": "#FAF5EE",
+      "--cream-100": "#F2EADD",
+      "--navy-900": "#1A1310",
+      "--navy-800": "#241B16"
+    }
+  };
+
+  function applyTheme(name) {
+    const vars = THEMES[name];
+    if (!vars) return;
+    const root = document.documentElement;
+    Object.entries(vars).forEach(([k, v]) => root.style.setProperty(k, v));
+    document.querySelectorAll('[data-theme]').forEach(btn => {
+      btn.classList.toggle('active', btn.dataset.theme === name);
+    });
+  }
+
+  function applyHeaderStyle(style) {
+    document.body.setAttribute('data-header-style', style);
+    document.querySelectorAll('[data-header]').forEach(btn => {
+      btn.classList.toggle('active', btn.dataset.header === style);
+    });
+  }
+
+  document.querySelectorAll('[data-theme]').forEach(btn => {
+    btn.addEventListener('click', () => applyTheme(btn.dataset.theme));
+  });
+
+  document.querySelectorAll('[data-header]').forEach(btn => {
+    btn.addEventListener('click', () => applyHeaderStyle(btn.dataset.header));
+  });
+
+  const panel = document.getElementById('tweaks-panel');
+  const toggle = document.getElementById('tweaks-toggle');
+  const closeBtn = document.getElementById('tweaks-close-btn');
+
+  function showPanel() { panel.style.display = 'block'; toggle.style.display = 'none'; }
+  function hidePanel() { panel.style.display = 'none'; toggle.style.display = 'flex'; }
+
+  closeBtn.addEventListener('click', hidePanel);
+  toggle.addEventListener('click', showPanel);
+</script>
+
+</body>
+</html>

@@ -1,0 +1,1910 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>PRIAM — Pitch Deck</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+
+<script src="deck-stage.js"></script>
+
+<script type="application/json" id="speaker-notes">
+[
+  "Welcome. PRIAM stands for Policy, Risk, Incident, Asset, Management — a single platform built specifically for small businesses. Today: what we built, why it matters, and how it works in practice.",
+  "Quick reality check. Lost laptops, phishing emails, supplier breaches, missed renewals — these aren't enterprise problems. They happen to small businesses every week. Most just don't have a way to track them.",
+  "Big companies have GRC teams, audit committees, full-time risk officers. SMBs have… a shared spreadsheet, if anything. We built PRIAM for the 99% of businesses that fall into that gap.",
+  "PRIAM gives you four connected modules: policy, risk, incident, and asset management — each lightweight enough to use day one, integrated enough to give you a single source of truth.",
+  "These five letters aren't just branding. They map to five real workflows that share data. A policy references an asset. An incident triggers a risk re-assessment. Everything feeds the same dashboard.",
+  "Policies as living documents, not PDFs in a binder. Draft, publish, version, acknowledge — and your team sees them where they work.",
+  "Risk assessments adapt to your industry. Pick your NAICS code, answer the questions that actually apply to you. No 400-question generic checklist.",
+  "After the assessment, you get a clear number, a category breakdown, and a likelihood-vs-impact matrix. Plus a prioritized list of fixes — not just 'you have problems'.",
+  "Every incident — a lost phone, a phishing click, a customer complaint — moves through a queue with a clear owner at every step. Submitted, assigned, active, resolved, closed.",
+  "Patterns matter more than individual events. Three lost devices in a month is a procurement problem. PRIAM shows you the trend, not just the ticket.",
+  "Your assets — employees, customers, suppliers, devices, vehicles — all live in one place. When an incident references a customer or device, you see it linked.",
+  "PRIAM ships with an annual HIPAA and Data Privacy Assessment for the front-line teams who actually handle protected health information. Twenty-five questions, thirty minutes, eighty percent to pass — and a certificate the moment you do.",
+  "The questions are written in plain language around the situations social-services teams actually face. Saved as you go, with a question palette so participants can jump straight to whatever they haven't answered yet.",
+  "Whether someone passes or not, every question gets an explanation — so the assessment doubles as training. Retakes are one click away.",
+  "On the admin side, compliance leads get a live dashboard: who's been invited, who's in progress, who's completed, who's failed — plus pass rate and average score. Drill-downs by company, participant, and report make it easy to chase the last few stragglers before a deadline.",
+  "Behind the four main modules sits a single admin portal. From here you author master policy templates, define recommendation rules, and import from a built-in catalog of twelve ready-made policies.",
+  "The flow is: author a template once with placeholders. Attach rules — NAICS code, state, business flags. Tenants then see only the policies that match their profile, with placeholders ready for their company-specific values. Or skip the authoring entirely and import from the catalog.",
+  "Five built-in roles cover almost every SMB org chart. Employees can add records, but admins approve them. No custom IAM project required.",
+  "A new tenant is up and running in under five minutes. Industry, state, operational characteristics — that's the entire signup, and the questionnaire is already tailored.",
+  "Here's how a small operations team actually uses PRIAM across a typical week. Mostly quick check-ins, with the occasional deeper assessment.",
+  "Why us. Simple, intuitive, queue-based incidents, adaptive questionnaires — and a real assembly of productive functions instead of one narrow tool.",
+  "Multi-tenant by design. Every record carries a tenant ID; isolation is enforced at the database query level, not bolted on after the fact.",
+  "Firebase auth, RBAC at the API layer, immutable audit trails on every assessment. Boring, dependable security primitives — the kind we want.",
+  "What's coming next. Profile change workflows, deeper notifications, more industry packs, and an open API.",
+  "If you're a small business owner, an ops lead, or a founder wearing the compliance hat — this is for you.",
+  "Two ways to start: a self-serve trial or a 20-minute walkthrough with us. Thank you."
+]
+</script>
+
+<style>
+  /* === TYPE & SPACING SCALE === */
+  :root {
+    --type-display: 124px;
+    --type-title: 76px;
+    --type-subtitle: 44px;
+    --type-body: 32px;
+    --type-small: 26px;
+    --type-eyebrow: 22px;
+
+    --pad-top: 96px;
+    --pad-bottom: 88px;
+    --pad-x: 110px;
+    --gap-title: 44px;
+    --gap-item: 24px;
+
+    --font-sans: 'Inter', system-ui, -apple-system, sans-serif;
+    --font-display: 'Fraunces', Georgia, serif;
+    --font-mono: 'JetBrains Mono', ui-monospace, monospace;
+
+    /* Brand palette */
+    --teal-900: #07382C;
+    --teal-700: #0F6E56;
+    --teal-500: #1B9678;
+    --teal-300: #5DCAA5;
+    --teal-100: #C4ECDC;
+    --mint-50:  #E9F7F1;
+
+    --orange-500: #FB923C;
+    --orange-400: #FDBA74;
+
+    --blue-500: #3B82F6;
+    --blue-400: #60A5FA;
+
+    --navy-900: #0B1220;
+    --navy-800: #111A2E;
+    --navy-700: #18233D;
+    --navy-600: #1F2C4A;
+
+    --cream-50: #F7F4EE;
+    --cream-100: #F1ECE2;
+    --cream-200: #E6DFCF;
+    --ink-900: #0E1216;
+    --ink-700: #2A3038;
+    --ink-500: #5A626E;
+    --ink-300: #8E96A2;
+
+    /* theme tokens (overridden by tweaks) */
+    --light-bg: var(--cream-50);
+    --light-panel: #FFFFFF;
+    --light-ink: var(--ink-900);
+    --light-muted: var(--ink-500);
+    --light-rule: rgba(15, 110, 86, 0.18);
+
+    --dark-bg: var(--navy-900);
+    --dark-panel: var(--navy-800);
+    --dark-ink: #F4F1EA;
+    --dark-muted: rgba(244, 241, 234, 0.62);
+    --dark-rule: rgba(196, 236, 220, 0.14);
+
+    --accent: var(--teal-700);
+    --accent-soft: var(--teal-100);
+    --accent-bright: var(--teal-500);
+    --warm: var(--orange-500);
+  }
+
+  html, body { margin: 0; padding: 0; background: #000; }
+  body { font-family: var(--font-sans); -webkit-font-smoothing: antialiased; }
+
+  deck-stage section {
+    overflow: hidden;
+    box-sizing: border-box;
+  }
+
+  /* === SLIDE BACKGROUNDS === */
+  .bg-light { background: var(--light-bg); color: var(--light-ink); }
+  .bg-light-warm {
+    background: radial-gradient(120% 80% at 80% 20%, #FFF8E8 0%, var(--cream-50) 50%, var(--cream-100) 100%);
+    color: var(--light-ink);
+  }
+  .bg-cream-deep { background: var(--cream-100); color: var(--light-ink); }
+  .bg-dark { background: var(--dark-bg); color: var(--dark-ink); }
+  .bg-dark-panel { background: var(--navy-800); color: var(--dark-ink); }
+  .bg-teal {
+    background: linear-gradient(135deg, var(--teal-900) 0%, var(--teal-700) 100%);
+    color: #F4FBF7;
+  }
+  .bg-teal-deep { background: var(--teal-900); color: #F4FBF7; }
+  .bg-mint { background: var(--mint-50); color: var(--light-ink); }
+
+  /* === LAYOUT PRIMITIVES === */
+  .frame {
+    width: 100%;
+    height: 100%;
+    padding: var(--pad-top) var(--pad-x) var(--pad-bottom);
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+  }
+  .frame-row {
+    flex-direction: row;
+    gap: 80px;
+    align-items: stretch;
+  }
+
+  /* === TYPOGRAPHY === */
+  .eyebrow {
+    font-family: var(--font-mono);
+    font-size: var(--type-eyebrow);
+    font-weight: 500;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin: 0 0 28px;
+  }
+  .bg-dark .eyebrow, .bg-dark-panel .eyebrow { color: var(--teal-300); }
+  .bg-teal .eyebrow, .bg-teal-deep .eyebrow { color: var(--orange-400); }
+
+  h1.title {
+    font-family: var(--font-display);
+    font-weight: 500;
+    font-size: var(--type-title);
+    line-height: 1.04;
+    letter-spacing: -0.022em;
+    margin: 0 0 var(--gap-title);
+    color: inherit;
+    text-wrap: balance;
+  }
+  h1.display {
+    font-family: var(--font-display);
+    font-weight: 500;
+    font-size: var(--type-display);
+    line-height: 0.96;
+    letter-spacing: -0.028em;
+    margin: 0 0 var(--gap-title);
+  }
+  h2.subtitle {
+    font-family: var(--font-display);
+    font-weight: 400;
+    font-style: italic;
+    font-size: var(--type-subtitle);
+    line-height: 1.18;
+    margin: 0 0 var(--gap-item);
+    color: var(--ink-700);
+    text-wrap: pretty;
+  }
+  .bg-dark h2.subtitle, .bg-dark-panel h2.subtitle, .bg-teal h2.subtitle, .bg-teal-deep h2.subtitle {
+    color: rgba(244, 241, 234, 0.78);
+  }
+  p.body {
+    font-size: var(--type-body);
+    line-height: 1.42;
+    margin: 0 0 var(--gap-item);
+    color: var(--ink-700);
+    max-width: 26ch;
+    text-wrap: pretty;
+  }
+  .bg-dark p.body, .bg-dark-panel p.body, .bg-teal p.body, .bg-teal-deep p.body {
+    color: rgba(244, 241, 234, 0.74);
+  }
+  p.lead {
+    font-size: var(--type-subtitle);
+    line-height: 1.24;
+    font-weight: 400;
+    margin: 0;
+    max-width: 22ch;
+    text-wrap: pretty;
+  }
+  .small {
+    font-size: var(--type-small);
+    line-height: 1.4;
+    color: var(--ink-500);
+  }
+  .bg-dark .small, .bg-dark-panel .small, .bg-teal .small, .bg-teal-deep .small {
+    color: rgba(244, 241, 234, 0.6);
+  }
+  .mono { font-family: var(--font-mono); font-size: var(--type-small); letter-spacing: 0.02em; }
+
+  /* === SECTION HEADER VARIANTS === */
+  .section-marker {
+    display: inline-flex;
+    align-items: baseline;
+    gap: 18px;
+    font-family: var(--font-mono);
+    font-size: var(--type-eyebrow);
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--teal-300);
+    margin-bottom: 36px;
+  }
+  .section-marker-num {
+    color: var(--orange-400);
+    font-weight: 500;
+  }
+  /* Variant B for tweaks */
+  body[data-headers="bar"] .section-marker {
+    border-left: 4px solid var(--orange-400);
+    padding-left: 18px;
+    margin-bottom: 36px;
+  }
+  body[data-headers="dot"] .section-marker::before {
+    content: "";
+    display: inline-block;
+    width: 14px;
+    height: 14px;
+    background: var(--orange-400);
+    border-radius: 50%;
+    margin-right: 6px;
+    transform: translateY(2px);
+  }
+
+  /* === LOGO LOCKUP === */
+  .logo-lockup {
+    display: inline-flex;
+    align-items: center;
+    gap: 22px;
+  }
+  .logo-lockup img { height: 54px; width: auto; display: block; }
+  .logo-lockup-sm img { height: 38px; }
+
+  /* === SLIDE-COVER (slide 1) === */
+  .cover-stage {
+    display: grid;
+    grid-template-columns: 1.15fr 1fr;
+    gap: 0;
+    width: 100%;
+    height: 100%;
+  }
+  .cover-left {
+    padding: 110px 100px 110px 110px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    background: var(--cream-50);
+  }
+  .cover-right {
+    background: linear-gradient(160deg, var(--teal-900) 0%, var(--teal-700) 60%, var(--teal-500) 130%);
+    position: relative;
+    overflow: hidden;
+  }
+  .cover-rings {
+    position: absolute;
+    inset: 0;
+    background:
+      radial-gradient(circle at 30% 60%, rgba(253,186,116,0.18) 0%, transparent 35%),
+      radial-gradient(circle at 80% 25%, rgba(196,236,220,0.18) 0%, transparent 30%);
+  }
+  .cover-emblem {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 560px;
+    height: 560px;
+  }
+  .cover-tagline {
+    font-family: var(--font-display);
+    font-style: italic;
+    font-weight: 400;
+    font-size: 38px;
+    color: var(--ink-700);
+    line-height: 1.3;
+    max-width: 14ch;
+    margin: 28px 0 0;
+  }
+  .cover-meta {
+    display: flex;
+    gap: 60px;
+    font-family: var(--font-mono);
+    font-size: 24px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--ink-500);
+  }
+  .cover-meta-key { color: var(--teal-700); display: block; margin-bottom: 6px; }
+  .cover-headline {
+    font-family: var(--font-display);
+    font-weight: 500;
+    font-size: 110px;
+    line-height: 0.94;
+    letter-spacing: -0.025em;
+    margin: 36px 0 0;
+    color: var(--ink-900);
+  }
+  .cover-headline em { font-style: italic; color: var(--teal-700); font-weight: 400; }
+
+  /* === GRID OF FIVE LETTERS (P R I A M) === */
+  .priam-grid {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 22px;
+    margin-top: var(--gap-title);
+  }
+  .priam-card {
+    background: var(--navy-700);
+    border: 1px solid var(--dark-rule);
+    border-radius: 18px;
+    padding: 36px 32px;
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+    min-height: 360px;
+  }
+  .priam-letter {
+    font-family: var(--font-display);
+    font-weight: 500;
+    font-size: 130px;
+    line-height: 0.85;
+    color: var(--teal-300);
+    letter-spacing: -0.04em;
+  }
+  .priam-card:nth-child(2) .priam-letter { color: var(--orange-400); }
+  .priam-card:nth-child(3) .priam-letter { color: #93C5FD; }
+  .priam-card:nth-child(4) .priam-letter { color: #C4ECDC; }
+  .priam-card:nth-child(5) .priam-letter { color: #FDE68A; }
+  .priam-word {
+    font-family: var(--font-display);
+    font-style: italic;
+    font-size: 34px;
+    margin: 0;
+    color: #F4F1EA;
+  }
+  .priam-desc {
+    font-size: 22px;
+    line-height: 1.4;
+    color: rgba(244,241,234,0.7);
+    margin: 0;
+  }
+
+  /* === STAT TILE === */
+  .stat-row {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 32px;
+    margin-top: var(--gap-title);
+  }
+  .stat-tile {
+    background: var(--cream-50);
+    border: 1px solid var(--light-rule);
+    border-radius: 20px;
+    padding: 44px 40px;
+  }
+  .bg-dark .stat-tile, .bg-dark-panel .stat-tile, .bg-teal .stat-tile {
+    background: rgba(255,255,255,0.04);
+    border: 1px solid var(--dark-rule);
+  }
+  .stat-num {
+    font-family: var(--font-display);
+    font-size: 96px;
+    line-height: 0.95;
+    font-weight: 500;
+    color: var(--teal-700);
+    letter-spacing: -0.02em;
+    margin: 0 0 12px;
+  }
+  .bg-dark .stat-num, .bg-teal .stat-num { color: var(--teal-300); }
+  .stat-label {
+    font-size: var(--type-small);
+    color: var(--ink-700);
+    line-height: 1.35;
+    margin: 0;
+    max-width: 14ch;
+  }
+  .bg-dark .stat-label, .bg-teal .stat-label { color: rgba(244,241,234,0.74); }
+
+  /* === SCREENSHOT FRAME === */
+  .screen-frame {
+    background: var(--navy-800);
+    border: 1px solid var(--dark-rule);
+    border-radius: 14px;
+    box-shadow: 0 30px 80px rgba(0,0,0,0.45);
+    overflow: hidden;
+    position: relative;
+  }
+  .screen-frame.on-light {
+    background: #FFFFFF;
+    border: 1px solid var(--cream-200);
+    box-shadow: 0 30px 80px rgba(15,110,86,0.12), 0 6px 14px rgba(0,0,0,0.05);
+  }
+  .screen-chrome {
+    height: 36px;
+    background: rgba(0,0,0,0.4);
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 0 16px;
+    border-bottom: 1px solid rgba(255,255,255,0.06);
+  }
+  .on-light .screen-chrome { background: var(--cream-100); border-bottom: 1px solid var(--cream-200); }
+  .dot { width: 11px; height: 11px; border-radius: 50%; background: rgba(255,255,255,0.18); }
+  .on-light .dot { background: rgba(0,0,0,0.18); }
+  .screen-frame img { display: block; width: 100%; height: auto; }
+  .screen-frame.fit-h img { width: auto; height: 100%; }
+
+  /* === LISTS === */
+  ul.clean { list-style: none; padding: 0; margin: 0; }
+  ul.clean li {
+    font-size: var(--type-body);
+    line-height: 1.5;
+    padding: 14px 0;
+    border-top: 1px solid var(--light-rule);
+    color: var(--ink-700);
+    display: flex;
+    gap: 22px;
+    align-items: baseline;
+  }
+  ul.clean li:last-child { border-bottom: 1px solid var(--light-rule); }
+  ul.clean li .num {
+    font-family: var(--font-mono);
+    font-size: var(--type-small);
+    color: var(--accent);
+    min-width: 3ch;
+    flex-shrink: 0;
+  }
+  .bg-dark ul.clean li, .bg-dark-panel ul.clean li, .bg-teal ul.clean li {
+    border-color: var(--dark-rule);
+    color: rgba(244,241,234,0.86);
+  }
+  .bg-dark ul.clean li .num, .bg-dark-panel ul.clean li .num, .bg-teal ul.clean li .num {
+    color: var(--teal-300);
+  }
+
+  /* === PILLS === */
+  .pill {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    padding: 10px 20px;
+    border-radius: 999px;
+    font-size: 22px;
+    font-family: var(--font-sans);
+    font-weight: 500;
+    background: rgba(15,110,86,0.10);
+    color: var(--teal-700);
+  }
+  .bg-dark .pill, .bg-teal .pill {
+    background: rgba(196,236,220,0.10);
+    color: var(--teal-300);
+  }
+  .pill.warm { background: rgba(251,146,60,0.14); color: #C2410C; }
+  .bg-dark .pill.warm, .bg-teal .pill.warm { color: var(--orange-400); }
+
+  /* === QUEUE DIAGRAM (slide 9) === */
+  .queue {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 0;
+    margin-top: 36px;
+    align-items: stretch;
+  }
+  .queue-step {
+    background: rgba(255,255,255,0.04);
+    border: 1px solid var(--dark-rule);
+    border-radius: 14px;
+    padding: 28px 26px;
+    margin-right: -8px;
+    position: relative;
+  }
+  .queue-step:nth-child(odd) { background: rgba(15,110,86,0.10); }
+  .queue-step .step-num {
+    font-family: var(--font-mono);
+    font-size: 18px;
+    color: var(--orange-400);
+    margin-bottom: 12px;
+    letter-spacing: 0.14em;
+  }
+  .queue-step .step-name {
+    font-family: var(--font-display);
+    font-size: 32px;
+    color: #F4F1EA;
+    margin: 0 0 10px;
+  }
+  .queue-step .step-desc {
+    font-size: 19px;
+    color: rgba(244,241,234,0.68);
+    line-height: 1.4;
+    margin: 0;
+  }
+
+  /* === TIMELINE (slide 14) === */
+  .week {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 18px;
+    margin-top: 28px;
+  }
+  .week-day {
+    background: #FFFFFF;
+    border: 1px solid var(--cream-200);
+    border-radius: 16px;
+    padding: 28px 24px;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    min-height: 460px;
+  }
+  .week-day h3 {
+    font-family: var(--font-mono);
+    font-size: 18px;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    margin: 0;
+    color: var(--teal-700);
+  }
+  .week-event {
+    font-size: 20px;
+    line-height: 1.4;
+    color: var(--ink-700);
+    padding-left: 14px;
+    border-left: 2px solid var(--cream-200);
+  }
+  .week-event b { color: var(--ink-900); display: block; margin-bottom: 4px; font-weight: 600; }
+  .week-event.warm { border-left-color: var(--orange-500); }
+  .week-event.teal { border-left-color: var(--teal-500); }
+  .week-event.blue { border-left-color: var(--blue-500); }
+
+  /* === ASSET ICONS ROW === */
+  .asset-row {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 28px;
+    margin-top: 36px;
+  }
+  .asset-tile {
+    background: rgba(255,255,255,0.04);
+    border: 1px solid var(--dark-rule);
+    border-radius: 16px;
+    padding: 36px 32px;
+    text-align: left;
+  }
+  .asset-tile h4 {
+    font-family: var(--font-display);
+    font-size: 38px;
+    margin: 0 0 12px;
+    color: var(--teal-300);
+    font-weight: 500;
+  }
+  .asset-tile p {
+    font-size: 21px;
+    color: rgba(244,241,234,0.68);
+    line-height: 1.4;
+    margin: 0;
+  }
+  .asset-glyph {
+    width: 56px;
+    height: 56px;
+    margin-bottom: 18px;
+    color: var(--orange-400);
+  }
+
+  /* === TWO-COL SHELL === */
+  .two-col {
+    display: grid;
+    grid-template-columns: 1fr 1.15fr;
+    gap: 80px;
+    flex: 1;
+    align-items: center;
+    min-height: 0;
+  }
+  .two-col.even { grid-template-columns: 1fr 1fr; }
+  .two-col.heavy-right { grid-template-columns: 0.85fr 1.25fr; }
+  .two-col-text { display: flex; flex-direction: column; gap: 0; }
+
+  /* === DIFFERENTIATORS === */
+  .diff-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 32px;
+    margin-top: var(--gap-title);
+  }
+  .diff-card {
+    background: rgba(255,255,255,0.04);
+    border: 1px solid var(--dark-rule);
+    border-radius: 18px;
+    padding: 40px 38px;
+  }
+  .diff-card .num {
+    font-family: var(--font-mono);
+    font-size: 18px;
+    color: var(--orange-400);
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    margin-bottom: 20px;
+  }
+  .diff-card h3 {
+    font-family: var(--font-display);
+    font-weight: 500;
+    font-size: 40px;
+    margin: 0 0 14px;
+    color: #F4F1EA;
+    line-height: 1.1;
+  }
+  .diff-card p {
+    font-size: 22px;
+    line-height: 1.45;
+    color: rgba(244,241,234,0.7);
+    margin: 0;
+  }
+
+  /* === ROLES TABLE (slide 12) === */
+  .roles-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: var(--gap-title);
+    font-size: 24px;
+  }
+  .roles-table th, .roles-table td {
+    text-align: left;
+    padding: 18px 22px;
+    border-bottom: 1px solid var(--light-rule);
+  }
+  .roles-table th {
+    font-family: var(--font-mono);
+    font-size: 18px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--teal-700);
+    font-weight: 500;
+    background: rgba(15,110,86,0.06);
+  }
+  .roles-table td:first-child {
+    font-family: var(--font-display);
+    font-size: 30px;
+    color: var(--ink-900);
+    width: 22%;
+  }
+  .check { color: var(--teal-700); font-weight: 600; }
+  .dash { color: var(--ink-300); }
+
+  /* === ROADMAP (slide 18) === */
+  .roadmap {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 32px;
+    margin-top: var(--gap-title);
+  }
+  .road-col h3 {
+    font-family: var(--font-mono);
+    font-size: 20px;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--orange-400);
+    margin: 0 0 22px;
+    padding-bottom: 14px;
+    border-bottom: 2px solid rgba(251,146,60,0.4);
+  }
+  .road-col h3.now { color: var(--teal-300); border-bottom-color: rgba(93,202,165,0.4); }
+  .road-col h3.next { color: #93C5FD; border-bottom-color: rgba(96,165,250,0.4); }
+  .road-col ul { list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 16px; }
+  .road-col li {
+    font-size: 22px;
+    line-height: 1.4;
+    color: rgba(244,241,234,0.78);
+    padding-left: 22px;
+    position: relative;
+  }
+  .road-col li::before {
+    content: "";
+    position: absolute;
+    left: 0; top: 12px;
+    width: 8px; height: 8px;
+    background: rgba(244,241,234,0.4);
+    border-radius: 50%;
+  }
+
+  /* === WHO IT'S FOR (slide 19) === */
+  .audience-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 28px;
+    margin-top: var(--gap-title);
+  }
+  .audience-card {
+    background: #FFFFFF;
+    border: 1px solid var(--cream-200);
+    border-radius: 18px;
+    padding: 36px 36px;
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+  }
+  .audience-card h3 {
+    font-family: var(--font-display);
+    font-size: 38px;
+    margin: 0;
+    font-weight: 500;
+    color: var(--ink-900);
+  }
+  .audience-card p {
+    font-size: 22px;
+    line-height: 1.4;
+    color: var(--ink-700);
+    margin: 0;
+  }
+  .audience-card .stat {
+    font-family: var(--font-mono);
+    font-size: 18px;
+    color: var(--teal-700);
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+  }
+
+  /* === GET STARTED (slide 20) === */
+  .cta-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 40px;
+    margin-top: var(--gap-title);
+  }
+  .cta-card {
+    background: rgba(255,255,255,0.05);
+    border: 1px solid var(--dark-rule);
+    border-radius: 22px;
+    padding: 56px 50px;
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+  }
+  .cta-card.warm {
+    background: linear-gradient(135deg, rgba(251,146,60,0.18), rgba(251,146,60,0.04));
+    border-color: rgba(251,146,60,0.4);
+  }
+  .cta-card h3 {
+    font-family: var(--font-display);
+    font-size: 56px;
+    font-weight: 500;
+    margin: 0;
+    line-height: 1.05;
+    color: #F4F1EA;
+  }
+  .cta-card p {
+    font-size: 24px;
+    line-height: 1.4;
+    color: rgba(244,241,234,0.7);
+    margin: 0;
+  }
+  .cta-card .url {
+    font-family: var(--font-mono);
+    font-size: 28px;
+    color: var(--teal-300);
+    margin-top: auto;
+  }
+  .cta-card.warm .url { color: var(--orange-400); }
+
+  /* === MULTI-TENANT VISUAL (slide 16) === */
+  .tenant-vis {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 18px;
+    margin-top: var(--gap-title);
+  }
+  .tenant-card {
+    background: rgba(255,255,255,0.05);
+    border: 1px solid var(--dark-rule);
+    border-radius: 14px;
+    padding: 26px 22px;
+    min-height: 220px;
+    position: relative;
+  }
+  .tenant-card .tname {
+    font-family: var(--font-display);
+    font-size: 26px;
+    color: #F4F1EA;
+    margin: 0 0 6px;
+  }
+  .tenant-card .tid {
+    font-family: var(--font-mono);
+    font-size: 16px;
+    color: rgba(244,241,234,0.5);
+    margin-bottom: 18px;
+    letter-spacing: 0.06em;
+  }
+  .tenant-card .tstack {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+  }
+  .tenant-card .tstack span {
+    font-size: 16px;
+    font-family: var(--font-mono);
+    color: rgba(244,241,234,0.7);
+    padding: 4px 10px;
+    background: rgba(15,110,86,0.18);
+    border-radius: 6px;
+    width: fit-content;
+  }
+
+  /* === SECURITY PILLARS (slide 17) === */
+  .sec-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 32px;
+    margin-top: var(--gap-title);
+  }
+  .sec-card {
+    background: rgba(255,255,255,0.04);
+    border: 1px solid var(--dark-rule);
+    border-radius: 18px;
+    padding: 36px 36px;
+  }
+  .sec-card .ico {
+    font-family: var(--font-mono);
+    font-size: 18px;
+    color: var(--teal-300);
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    margin-bottom: 16px;
+  }
+  .sec-card h3 {
+    font-family: var(--font-display);
+    font-weight: 500;
+    font-size: 34px;
+    margin: 0 0 12px;
+    color: #F4F1EA;
+  }
+  .sec-card p {
+    font-size: 21px;
+    line-height: 1.45;
+    color: rgba(244,241,234,0.7);
+    margin: 0;
+  }
+
+  /* === ONBOARDING STEPS (slide 13) === */
+  .onb-flow {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 28px;
+    margin-top: var(--gap-title);
+    align-items: stretch;
+  }
+  .onb-step {
+    background: #FFFFFF;
+    border: 1px solid var(--cream-200);
+    border-radius: 16px;
+    padding: 32px 28px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+  .onb-step .t {
+    font-family: var(--font-mono);
+    font-size: 18px;
+    letter-spacing: 0.14em;
+    color: var(--orange-500);
+    text-transform: uppercase;
+  }
+  .onb-step h3 {
+    font-family: var(--font-display);
+    font-size: 32px;
+    margin: 0;
+    color: var(--ink-900);
+    font-weight: 500;
+  }
+  .onb-step p {
+    font-size: 20px;
+    color: var(--ink-700);
+    line-height: 1.4;
+    margin: 0;
+  }
+  .onb-step .min {
+    font-family: var(--font-mono);
+    font-size: 16px;
+    color: var(--teal-700);
+    margin-top: auto;
+  }
+
+  /* === SECTION DIVIDER (between modules) === */
+  .module-hero {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    justify-content: space-between;
+  }
+  .module-tag {
+    font-family: var(--font-mono);
+    font-size: 20px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--orange-400);
+    margin-bottom: 24px;
+  }
+
+  /* === SLIDE 2 — risk vignette === */
+  .risk-tiles {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr) 1.2fr;
+    gap: 22px;
+    margin-top: var(--gap-title);
+    flex: 1;
+    align-items: stretch;
+  }
+  .risk-tile {
+    background: rgba(255,255,255,0.04);
+    border: 1px solid var(--dark-rule);
+    border-radius: 16px;
+    padding: 32px 30px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+  .risk-tile.wide { grid-row: span 1; }
+  .risk-tile .src {
+    font-family: var(--font-mono);
+    font-size: 16px;
+    color: rgba(244,241,234,0.5);
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+  }
+  .risk-tile .num {
+    font-family: var(--font-display);
+    font-size: 92px;
+    font-weight: 500;
+    line-height: 0.95;
+    color: var(--orange-400);
+    letter-spacing: -0.02em;
+    margin: 6px 0 0;
+  }
+  .risk-tile p {
+    font-size: 20px;
+    line-height: 1.4;
+    color: rgba(244,241,234,0.78);
+    margin: auto 0 0;
+  }
+
+  /* page footer (only on dark frames) */
+  .footer-mark {
+    position: absolute;
+    bottom: 36px; left: var(--pad-x);
+    font-family: var(--font-mono);
+    font-size: 16px;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: rgba(244,241,234,0.4);
+  }
+  .footer-mark.light { color: var(--ink-300); }
+  .footer-mark .accent { color: var(--orange-400); margin-right: 14px; }
+  .footer-mark.light .accent { color: var(--orange-500); }
+
+  .pagination {
+    position: absolute;
+    bottom: 36px; right: var(--pad-x);
+    font-family: var(--font-mono);
+    font-size: 16px;
+    letter-spacing: 0.16em;
+    color: rgba(244,241,234,0.4);
+  }
+  .pagination.light { color: var(--ink-300); }
+
+  /* small flex-ed image overlay for product callout */
+  .callout {
+    background: rgba(15, 110, 86, 0.18);
+    border: 1px solid var(--teal-300);
+    color: #F4F1EA;
+    padding: 14px 22px;
+    border-radius: 10px;
+    font-family: var(--font-mono);
+    font-size: 18px;
+    letter-spacing: 0.06em;
+  }
+
+  /* dark theme override */
+  body[data-theme="navy"] {
+    --light-bg: #F2F4F8;
+    --light-panel: #FFFFFF;
+    --accent: #1F4E8C;
+    --accent-bright: #3B82F6;
+    --accent-soft: #DBEAFE;
+    --teal-700: #1F4E8C;
+    --teal-300: #93C5FD;
+    --teal-500: #3B82F6;
+    --teal-100: #DBEAFE;
+    --teal-900: #0F1E3A;
+    --mint-50: #EEF3FB;
+  }
+  body[data-theme="forest"] {
+    /* default — handled by base palette */
+  }
+  body[data-theme="warm"] {
+    --light-bg: #FBF5EC;
+    --cream-50: #FBF5EC;
+    --cream-100: #F4ECDC;
+    --accent: #B45309;
+    --teal-700: #B45309;
+    --teal-300: #FDBA74;
+    --teal-500: #D97706;
+    --teal-100: #FEF3C7;
+    --orange-500: #0F6E56;
+    --orange-400: #5DCAA5;
+  }
+
+</style>
+</head>
+<body data-theme="forest" data-headers="default">
+
+<deck-stage width="1920" height="1080">
+
+<!-- ============ SLIDE 1: COVER ============ -->
+<section data-label="01 Cover" class="bg-light">
+  <div class="cover-stage">
+    <div class="cover-left">
+      <div class="logo-lockup">
+        <img src="assets/priam-logo.svg" alt="PRIAM logo">
+      </div>
+      <div style="display:flex; flex-direction:column; gap:48px">
+        <p class="eyebrow" style="margin:0">Risk &amp; Asset Management for Small Business</p>
+        <h1 class="cover-headline">Risk visibility, <em>without the GRC team.</em></h1>
+      </div>
+      <div style="display:flex; flex-direction:column; gap:32px">
+        <p style="font-family:var(--font-display); font-style:italic; font-weight:400; font-size:42px; line-height:1.25; color:var(--ink-700); margin:0; max-width:18ch">Policy. Risk. Incident. Asset.</p>
+        <p style="font-size:28px; line-height:1.45; color:var(--ink-500); margin:0; max-width:32ch">One platform — sized for the way small businesses actually work.</p>
+      </div>
+    </div>
+    <div class="cover-right">
+      <div class="cover-rings"></div>
+      <svg class="cover-emblem" viewBox="0 0 600 600" aria-hidden="true">
+        <circle cx="300" cy="300" r="250" fill="none" stroke="#FB923C" stroke-width="3" stroke-dasharray="14 10" opacity="0.85"/>
+        <circle cx="300" cy="300" r="180" fill="none" stroke="#9FE1CB" stroke-width="1" opacity="0.4"/>
+        <g stroke="#9FE1CB" stroke-width="1" opacity="0.35">
+          <line x1="300" y1="50" x2="300" y2="550"/>
+          <line x1="50" y1="300" x2="550" y2="300"/>
+          <line x1="123" y1="123" x2="477" y2="477"/>
+          <line x1="477" y1="123" x2="123" y2="477"/>
+        </g>
+        <g fill="#0F6E56">
+          <circle cx="300" cy="80" r="42"/>
+          <circle cx="520" cy="300" r="42"/>
+          <circle cx="300" cy="520" r="42"/>
+          <circle cx="80" cy="300" r="42"/>
+        </g>
+        <g font-family="Inter, sans-serif" font-weight="700" font-size="44" fill="#9FE1CB" text-anchor="middle">
+          <text x="300" y="96">P</text>
+          <text x="520" y="316">R</text>
+          <text x="300" y="536">I</text>
+          <text x="80" y="316">A</text>
+        </g>
+        <circle cx="300" cy="300" r="62" fill="#085041"/>
+        <text x="300" y="320" font-family="Inter, sans-serif" font-weight="700" font-size="60" fill="#E1F5EE" text-anchor="middle">M</text>
+      </svg>
+    </div>
+  </div>
+</section>
+
+<!-- ============ SLIDE 2: THE RISKS SMBS FACE ============ -->
+<section data-label="02 Risks SMBs face" class="bg-dark">
+  <div class="frame">
+    <p class="eyebrow">The reality</p>
+    <h1 class="title" style="max-width:18ch">The risks small businesses face every day.</h1>
+    <div class="risk-tiles">
+      <div class="risk-tile">
+        <span class="src">Verizon DBIR — 2024</span>
+        <p class="num">43%</p>
+        <p>of cyber incidents target small businesses.</p>
+      </div>
+      <div class="risk-tile">
+        <span class="src">U.S. Bank study</span>
+        <p class="num">82%</p>
+        <p>of small businesses fail due to cash-flow and operational risk.</p>
+      </div>
+      <div class="risk-tile wide" style="background:linear-gradient(135deg, rgba(251,146,60,0.18), rgba(251,146,60,0.04)); border-color:rgba(251,146,60,0.35)">
+        <span class="src" style="color:var(--orange-400)">Across the week</span>
+        <p style="font-family:var(--font-display); font-size:36px; line-height:1.2; color:#F4F1EA; margin:0">A lost laptop. A phishing click. A supplier outage. A missed policy renewal. A customer data request.</p>
+        <p style="margin-top:24px; font-size:22px; color:rgba(244,241,234,0.6)">Each one is small on its own. Together, they're a business.</p>
+      </div>
+    </div>
+  </div>
+  <div class="footer-mark"><span class="accent">PRIAM</span> 02 / 20</div>
+</section>
+
+<!-- ============ SLIDE 3: WHY MOST GO WITHOUT ============ -->
+<section data-label="03 Why most SMBs go without" class="bg-light-warm">
+  <div class="frame">
+    <div class="two-col" style="gap:120px">
+      <div class="two-col-text">
+        <p class="eyebrow">The gap</p>
+        <h1 class="title">Big companies have GRC teams. Small businesses have a spreadsheet.</h1>
+        <p class="body" style="font-size:30px; max-width:32ch">Risk software is built for enterprises with full-time officers, audit committees, and six-figure software budgets. SMBs need the same outcomes — without any of that.</p>
+      </div>
+      <div style="display:flex; flex-direction:column; gap:24px; justify-content:center">
+        <div style="background:#FFFFFF; border-radius:18px; padding:40px; border:1px solid var(--cream-200)">
+          <p class="mono" style="color:var(--teal-700); margin:0 0 14px">Enterprise GRC</p>
+          <p style="font-family:var(--font-display); font-size:42px; margin:0 0 8px; line-height:1.1">$60k+/year, 6-month rollout</p>
+          <p style="margin:0; color:var(--ink-500); font-size:22px">Built for compliance officers</p>
+        </div>
+        <div style="background:#FFFFFF; border-radius:18px; padding:40px; border:1px solid var(--cream-200)">
+          <p class="mono" style="color:var(--ink-500); margin:0 0 14px">SMB Reality</p>
+          <p style="font-family:var(--font-display); font-size:42px; margin:0 0 8px; line-height:1.1">A shared Google Sheet</p>
+          <p style="margin:0; color:var(--ink-500); font-size:22px">If anything at all</p>
+        </div>
+        <div style="background:linear-gradient(135deg, var(--teal-700), var(--teal-500)); color:#fff; border-radius:18px; padding:40px">
+          <p class="mono" style="color:var(--teal-100); margin:0 0 14px">PRIAM</p>
+          <p style="font-family:var(--font-display); font-size:42px; margin:0 0 8px; line-height:1.1">Day-one usable</p>
+          <p style="margin:0; color:rgba(255,255,255,0.78); font-size:22px">Built for the way SMBs work</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ SLIDE 4: WHAT PRIAM DOES ============ -->
+<section data-label="04 What PRIAM does" class="bg-dark">
+  <div class="frame">
+    <div class="section-marker"><span class="section-marker-num">01</span><span>The platform</span></div>
+    <h1 class="display" style="max-width:18ch">A single platform for everything that <span style="color:var(--teal-300); font-style:italic">might go wrong</span>—and everything you own.</h1>
+    <p class="body" style="font-size:30px; max-width:46ch; margin-top:14px; color:rgba(244,241,234,0.78)">Four lightweight modules. One shared system of record. Designed so a five-person team and a fifty-person team can both use it from week one.</p>
+  </div>
+  <div class="footer-mark"><span class="accent">PRIAM</span> 04 / 20</div>
+</section>
+
+<!-- ============ SLIDE 5: P R I A M ============ -->
+<section data-label="05 P R I A M acronym" class="bg-dark-panel">
+  <div class="frame">
+    <div class="section-marker"><span class="section-marker-num">02</span><span>The acronym</span></div>
+    <h1 class="title" style="max-width:24ch">Five letters. Five connected workflows.</h1>
+    <div class="priam-grid">
+      <div class="priam-card">
+        <span class="priam-letter">P</span>
+        <p class="priam-word">Policy</p>
+        <p class="priam-desc">Draft, publish, version, and track acknowledgement.</p>
+      </div>
+      <div class="priam-card">
+        <span class="priam-letter">R</span>
+        <p class="priam-word">Risk</p>
+        <p class="priam-desc">Adaptive, industry-specific assessments and recommendations.</p>
+      </div>
+      <div class="priam-card">
+        <span class="priam-letter">I</span>
+        <p class="priam-word">Incident</p>
+        <p class="priam-desc">Queue-based reporting with status, ownership, and audit trail.</p>
+      </div>
+      <div class="priam-card">
+        <span class="priam-letter">A</span>
+        <p class="priam-word">Asset</p>
+        <p class="priam-desc">People, customers, suppliers, devices, and vehicles in one ledger.</p>
+      </div>
+      <div class="priam-card">
+        <span class="priam-letter">M</span>
+        <p class="priam-word">Management</p>
+        <p class="priam-desc">Roles, approvals, audit, and the dashboard that ties it together.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ SLIDE 6: POLICY ============ -->
+<section data-label="06 Policy management" class="bg-light">
+  <div class="frame">
+    <div class="two-col heavy-right">
+      <div class="two-col-text">
+        <div class="section-marker" style="color:var(--teal-700)"><span style="color:var(--orange-500)">P —</span><span>Policy</span></div>
+        <h1 class="title">Living documents, not binders.</h1>
+        <p class="body" style="font-size:28px">Every policy has a status, a version, an effective date, and a paper trail of who acknowledged it. Drafts stay drafts until you publish.</p>
+        <ul class="clean" style="margin-top:18px">
+          <li><span class="num">→</span><span>Draft → Published → Acknowledged</span></li>
+          <li><span class="num">→</span><span>Categories &amp; tags for fast filtering</span></li>
+          <li><span class="num">→</span><span>Add-on modules: HIPAA, GDPR, SOC&nbsp;2</span></li>
+        </ul>
+      </div>
+      <div class="screen-frame on-light">
+        <div class="screen-chrome"><span class="dot"></span><span class="dot"></span><span class="dot"></span></div>
+        <img src="assets/policy-mgmt.png" alt="Policy management screen">
+      </div>
+    </div>
+  </div>
+  <div class="pagination light">06 / 20</div>
+</section>
+
+<!-- ============ SLIDE 7: RISK — adaptive ============ -->
+<section data-label="07 Risk assessment adaptive" class="bg-mint">
+  <div class="frame">
+    <div class="section-marker" style="color:var(--teal-700)"><span style="color:var(--orange-500)">R —</span><span>Risk Assessment</span></div>
+    <h1 class="title" style="max-width:22ch">Questionnaires that adapt to your industry, not yours to a checklist.</h1>
+    <div class="two-col" style="margin-top:24px; align-items:flex-start">
+      <div>
+        <p class="body" style="font-size:30px">Pick your NAICS code at signup. PRIAM only asks what's relevant.</p>
+        <div style="display:flex; gap:16px; flex-wrap:wrap; margin-top:24px">
+          <span class="pill">Adaptive (DAG engine)</span>
+          <span class="pill warm">NAICS-tailored</span>
+          <span class="pill">Audit-trailed</span>
+          <span class="pill warm">6-month retention</span>
+        </div>
+        <p class="small" style="margin-top:36px; max-width:34ch">Answers feed downstream — change one input, see the score and recommendations update on the spot.</p>
+      </div>
+      <div style="display:flex; flex-direction:column; gap:20px">
+        <div style="background:#FFFFFF; padding:32px 36px; border-radius:16px; border:1px solid var(--cream-200)">
+          <p class="mono" style="color:var(--teal-700); margin:0 0 14px">Without PRIAM</p>
+          <p style="margin:0; font-family:var(--font-display); font-size:34px; line-height:1.1">A 400-question generic checklist.</p>
+        </div>
+        <div style="background:var(--teal-700); color:#fff; padding:32px 36px; border-radius:16px">
+          <p class="mono" style="color:var(--teal-100); margin:0 0 14px">With PRIAM</p>
+          <p style="margin:0; font-family:var(--font-display); font-size:34px; line-height:1.1">Roughly 50 questions. Only the ones that apply to a 12-person retailer in Oregon.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ SLIDE 8: RISK RESULTS ============ -->
+<section data-label="08 Risk results" class="bg-dark">
+  <div class="frame">
+    <div class="section-marker"><span class="section-marker-num">R</span><span>Results &amp; recommendations</span></div>
+    <h1 class="title" style="max-width:24ch">A score, a matrix, and a prioritized list of fixes.</h1>
+    <div class="two-col even" style="margin-top:18px; align-items:stretch">
+      <div class="screen-frame">
+        <div class="screen-chrome"><span class="dot"></span><span class="dot"></span><span class="dot"></span></div>
+        <img src="assets/risk-results.png" alt="Risk assessment results">
+      </div>
+      <div class="screen-frame">
+        <div class="screen-chrome"><span class="dot"></span><span class="dot"></span><span class="dot"></span></div>
+        <img src="assets/risk-recommendations.png" alt="Actionable recommendations">
+      </div>
+    </div>
+  </div>
+  <div class="pagination">08 / 20</div>
+</section>
+
+<!-- ============ SLIDE 9: INCIDENT QUEUE ============ -->
+<section data-label="09 Incident queue" class="bg-dark-panel">
+  <div class="frame">
+    <div class="section-marker"><span style="color:var(--orange-400)">I —</span><span>Incident management</span></div>
+    <h1 class="title" style="max-width:22ch">A queue, not an inbox.</h1>
+    <p class="body" style="font-size:28px; color:rgba(244,241,234,0.78); max-width:50ch">Every incident has an owner at every stage. BullMQ-backed transitions, immutable audit trail, automatic notifications.</p>
+    <div class="queue">
+      <div class="queue-step">
+        <div class="step-num">01 — SUBMITTED</div>
+        <h3 class="step-name">Submitted</h3>
+        <p class="step-desc">Anyone on the team can report — public or private.</p>
+      </div>
+      <div class="queue-step">
+        <div class="step-num">02 — TRIAGE</div>
+        <h3 class="step-name">Unassigned</h3>
+        <p class="step-desc">Routed to the right team based on category.</p>
+      </div>
+      <div class="queue-step">
+        <div class="step-num">03 — OWNED</div>
+        <h3 class="step-name">Assigned</h3>
+        <p class="step-desc">A named owner with priority and SLA.</p>
+      </div>
+      <div class="queue-step">
+        <div class="step-num">04 — IN MOTION</div>
+        <h3 class="step-name">Active</h3>
+        <p class="step-desc">Comments, status updates, and edits — all logged.</p>
+      </div>
+      <div class="queue-step">
+        <div class="step-num">05 — DONE</div>
+        <h3 class="step-name">Resolved</h3>
+        <p class="step-desc">Closed with a reason. Re-openable if it returns.</p>
+      </div>
+    </div>
+    <div style="margin-top:36px; display:grid; grid-template-columns: 1.3fr 1fr; gap:30px">
+      <div class="screen-frame">
+        <div class="screen-chrome"><span class="dot"></span><span class="dot"></span><span class="dot"></span></div>
+        <img src="assets/incident-detail.png" alt="Incident detail with audit trail">
+      </div>
+      <div class="screen-frame">
+        <div class="screen-chrome"><span class="dot"></span><span class="dot"></span><span class="dot"></span></div>
+        <img src="assets/incident-edit.png" alt="Incident edit panel">
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ SLIDE 10: INCIDENT ANALYTICS ============ -->
+<section data-label="10 Incident analytics" class="bg-dark">
+  <div class="frame">
+    <div class="section-marker"><span class="section-marker-num">I</span><span>Analytics</span></div>
+    <h1 class="title" style="max-width:24ch">See patterns, not just events.</h1>
+    <p class="body" style="font-size:28px; color:rgba(244,241,234,0.78); max-width:48ch">Three lost devices in a month is a procurement problem, not three tickets.</p>
+    <div class="screen-frame" style="margin-top:24px; flex:1; display:flex; flex-direction:column">
+      <div class="screen-chrome"><span class="dot"></span><span class="dot"></span><span class="dot"></span></div>
+      <img src="assets/incident-analytics.png" alt="Incident analytics dashboard" style="flex:1; object-fit:cover; object-position:top">
+    </div>
+  </div>
+</section>
+
+<!-- ============ SLIDE 11: ASSETS ============ -->
+<section data-label="11 Asset management" class="bg-dark-panel">
+  <div class="frame">
+    <div class="section-marker"><span style="color:var(--orange-400)">A —</span><span>Asset management</span></div>
+    <h1 class="title" style="max-width:24ch">Five things every business has. One place to track them all.</h1>
+    <div class="asset-row">
+      <div class="asset-tile">
+        <svg class="asset-glyph" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><circle cx="24" cy="18" r="8"/><path d="M8 42c0-9 7-16 16-16s16 7 16 16"/></svg>
+        <h4>Employees</h4>
+        <p>Roles, departments, onboarding status.</p>
+      </div>
+      <div class="asset-tile">
+        <svg class="asset-glyph" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M34 22a10 10 0 0 0-20 0v6l-4 8h28l-4-8z"/><path d="M19 36a5 5 0 0 0 10 0"/></svg>
+        <h4>Customers</h4>
+        <p>NAICS-coded with verification workflow.</p>
+      </div>
+      <div class="asset-tile">
+        <svg class="asset-glyph" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><rect x="6" y="14" width="22" height="20" rx="2"/><path d="M28 20h8l6 6v8h-14"/><circle cx="14" cy="36" r="3"/><circle cx="34" cy="36" r="3"/></svg>
+        <h4>Suppliers</h4>
+        <p>Approval-gated entries, audit-ready.</p>
+      </div>
+      <div class="asset-tile">
+        <svg class="asset-glyph" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><rect x="6" y="10" width="36" height="22" rx="2"/><path d="M14 32v6m20-6v6M10 38h28"/></svg>
+        <h4>Devices</h4>
+        <p>Computers, phones, peripherals.</p>
+      </div>
+      <div class="asset-tile">
+        <svg class="asset-glyph" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M8 30v-8l4-8h24l4 8v8M8 30h32M8 30v6h6v-6m20 0v6h6v-6"/><circle cx="16" cy="30" r="2"/><circle cx="32" cy="30" r="2"/></svg>
+        <h4>Vehicles</h4>
+        <p>Fleet records and assignments.</p>
+      </div>
+    </div>
+    <div class="screen-frame" style="margin-top:36px">
+      <div class="screen-chrome"><span class="dot"></span><span class="dot"></span><span class="dot"></span></div>
+      <img src="assets/company-resources.png" alt="Company resources view" style="object-fit:cover; object-position:top; max-height:340px">
+    </div>
+  </div>
+</section>
+
+<!-- ============ SLIDE 11A: HIPAA — INTRO ============ -->
+<section data-label="11a HIPAA Assessment intro" class="bg-light-warm">
+  <div class="frame">
+    <div class="section-marker" style="color:var(--teal-700)"><span style="color:var(--orange-500)">+</span><span>HIPAA &amp; Data Privacy Assessment</span></div>
+    <div class="two-col" style="gap:80px; align-items:center">
+      <div>
+        <h1 class="title" style="max-width:18ch">A guided assessment for the people on the front line.</h1>
+        <p class="body" style="font-size:28px; max-width:42ch">Annual HIPAA &amp; Data Privacy refreshers — built into PRIAM. Coaches and case workers take a 25-question, 30-minute assessment. Pass at 80% and a Certificate of Completion is generated automatically.</p>
+        <ul class="bullets" style="margin-top:18px">
+          <li><b>25 questions</b> · multiple choice + short answer</li>
+          <li><b>30-minute</b> timed window with autosave</li>
+          <li><b>80% to pass</b> · explanations after every attempt</li>
+          <li><b>Certificate</b> issued the moment you pass</li>
+        </ul>
+      </div>
+      <div class="screen-frame">
+        <div class="screen-chrome"><span class="dot"></span><span class="dot"></span><span class="dot"></span></div>
+        <img src="assets/hipaa-assessment-1.png" alt="HIPAA welcome">
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ SLIDE 11B: HIPAA — DURING ============ -->
+<section data-label="11b HIPAA in progress" class="bg-dark">
+  <div class="frame">
+    <div class="section-marker"><span class="section-marker-num">+</span><span>Taking the assessment</span></div>
+    <h1 class="title" style="max-width:24ch">Plain-language scenarios. Saved as you go.</h1>
+    <p class="body" style="font-size:26px; color:rgba(244,241,234,0.78); max-width:54ch">Multiple-choice and short-answer prompts drawn from the situations social-services teams actually run into — with a question palette so participants can jump back to anything still unanswered.</p>
+    <div style="margin-top:30px; display:grid; grid-template-columns: 1fr 1fr; gap:24px">
+      <div class="screen-frame">
+        <div class="screen-chrome"><span class="dot"></span><span class="dot"></span><span class="dot"></span></div>
+        <img src="assets/hipaa-assessment-2.png" alt="Multiple choice question">
+      </div>
+      <div class="screen-frame">
+        <div class="screen-chrome"><span class="dot"></span><span class="dot"></span><span class="dot"></span></div>
+        <img src="assets/hipaa-assessment-3.png" alt="Submit assessment">
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ SLIDE 11C: HIPAA — RESULTS & EXPLANATIONS ============ -->
+<section data-label="11c HIPAA results and explanations" class="bg-mint">
+  <div class="frame">
+    <div class="section-marker" style="color:var(--teal-700)"><span style="color:var(--orange-500)">+</span><span>Results &amp; explanations</span></div>
+    <h1 class="title" style="max-width:22ch">A score, and the reason behind every answer.</h1>
+    <p class="body" style="font-size:24px; max-width:54ch">Whether you pass or not, every question gets an explanation — so the assessment doubles as training. Retakes are one click away.</p>
+    <div style="margin-top:22px; display:grid; grid-template-columns: 1fr 1.15fr; gap:24px">
+      <div class="screen-frame on-light">
+        <div class="screen-chrome"><span class="dot"></span><span class="dot"></span><span class="dot"></span></div>
+        <img src="assets/hipaa-assessment-4.png" alt="Result screen">
+      </div>
+      <div class="screen-frame">
+        <div class="screen-chrome"><span class="dot"></span><span class="dot"></span><span class="dot"></span></div>
+        <img src="assets/hipaa-questions-explained.png" alt="Question-by-question explanations">
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ SLIDE 11D: HIPAA — ADMIN ============ -->
+<section data-label="11d HIPAA admin" class="bg-dark-panel">
+  <div class="frame">
+    <div class="section-marker"><span style="color:var(--orange-400)">Admin</span><span>HIPAA participant tracking</span></div>
+    <h1 class="title" style="max-width:24ch">For admins: who's invited, in progress, passed.</h1>
+    <p class="body" style="font-size:26px; color:rgba(244,241,234,0.78); max-width:54ch">A live participant dashboard surfaces invited, in-progress, completed, and failed counts — plus a pass-rate and average-score readout. Compliance leads see assessment status across every tenant they administer, with drill-downs by company, participant, and report.</p>
+    <div class="screen-frame" style="margin-top:24px; flex:1; display:flex; flex-direction:column">
+      <div class="screen-chrome"><span class="dot"></span><span class="dot"></span><span class="dot"></span></div>
+      <img src="assets/hipaa-admin.png" alt="HIPAA admin dashboard" style="flex:1; object-fit:cover; object-position:top">
+    </div>
+  </div>
+</section>
+
+<!-- ============ SLIDE 11E: PLATFORM ADMIN — OVERVIEW ============ -->
+<section data-label="11e Platform Administration" class="bg-light">
+  <div class="frame">
+    <div class="section-marker" style="color:var(--teal-700)"><span style="color:var(--orange-500)">⌘</span><span>Platform Administration</span></div>
+    <h1 class="title" style="max-width:22ch">One control plane behind every tenant.</h1>
+    <p class="body" style="font-size:26px; max-width:50ch">Author master policy templates, define recommendation rules, import from a built-in catalog, and govern the HIPAA programme — all from a single admin portal.</p>
+    <div style="margin-top:30px; display:grid; grid-template-columns: 1.2fr 1fr; gap:30px; align-items:stretch">
+      <div class="screen-frame on-light">
+        <div class="screen-chrome"><span class="dot"></span><span class="dot"></span><span class="dot"></span></div>
+        <img src="assets/policy-admin-dashboard.png" alt="Admin dashboard">
+      </div>
+      <div style="display:flex; flex-direction:column; gap:14px">
+        <div class="onb-step"><span class="t">Templates</span><h3 style="font-size:26px">Author once</h3><p style="font-size:18px">Master policies with placeholders for tenant-specific values.</p></div>
+        <div class="onb-step"><span class="t">Rules</span><h3 style="font-size:26px">Recommend smartly</h3><p style="font-size:18px">Industry, jurisdiction, and business-flag-driven matches.</p></div>
+        <div class="onb-step"><span class="t">Catalog</span><h3 style="font-size:26px">Import in bulk</h3><p style="font-size:18px">12 ready-made templates with rules attached.</p></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ SLIDE 11F: PLATFORM ADMIN — TEMPLATES & RULES ============ -->
+<section data-label="11f Templates rules and catalog" class="bg-dark">
+  <div class="frame">
+    <div class="section-marker"><span class="section-marker-num">⌘</span><span>Templates · Rules · Catalog</span></div>
+    <h1 class="title" style="max-width:24ch">From one master template to the right policy for every tenant.</h1>
+    <p class="body" style="font-size:24px; color:rgba(244,241,234,0.78); max-width:60ch">Edit a template once with placeholders. Attach rules — NAICS code, state, business flags. Tenants see only the policies that match their profile, ready to publish.</p>
+    <div style="margin-top:24px; display:grid; grid-template-columns: repeat(4, 1fr); gap:16px; flex:1; align-items:stretch">
+      <div class="screen-frame" style="display:flex; flex-direction:column">
+        <div class="screen-chrome"><span class="dot"></span><span class="dot"></span><span class="dot"></span></div>
+        <img src="assets/policy-template-edit.png" alt="Template editor" style="flex:1; object-fit:cover; object-position:top">
+        <p class="mono" style="margin:10px 14px 12px; color:rgba(244,241,234,0.55); font-size:13px; letter-spacing:0.14em; text-transform:uppercase">01 · Author</p>
+      </div>
+      <div class="screen-frame" style="display:flex; flex-direction:column">
+        <div class="screen-chrome"><span class="dot"></span><span class="dot"></span><span class="dot"></span></div>
+        <img src="assets/policy-template-rules.png" alt="Template rules list" style="flex:1; object-fit:cover; object-position:top">
+        <p class="mono" style="margin:10px 14px 12px; color:rgba(244,241,234,0.55); font-size:13px; letter-spacing:0.14em; text-transform:uppercase">02 · Rule list</p>
+      </div>
+      <div class="screen-frame" style="display:flex; flex-direction:column">
+        <div class="screen-chrome"><span class="dot"></span><span class="dot"></span><span class="dot"></span></div>
+        <img src="assets/policy-rule-edit.png" alt="Rule editor" style="flex:1; object-fit:cover; object-position:top">
+        <p class="mono" style="margin:10px 14px 12px; color:rgba(244,241,234,0.55); font-size:13px; letter-spacing:0.14em; text-transform:uppercase">03 · Match</p>
+      </div>
+      <div class="screen-frame" style="display:flex; flex-direction:column">
+        <div class="screen-chrome"><span class="dot"></span><span class="dot"></span><span class="dot"></span></div>
+        <img src="assets/policy-import-catalog.png" alt="Import from catalog" style="flex:1; object-fit:cover; object-position:top">
+        <p class="mono" style="margin:10px 14px 12px; color:rgba(244,241,234,0.55); font-size:13px; letter-spacing:0.14em; text-transform:uppercase">04 · Import</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ SLIDE 12: ROLES & APPROVALS ============ -->
+<section data-label="12 Roles and approvals" class="bg-light">
+  <div class="frame">
+    <div class="section-marker" style="color:var(--teal-700)"><span style="color:var(--orange-500)">M —</span><span>Roles &amp; approvals</span></div>
+    <h1 class="title" style="max-width:24ch">Five built-in roles. Sensible defaults out of the box.</h1>
+    <table class="roles-table">
+      <thead>
+        <tr>
+          <th>Role</th>
+          <th>View</th>
+          <th>Add asset</th>
+          <th>Edit employee</th>
+          <th>Approve</th>
+          <th>Configure</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Super</td>
+          <td><span class="check">●</span></td>
+          <td><span class="check">●</span></td>
+          <td><span class="check">●</span></td>
+          <td><span class="check">●</span></td>
+          <td><span class="check">●</span></td>
+        </tr>
+        <tr>
+          <td>Admin</td>
+          <td><span class="check">●</span></td>
+          <td><span class="check">●</span></td>
+          <td><span class="check">●</span></td>
+          <td><span class="check">●</span></td>
+          <td><span class="check">●</span></td>
+        </tr>
+        <tr>
+          <td>Manager</td>
+          <td><span class="check">●</span></td>
+          <td><span class="check">●</span></td>
+          <td><span class="dash">—</span></td>
+          <td><span class="check">●</span></td>
+          <td><span class="dash">—</span></td>
+        </tr>
+        <tr>
+          <td>Employee</td>
+          <td><span class="check">●</span></td>
+          <td><span class="check">●&nbsp;<span style="font-size:18px; font-family:var(--font-mono); color:var(--orange-500)">pending</span></span></td>
+          <td><span class="dash">—</span></td>
+          <td><span class="dash">—</span></td>
+          <td><span class="dash">—</span></td>
+        </tr>
+        <tr>
+          <td>Viewer</td>
+          <td><span class="check">●</span></td>
+          <td><span class="dash">—</span></td>
+          <td><span class="dash">—</span></td>
+          <td><span class="dash">—</span></td>
+          <td><span class="dash">—</span></td>
+        </tr>
+      </tbody>
+    </table>
+    <p class="small" style="margin-top:32px">Employees can <em>add</em> customers and suppliers — admins flip them from <span class="mono" style="color:var(--orange-500)">pending</span> to <span class="mono" style="color:var(--teal-700)">active</span>.</p>
+  </div>
+</section>
+
+<!-- ============ SLIDE 13: ONBOARDING ============ -->
+<section data-label="13 Onboarding" class="bg-cream-deep">
+  <div class="frame">
+    <div class="section-marker" style="color:var(--teal-700)"><span style="color:var(--orange-500)">M —</span><span>Onboarding</span></div>
+    <h1 class="title" style="max-width:24ch">From signup to your first assessment in under five minutes.</h1>
+    <div class="onb-flow">
+      <div class="onb-step">
+        <span class="t">Step 01</span>
+        <h3>Register</h3>
+        <p>Email, company name, industry, and state. That's the form.</p>
+        <span class="min">~ 90 seconds</span>
+      </div>
+      <div class="onb-step">
+        <span class="t">Step 02</span>
+        <h3>Verify</h3>
+        <p>Token-based email verification. No phone tree.</p>
+        <span class="min">~ 30 seconds</span>
+      </div>
+      <div class="onb-step">
+        <span class="t">Step 03</span>
+        <h3>Invite team</h3>
+        <p>Add admins and employees with role-scoped invites.</p>
+        <span class="min">~ 60 seconds</span>
+      </div>
+      <div class="onb-step">
+        <span class="t">Step 04</span>
+        <h3>Start</h3>
+        <p>Risk assessment is already tailored to your NAICS.</p>
+        <span class="min">→ ready</span>
+      </div>
+    </div>
+    <div style="margin-top:38px; display:grid; grid-template-columns: 1fr 1fr; gap:28px">
+      <div class="screen-frame on-light">
+        <div class="screen-chrome"><span class="dot"></span><span class="dot"></span><span class="dot"></span></div>
+        <img src="assets/company-registration.png" alt="Company registration">
+      </div>
+      <div class="screen-frame on-light">
+        <div class="screen-chrome"><span class="dot"></span><span class="dot"></span><span class="dot"></span></div>
+        <img src="assets/invite-employee.png" alt="Invite employee modal">
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ SLIDE 14: A TYPICAL WEEK ============ -->
+<section data-label="14 A typical week" class="bg-light">
+  <div class="frame">
+    <p class="eyebrow">In practice</p>
+    <h1 class="title" style="max-width:24ch">A typical week with PRIAM.</h1>
+    <p class="body" style="font-size:26px; max-width:50ch">Mostly two-minute check-ins. Occasionally a deeper assessment. Always one place to look.</p>
+    <div class="week">
+      <div class="week-day">
+        <h3>Monday</h3>
+        <div class="week-event teal"><b>Owner check-in</b>Reviews dashboard. 0 pending policy ack.</div>
+        <div class="week-event"><b>Onboard new hire</b>Manager invites; admin approves.</div>
+      </div>
+      <div class="week-day">
+        <h3>Tuesday</h3>
+        <div class="week-event warm"><b>Phishing email</b>Employee files incident. Auto-routed to IT.</div>
+      </div>
+      <div class="week-day">
+        <h3>Wednesday</h3>
+        <div class="week-event blue"><b>Quarterly assessment</b>Risk score rises 8 pts on data privacy.</div>
+        <div class="week-event"><b>Three new suppliers</b>Filed by ops, awaiting verification.</div>
+      </div>
+      <div class="week-day">
+        <h3>Thursday</h3>
+        <div class="week-event teal"><b>Policy update</b>New remote-work policy goes from draft to published.</div>
+      </div>
+      <div class="week-day">
+        <h3>Friday</h3>
+        <div class="week-event warm"><b>Lost laptop</b>Reported, asset record flagged, manager notified.</div>
+        <div class="week-event teal"><b>Resolved</b>Tuesday's phishing incident closed by IT lead.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ SLIDE 15: DIFFERENTIATORS ============ -->
+<section data-label="15 Built for SMBs" class="bg-dark">
+  <div class="frame">
+    <div class="section-marker"><span class="section-marker-num">03</span><span>Why us</span></div>
+    <h1 class="title" style="max-width:18ch">Four reasons PRIAM fits where enterprise GRC doesn't.</h1>
+    <div class="diff-grid">
+      <div class="diff-card">
+        <div class="num">01 — Simplicity</div>
+        <h3>Intuitive on day one.</h3>
+        <p>No consultant rollout. Your office manager can drive it.</p>
+      </div>
+      <div class="diff-card">
+        <div class="num">02 — Adaptive</div>
+        <h3>Industry-tailored questionnaires.</h3>
+        <p>NAICS-aware DAG engine asks only what's relevant.</p>
+      </div>
+      <div class="diff-card">
+        <div class="num">03 — Queue-based</div>
+        <h3>Incidents have owners, not inboxes.</h3>
+        <p>BullMQ-backed transitions, audit trail, notifications.</p>
+      </div>
+      <div class="diff-card">
+        <div class="num">04 — Assembled</div>
+        <h3>Policy, risk, incident, asset — together.</h3>
+        <p>One login. One source of truth. Recommendations that connect.</p>
+      </div>
+    </div>
+  </div>
+  <div class="footer-mark"><span class="accent">PRIAM</span> 15 / 20</div>
+</section>
+
+<!-- ============ SLIDE 16: MULTI-TENANT ============ -->
+<section data-label="16 Multi-tenant" class="bg-teal-deep">
+  <div class="frame">
+    <div class="section-marker" style="color:var(--orange-400)"><span style="color:var(--teal-300)">04</span><span>Architecture</span></div>
+    <h1 class="title" style="max-width:24ch; color:#F4F1EA">Multi-tenant by design.</h1>
+    <p class="body" style="font-size:28px; max-width:50ch; color:rgba(244,241,234,0.78)">Every record carries a tenant ID. Isolation is enforced at the database query layer — not bolted on at the application edge.</p>
+    <div class="tenant-vis">
+      <div class="tenant-card">
+        <p class="tname">Northwind Retail</p>
+        <p class="tid">tenant_a91f</p>
+        <div class="tstack">
+          <span>employees · 23</span>
+          <span>incidents · 4</span>
+          <span>policies · 6</span>
+        </div>
+      </div>
+      <div class="tenant-card">
+        <p class="tname">Cedar &amp; Co.</p>
+        <p class="tid">tenant_b30c</p>
+        <div class="tstack">
+          <span>employees · 11</span>
+          <span>incidents · 1</span>
+          <span>policies · 4</span>
+        </div>
+      </div>
+      <div class="tenant-card">
+        <p class="tname">Mendoza Logistics</p>
+        <p class="tid">tenant_c7e2</p>
+        <div class="tstack">
+          <span>employees · 48</span>
+          <span>incidents · 9</span>
+          <span>policies · 12</span>
+        </div>
+      </div>
+      <div class="tenant-card" style="background:rgba(251,146,60,0.12); border-color:rgba(251,146,60,0.4)">
+        <p class="tname" style="color:var(--orange-400)">Your business</p>
+        <p class="tid">tenant_xxxx</p>
+        <div class="tstack">
+          <span style="background:rgba(251,146,60,0.18); color:var(--orange-400)">isolated</span>
+          <span style="background:rgba(251,146,60,0.18); color:var(--orange-400)">encrypted</span>
+          <span style="background:rgba(251,146,60,0.18); color:var(--orange-400)">audited</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ SLIDE 17: SECURITY ============ -->
+<section data-label="17 Security" class="bg-dark">
+  <div class="frame">
+    <div class="section-marker"><span class="section-marker-num">05</span><span>Security &amp; data handling</span></div>
+    <h1 class="title" style="max-width:24ch">Boring, dependable security primitives.</h1>
+    <div class="sec-grid">
+      <div class="sec-card">
+        <p class="ico">Identity</p>
+        <h3>Firebase Authentication</h3>
+        <p>Industry-standard auth, MFA-ready, with token-based session management.</p>
+      </div>
+      <div class="sec-card">
+        <p class="ico">Authorization</p>
+        <h3>RBAC at the API layer</h3>
+        <p>Every API route runs through <span class="mono" style="font-size:20px">withAuth</span> + <span class="mono" style="font-size:20px">checkAccess</span>.</p>
+      </div>
+      <div class="sec-card">
+        <p class="ico">Audit</p>
+        <h3>Immutable trails</h3>
+        <p>Assessment evaluations and incident transitions log to append-only collections.</p>
+      </div>
+      <div class="sec-card">
+        <p class="ico">Retention</p>
+        <h3>Lifecycle defaults</h3>
+        <p>Risk assessments expire after 6 months; tenants can extend per record.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ SLIDE 18: ROADMAP ============ -->
+<section data-label="18 Roadmap" class="bg-dark-panel">
+  <div class="frame">
+    <div class="section-marker"><span class="section-marker-num">06</span><span>What's next</span></div>
+    <h1 class="title" style="max-width:18ch">Roadmap.</h1>
+    <div class="roadmap">
+      <div class="road-col">
+        <h3 class="now">Now — Q2 '26</h3>
+        <ul>
+          <li>Policy management + acknowledgement</li>
+          <li>Adaptive risk assessment (DAG engine)</li>
+          <li>Queue-based incident workflow</li>
+          <li>Asset registry &amp; RBAC</li>
+        </ul>
+      </div>
+      <div class="road-col">
+        <h3 class="next">Next — Q3 '26</h3>
+        <ul>
+          <li>Profile change workflows</li>
+          <li>Notification rules &amp; digest</li>
+          <li>HIPAA &amp; SOC&nbsp;2 add-on packs</li>
+          <li>Slack &amp; Teams integration</li>
+        </ul>
+      </div>
+      <div class="road-col">
+        <h3>Later — Q4 '26+</h3>
+        <ul>
+          <li>Open API &amp; webhooks</li>
+          <li>Vendor risk scoring</li>
+          <li>Mobile incident reporting</li>
+          <li>Industry packs: retail, logistics, healthcare</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ SLIDE 19: WHO IT'S FOR ============ -->
+<section data-label="19 Who it's for" class="bg-light-warm">
+  <div class="frame">
+    <p class="eyebrow">Audience</p>
+    <h1 class="title" style="max-width:22ch">If you're wearing the compliance hat — this is for you.</h1>
+    <div class="audience-grid">
+      <div class="audience-card">
+        <span class="stat">5–50 employees</span>
+        <h3>The owner-operator</h3>
+        <p>Running ops, compliance, and HR on the side of the actual business.</p>
+      </div>
+      <div class="audience-card">
+        <span class="stat">10–200 employees</span>
+        <h3>The ops lead</h3>
+        <p>Wants a dashboard that doesn't require a vendor relationship to interpret.</p>
+      </div>
+      <div class="audience-card">
+        <span class="stat">First-time compliance</span>
+        <h3>The founder under contract pressure</h3>
+        <p>Customers asking "do you have a security program?" — needs one this quarter.</p>
+      </div>
+      <div class="audience-card">
+        <span class="stat">Regulated by default</span>
+        <h3>The healthcare or fintech SMB</h3>
+        <p>Needs HIPAA / PCI / SOC 2 hooks without an enterprise GRC platform.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ SLIDE 20: GET STARTED ============ -->
+<section data-label="20 Get started" class="bg-dark">
+  <div class="frame">
+    <div style="display:flex; align-items:center; justify-content:space-between; margin-bottom:38px">
+      <div class="logo-lockup logo-lockup-sm">
+        <img src="assets/priam-logo.svg" alt="PRIAM">
+      </div>
+      <p class="mono" style="color:rgba(244,241,234,0.5); margin:0">PRIAM · RISK &amp; ASSET MANAGEMENT</p>
+    </div>
+    <h1 class="display" style="max-width:18ch">Two ways to <span style="color:var(--teal-300); font-style:italic">get started.</span></h1>
+    <div class="cta-grid">
+      <div class="cta-card">
+        <p class="mono" style="color:var(--teal-300); margin:0; letter-spacing:0.16em; text-transform:uppercase; font-size:20px">Self-serve</p>
+        <h3>Start a free trial</h3>
+        <p>Tenant created in under five minutes. First assessment ready immediately. No card required for the trial.</p>
+        <p class="url">priam.app/start</p>
+      </div>
+      <div class="cta-card warm">
+        <p class="mono" style="color:var(--orange-400); margin:0; letter-spacing:0.16em; text-transform:uppercase; font-size:20px">Guided</p>
+        <h3>Book a 20-min walkthrough</h3>
+        <p>We'll set you up with sample data for your industry. You'll see exactly what your first month looks like.</p>
+        <p class="url">priam.app/demo</p>
+      </div>
+    </div>
+    <p style="text-align:center; margin-top:48px; font-family:var(--font-display); font-style:italic; font-size:32px; color:rgba(244,241,234,0.78)">Thank you.</p>
+  </div>
+</section>
+
+</deck-stage>
+
+<!-- TWEAKS -->
+<script src="https://unpkg.com/react@18.3.1/umd/react.development.js" integrity="sha384-hD6/rw4ppMLGNu3tX5cjIb+uRZ7UkRJ6BPkLpg4hAu/6onKUg4lLsHAs9EBPT82L" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.development.js" integrity="sha384-u6aeetuaXnQ38mYT8rp6sbXaQe3NL9t+IBXmnYxwkUI2Hw4bsp2Wvmx4yRQF1uAm" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/@babel/standalone@7.29.0/babel.min.js" integrity="sha384-m08KidiNqLdpJqLq95G/LEi8Qvjl/xUYll3QILypMoQ65QorJ9Lvtp2RXYGBFj1y" crossorigin="anonymous"></script>
+<script type="text/babel" src="tweaks-panel.jsx"></script>
+
+<script type="text/babel">
+const TWEAK_DEFAULTS = /*EDITMODE-BEGIN*/{
+  "theme": {
+    "value": "forest",
+    "swatch": [
+      "#0F6E56",
+      "#FB923C",
+      "#F7F4EE"
+    ]
+  },
+  "headerStyle": "default",
+  "displayFont": "Fraunces"
+}/*EDITMODE-END*/;
+
+const PriamTweaks = () => {
+  const [t, setTweak] = useTweaks(TWEAK_DEFAULTS);
+
+  React.useEffect(() => {
+    document.body.dataset.theme = t.theme;
+    document.body.dataset.headers = t.headerStyle;
+    document.documentElement.style.setProperty('--font-display',
+      t.displayFont === 'Fraunces' ? "'Fraunces', Georgia, serif" :
+      t.displayFont === 'Inter' ? "'Inter', system-ui, sans-serif" :
+      "'JetBrains Mono', monospace"
+    );
+  }, [t]);
+
+  return (
+    <TweaksPanel title="Tweaks">
+      <TweakSection title="Color theme">
+        <TweakColor
+          label="Theme palette"
+          value={t.theme}
+          onChange={(v) => setTweak('theme', v)}
+          options={[
+            { value: 'forest', swatch: ['#0F6E56', '#FB923C', '#F7F4EE'] },
+            { value: 'navy',   swatch: ['#1F4E8C', '#3B82F6', '#F2F4F8'] },
+            { value: 'warm',   swatch: ['#B45309', '#0F6E56', '#FBF5EC'] }
+          ]}
+        />
+      </TweakSection>
+
+      <TweakSection title="Section header style">
+        <TweakRadio
+          label="Marker"
+          value={t.headerStyle}
+          onChange={(v) => setTweak('headerStyle', v)}
+          options={[
+            { value: 'default', label: 'Inline' },
+            { value: 'bar',     label: 'Bar' },
+            { value: 'dot',     label: 'Dot' }
+          ]}
+        />
+      </TweakSection>
+
+      <TweakSection title="Display font">
+        <TweakRadio
+          label="Headings"
+          value={t.displayFont}
+          onChange={(v) => setTweak('displayFont', v)}
+          options={[
+            { value: 'Fraunces', label: 'Fraunces' },
+            { value: 'Inter',    label: 'Inter' },
+            { value: 'Mono',     label: 'Mono' }
+          ]}
+        />
+      </TweakSection>
+    </TweaksPanel>
+  );
+};
+
+const __tweaksRoot = document.createElement('div');
+document.body.appendChild(__tweaksRoot);
+ReactDOM.createRoot(__tweaksRoot).render(<PriamTweaks />);
+</script>
+
+</body>
+</html>
