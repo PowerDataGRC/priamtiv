@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>PRIAM — Pitch Deck</title>
+<title>PRIAMTIV — Pitch Deck</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
@@ -11,18 +11,18 @@
 
 <script type="application/json" id="speaker-notes">
 [
-  "Welcome. PRIAM stands for Policy, Risk, Incident, Asset, Management — a single platform built specifically for small businesses. Today: what we built, why it matters, and how it works in practice.",
+  "Welcome. PRIAMTIV stands for Policy, Risk, Incident, Asset, Management — a single platform built specifically for small businesses. Today: what we built, why it matters, and how it works in practice.",
   "Quick reality check. Lost laptops, phishing emails, supplier breaches, missed renewals — these aren't enterprise problems. They happen to small businesses every week. Most just don't have a way to track them.",
-  "Big companies have GRC teams, audit committees, full-time risk officers. SMBs have… a shared spreadsheet, if anything. We built PRIAM for the 99% of businesses that fall into that gap.",
-  "PRIAM gives you four connected modules: policy, risk, incident, and asset management — each lightweight enough to use day one, integrated enough to give you a single source of truth.",
+  "Big companies have GRC teams, audit committees, full-time risk officers. SMBs have… a shared spreadsheet, if anything. We built PRIAMTIV for the 99% of businesses that fall into that gap.",
+  "PRIAMTIV gives you four connected modules: policy, risk, incident, and asset management — each lightweight enough to use day one, integrated enough to give you a single source of truth.",
   "These five letters aren't just branding. They map to five real workflows that share data. A policy references an asset. An incident triggers a risk re-assessment. Everything feeds the same dashboard.",
   "Policies as living documents, not PDFs in a binder. Draft, publish, version, acknowledge — and your team sees them where they work.",
   "Risk assessments adapt to your industry. Pick your NAICS code, answer the questions that actually apply to you. No 400-question generic checklist.",
   "After the assessment, you get a clear number, a category breakdown, and a likelihood-vs-impact matrix. Plus a prioritized list of fixes — not just 'you have problems'.",
   "Every incident — a lost phone, a phishing click, a customer complaint — moves through a queue with a clear owner at every step. Submitted, assigned, active, resolved, closed.",
-  "Patterns matter more than individual events. Three lost devices in a month is a procurement problem. PRIAM shows you the trend, not just the ticket.",
+  "Patterns matter more than individual events. Three lost devices in a month is a procurement problem. PRIAMTIV shows you the trend, not just the ticket.",
   "Your assets — employees, customers, suppliers, devices, vehicles — all live in one place. When an incident references a customer or device, you see it linked.",
-  "PRIAM ships with an annual HIPAA and Data Privacy Assessment for the front-line teams who actually handle protected health information. Twenty-five questions, thirty minutes, eighty percent to pass — and a certificate the moment you do.",
+  "PRIAMTIV ships with an annual HIPAA and Data Privacy Assessment for the front-line teams who actually handle protected health information. Twenty-five questions, thirty minutes, eighty percent to pass — and a certificate the moment you do.",
   "The questions are written in plain language around the situations social-services teams actually face. Saved as you go, with a question palette so participants can jump straight to whatever they haven't answered yet.",
   "Whether someone passes or not, every question gets an explanation — so the assessment doubles as training. Retakes are one click away.",
   "On the admin side, compliance leads get a live dashboard: who's been invited, who's in progress, who's completed, who's failed — plus pass rate and average score. Drill-downs by company, participant, and report make it easy to chase the last few stragglers before a deadline.",
@@ -30,7 +30,7 @@
   "The flow is: author a template once with placeholders. Attach rules — NAICS code, state, business flags. Tenants then see only the policies that match their profile, with placeholders ready for their company-specific values. Or skip the authoring entirely and import from the catalog.",
   "Five built-in roles cover almost every SMB org chart. Employees can add records, but admins approve them. No custom IAM project required.",
   "A new tenant is up and running in under five minutes. Industry, state, operational characteristics — that's the entire signup, and the questionnaire is already tailored.",
-  "Here's how a small operations team actually uses PRIAM across a typical week. Mostly quick check-ins, with the occasional deeper assessment.",
+  "Here's how a small operations team actually uses PRIAMTIV across a typical week. Mostly quick check-ins, with the occasional deeper assessment.",
   "Why us. Simple, intuitive, queue-based incidents, adaptive questionnaires — and a real assembly of productive functions instead of one narrow tool.",
   "Multi-tenant by design. Every record carries a tenant ID; isolation is enforced at the database query level, not bolted on after the fact.",
   "Firebase auth, RBAC at the API layer, immutable audit trails on every assessment. Boring, dependable security primitives — the kind we want.",
@@ -327,13 +327,13 @@
   .cover-headline em { font-style: italic; color: var(--teal-700); font-weight: 400; }
 
   /* === GRID OF FIVE LETTERS (P R I A M) === */
-  .priam-grid {
+  .PRIAMTIV-grid {
     display: grid;
     grid-template-columns: repeat(5, 1fr);
     gap: 22px;
     margin-top: var(--gap-title);
   }
-  .priam-card {
+  .PRIAMTIV-card {
     background: var(--navy-700);
     border: 1px solid var(--dark-rule);
     border-radius: 18px;
@@ -343,7 +343,7 @@
     gap: 14px;
     min-height: 360px;
   }
-  .priam-letter {
+  .PRIAMTIV-letter {
     font-family: var(--font-display);
     font-weight: 500;
     font-size: 130px;
@@ -351,18 +351,18 @@
     color: var(--teal-300);
     letter-spacing: -0.04em;
   }
-  .priam-card:nth-child(2) .priam-letter { color: var(--orange-400); }
-  .priam-card:nth-child(3) .priam-letter { color: #93C5FD; }
-  .priam-card:nth-child(4) .priam-letter { color: #C4ECDC; }
-  .priam-card:nth-child(5) .priam-letter { color: #FDE68A; }
-  .priam-word {
+  .PRIAMTIV-card:nth-child(2) .PRIAMTIV-letter { color: var(--orange-400); }
+  .PRIAMTIV-card:nth-child(3) .PRIAMTIV-letter { color: #93C5FD; }
+  .PRIAMTIV-card:nth-child(4) .PRIAMTIV-letter { color: #C4ECDC; }
+  .PRIAMTIV-card:nth-child(5) .PRIAMTIV-letter { color: #FDE68A; }
+  .PRIAMTIV-word {
     font-family: var(--font-display);
     font-style: italic;
     font-size: 34px;
     margin: 0;
     color: #F4F1EA;
   }
-  .priam-desc {
+  .PRIAMTIV-desc {
     font-size: 22px;
     line-height: 1.4;
     color: rgba(244,241,234,0.7);
@@ -1041,7 +1041,7 @@
   <div class="cover-stage">
     <div class="cover-left">
       <div class="logo-lockup">
-        <img src="assets/priam-logo.svg" alt="PRIAM logo">
+        <img src="assets/PRIAMTIV-logo.svg" alt="PRIAMTIV logo">
       </div>
       <div style="display:flex; flex-direction:column; gap:48px">
         <p class="eyebrow" style="margin:0">Risk &amp; Asset Management for Small Business</p>
@@ -1105,7 +1105,7 @@
       </div>
     </div>
   </div>
-  <div class="footer-mark"><span class="accent">PRIAM</span> 02 / 20</div>
+  <div class="footer-mark"><span class="accent">PRIAMTIV</span> 02 / 20</div>
 </section>
 
 <!-- ============ SLIDE 3: WHY MOST GO WITHOUT ============ -->
@@ -1129,7 +1129,7 @@
           <p style="margin:0; color:var(--ink-500); font-size:22px">If anything at all</p>
         </div>
         <div style="background:linear-gradient(135deg, var(--teal-700), var(--teal-500)); color:#fff; border-radius:18px; padding:40px">
-          <p class="mono" style="color:var(--teal-100); margin:0 0 14px">PRIAM</p>
+          <p class="mono" style="color:var(--teal-100); margin:0 0 14px">PRIAMTIV</p>
           <p style="font-family:var(--font-display); font-size:42px; margin:0 0 8px; line-height:1.1">Day-one usable</p>
           <p style="margin:0; color:rgba(255,255,255,0.78); font-size:22px">Built for the way SMBs work</p>
         </div>
@@ -1138,14 +1138,14 @@
   </div>
 </section>
 
-<!-- ============ SLIDE 4: WHAT PRIAM DOES ============ -->
-<section data-label="04 What PRIAM does" class="bg-dark">
+<!-- ============ SLIDE 4: WHAT PRIAMTIV DOES ============ -->
+<section data-label="04 What PRIAMTIV does" class="bg-dark">
   <div class="frame">
     <div class="section-marker"><span class="section-marker-num">01</span><span>The platform</span></div>
     <h1 class="display" style="max-width:18ch">A single platform for everything that <span style="color:var(--teal-300); font-style:italic">might go wrong</span>—and everything you own.</h1>
     <p class="body" style="font-size:30px; max-width:46ch; margin-top:14px; color:rgba(244,241,234,0.78)">Four lightweight modules. One shared system of record. Designed so a five-person team and a fifty-person team can both use it from week one.</p>
   </div>
-  <div class="footer-mark"><span class="accent">PRIAM</span> 04 / 20</div>
+  <div class="footer-mark"><span class="accent">PRIAMTIV</span> 04 / 20</div>
 </section>
 
 <!-- ============ SLIDE 5: P R I A M ============ -->
@@ -1153,31 +1153,31 @@
   <div class="frame">
     <div class="section-marker"><span class="section-marker-num">02</span><span>The acronym</span></div>
     <h1 class="title" style="max-width:24ch">Five letters. Five connected workflows.</h1>
-    <div class="priam-grid">
-      <div class="priam-card">
-        <span class="priam-letter">P</span>
-        <p class="priam-word">Policy</p>
-        <p class="priam-desc">Draft, publish, version, and track acknowledgement.</p>
+    <div class="PRIAMTIV-grid">
+      <div class="PRIAMTIV-card">
+        <span class="PRIAMTIV-letter">P</span>
+        <p class="PRIAMTIV-word">Policy</p>
+        <p class="PRIAMTIV-desc">Draft, publish, version, and track acknowledgement.</p>
       </div>
-      <div class="priam-card">
-        <span class="priam-letter">R</span>
-        <p class="priam-word">Risk</p>
-        <p class="priam-desc">Adaptive, industry-specific assessments and recommendations.</p>
+      <div class="PRIAMTIV-card">
+        <span class="PRIAMTIV-letter">R</span>
+        <p class="PRIAMTIV-word">Risk</p>
+        <p class="PRIAMTIV-desc">Adaptive, industry-specific assessments and recommendations.</p>
       </div>
-      <div class="priam-card">
-        <span class="priam-letter">I</span>
-        <p class="priam-word">Incident</p>
-        <p class="priam-desc">Queue-based reporting with status, ownership, and audit trail.</p>
+      <div class="PRIAMTIV-card">
+        <span class="PRIAMTIV-letter">I</span>
+        <p class="PRIAMTIV-word">Incident</p>
+        <p class="PRIAMTIV-desc">Queue-based reporting with status, ownership, and audit trail.</p>
       </div>
-      <div class="priam-card">
-        <span class="priam-letter">A</span>
-        <p class="priam-word">Asset</p>
-        <p class="priam-desc">People, customers, suppliers, devices, and vehicles in one ledger.</p>
+      <div class="PRIAMTIV-card">
+        <span class="PRIAMTIV-letter">A</span>
+        <p class="PRIAMTIV-word">Asset</p>
+        <p class="PRIAMTIV-desc">People, customers, suppliers, devices, and vehicles in one ledger.</p>
       </div>
-      <div class="priam-card">
-        <span class="priam-letter">M</span>
-        <p class="priam-word">Management</p>
-        <p class="priam-desc">Roles, approvals, audit, and the dashboard that ties it together.</p>
+      <div class="PRIAMTIV-card">
+        <span class="PRIAMTIV-letter">M</span>
+        <p class="PRIAMTIV-word">Management</p>
+        <p class="PRIAMTIV-desc">Roles, approvals, audit, and the dashboard that ties it together.</p>
       </div>
     </div>
   </div>
@@ -1213,7 +1213,7 @@
     <h1 class="title" style="max-width:22ch">Questionnaires that adapt to your industry, not yours to a checklist.</h1>
     <div class="two-col" style="margin-top:24px; align-items:flex-start">
       <div>
-        <p class="body" style="font-size:30px">Pick your NAICS code at signup. PRIAM only asks what's relevant.</p>
+        <p class="body" style="font-size:30px">Pick your NAICS code at signup. PRIAMTIV only asks what's relevant.</p>
         <div style="display:flex; gap:16px; flex-wrap:wrap; margin-top:24px">
           <span class="pill">Adaptive (DAG engine)</span>
           <span class="pill warm">NAICS-tailored</span>
@@ -1224,11 +1224,11 @@
       </div>
       <div style="display:flex; flex-direction:column; gap:20px">
         <div style="background:#FFFFFF; padding:32px 36px; border-radius:16px; border:1px solid var(--cream-200)">
-          <p class="mono" style="color:var(--teal-700); margin:0 0 14px">Without PRIAM</p>
+          <p class="mono" style="color:var(--teal-700); margin:0 0 14px">Without PRIAMTIV</p>
           <p style="margin:0; font-family:var(--font-display); font-size:34px; line-height:1.1">A 400-question generic checklist.</p>
         </div>
         <div style="background:var(--teal-700); color:#fff; padding:32px 36px; border-radius:16px">
-          <p class="mono" style="color:var(--teal-100); margin:0 0 14px">With PRIAM</p>
+          <p class="mono" style="color:var(--teal-100); margin:0 0 14px">With PRIAMTIV</p>
           <p style="margin:0; font-family:var(--font-display); font-size:34px; line-height:1.1">Roughly 50 questions. Only the ones that apply to a 12-person retailer in Oregon.</p>
         </div>
       </div>
@@ -1360,7 +1360,7 @@
     <div class="two-col" style="gap:80px; align-items:center">
       <div>
         <h1 class="title" style="max-width:18ch">A guided assessment for the people on the front line.</h1>
-        <p class="body" style="font-size:28px; max-width:42ch">Annual HIPAA &amp; Data Privacy refreshers — built into PRIAM. Coaches and case workers take a 25-question, 30-minute assessment. Pass at 80% and a Certificate of Completion is generated automatically.</p>
+        <p class="body" style="font-size:28px; max-width:42ch">Annual HIPAA &amp; Data Privacy refreshers — built into PRIAMTIV. Coaches and case workers take a 25-question, 30-minute assessment. Pass at 80% and a Certificate of Completion is generated automatically.</p>
         <ul class="bullets" style="margin-top:18px">
           <li><b>25 questions</b> · multiple choice + short answer</li>
           <li><b>30-minute</b> timed window with autosave</li>
@@ -1589,7 +1589,7 @@
 <section data-label="14 A typical week" class="bg-light">
   <div class="frame">
     <p class="eyebrow">In practice</p>
-    <h1 class="title" style="max-width:24ch">A typical week with PRIAM.</h1>
+    <h1 class="title" style="max-width:24ch">A typical week with PRIAMTIV.</h1>
     <p class="body" style="font-size:26px; max-width:50ch">Mostly two-minute check-ins. Occasionally a deeper assessment. Always one place to look.</p>
     <div class="week">
       <div class="week-day">
@@ -1623,7 +1623,7 @@
 <section data-label="15 Built for SMBs" class="bg-dark">
   <div class="frame">
     <div class="section-marker"><span class="section-marker-num">03</span><span>Why us</span></div>
-    <h1 class="title" style="max-width:18ch">Four reasons PRIAM fits where enterprise GRC doesn't.</h1>
+    <h1 class="title" style="max-width:18ch">Four reasons PRIAMTIV fits where enterprise GRC doesn't.</h1>
     <div class="diff-grid">
       <div class="diff-card">
         <div class="num">01 — Simplicity</div>
@@ -1647,7 +1647,7 @@
       </div>
     </div>
   </div>
-  <div class="footer-mark"><span class="accent">PRIAM</span> 15 / 20</div>
+  <div class="footer-mark"><span class="accent">PRIAMTIV</span> 15 / 20</div>
 </section>
 
 <!-- ============ SLIDE 16: MULTI-TENANT ============ -->
@@ -1799,9 +1799,9 @@
   <div class="frame">
     <div style="display:flex; align-items:center; justify-content:space-between; margin-bottom:38px">
       <div class="logo-lockup logo-lockup-sm">
-        <img src="assets/priam-logo.svg" alt="PRIAM">
+        <img src="assets/PRIAMTIV-logo.svg" alt="PRIAMTIV">
       </div>
-      <p class="mono" style="color:rgba(244,241,234,0.5); margin:0">PRIAM · RISK &amp; ASSET MANAGEMENT</p>
+      <p class="mono" style="color:rgba(244,241,234,0.5); margin:0">PRIAMTIV · RISK &amp; ASSET MANAGEMENT</p>
     </div>
     <h1 class="display" style="max-width:18ch">Two ways to <span style="color:var(--teal-300); font-style:italic">get started.</span></h1>
     <div class="cta-grid">
@@ -1809,13 +1809,13 @@
         <p class="mono" style="color:var(--teal-300); margin:0; letter-spacing:0.16em; text-transform:uppercase; font-size:20px">Self-serve</p>
         <h3>Start a free trial</h3>
         <p>Tenant created in under five minutes. First assessment ready immediately. No card required for the trial.</p>
-        <p class="url">priam.app/start</p>
+        <p class="url">PRIAMTIV.app/start</p>
       </div>
       <div class="cta-card warm">
         <p class="mono" style="color:var(--orange-400); margin:0; letter-spacing:0.16em; text-transform:uppercase; font-size:20px">Guided</p>
         <h3>Book a 20-min walkthrough</h3>
         <p>We'll set you up with sample data for your industry. You'll see exactly what your first month looks like.</p>
-        <p class="url">priam.app/demo</p>
+        <p class="url">PRIAMTIV.app/demo</p>
       </div>
     </div>
     <p style="text-align:center; margin-top:48px; font-family:var(--font-display); font-style:italic; font-size:32px; color:rgba(244,241,234,0.78)">Thank you.</p>
@@ -1844,7 +1844,7 @@ const TWEAK_DEFAULTS = /*EDITMODE-BEGIN*/{
   "displayFont": "Fraunces"
 }/*EDITMODE-END*/;
 
-const PriamTweaks = () => {
+const PRIAMTIVTweaks = () => {
   const [t, setTweak] = useTweaks(TWEAK_DEFAULTS);
 
   React.useEffect(() => {
@@ -1903,7 +1903,7 @@ const PriamTweaks = () => {
 
 const __tweaksRoot = document.createElement('div');
 document.body.appendChild(__tweaksRoot);
-ReactDOM.createRoot(__tweaksRoot).render(<PriamTweaks />);
+ReactDOM.createRoot(__tweaksRoot).render(<PRIAMTIVTweaks />);
 </script>
 
 </body>

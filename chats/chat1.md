@@ -12,7 +12,7 @@ _Started 2026-05-06 23:40 UTC_
 
 I'll acknowledge the system reminder and respond to the user's request. Since this is the start of the conversation with no prior work to snip, I'll proceed with the task.
 
-The user wants marketing material for PRIAM (Policy, Risk, Incident, Asset, Management) — a multi-tenant SaaS. They mentioned "in addition to a product slide-deck" and provided detailed context plus screenshots. Let me ask clarifying questions before building.
+The user wants marketing material for PRIAMTIV (Policy, Risk, Incident, Asset, Management) — a multi-tenant SaaS. They mentioned "in addition to a product slide-deck" and provided detailed context plus screenshots. Let me ask clarifying questions before building.
 
 _[tool: questions_v2]_
 
@@ -71,16 +71,16 @@ _[tool: snip]_
 I have everything I need. Let me set up the project and plan the deck.
 
 **Design system observations:**
-- Logo: PRIAM emblem with 4 teal nodes (P, R, I, A) + center M circle, dashed orange ring. Brand colors: deep teal `#0F6E56`, mint `#9FE1CB`, orange accent `#FB923C`.
+- Logo: PRIAMTIV emblem with 4 teal nodes (P, R, I, A) + center M circle, dashed orange ring. Brand colors: deep teal `#0F6E56`, mint `#9FE1CB`, orange accent `#FB923C`.
 - Product UI: dark navy backgrounds, blue primary `#3B82F6`, status pill colors (green/orange/red/yellow). Inter-style sans.
 - Tone: friendly, approachable, SMB-focused (think Notion/Asana). Light hero sections with dark detail/proof sections.
 
 **Title sequence (action titles, sentence case — the speaker leads with each as a chapter intro):**
 
-1. PRIAM — Risk & Asset Management for small businesses (cover)
+1. PRIAMTIV — Risk & Asset Management for small businesses (cover)
 2. The risks SMBs face every day
 3. Why most small businesses go without a risk program
-4. What PRIAM does
+4. What PRIAMTIV does
 5. The four pieces, working together (P·R·I·A·M)
 6. Policy management — Living documents, not binders
 7. Risk assessment — Adaptive questionnaires by industry
@@ -90,7 +90,7 @@ I have everything I need. Let me set up the project and plan the deck.
 11. Asset management — People, customers, suppliers, devices, vehicles
 12. Built-in roles and approval workflows
 13. Onboarding in minutes
-14. A typical week with PRIAM
+14. A typical week with PRIAMTIV
 15. Built for small businesses (differentiators)
 16. Multi-tenant by design
 17. Security & data handling
@@ -126,10 +126,10 @@ _[tool: snip]_
 
 _[tool: fork_verifier_agent]_
 
-The PRIAM pitch deck is live — 20 slides at 1920×1080, friendly SMB tone with light hero / dark proof sections.
+The PRIAMTIV pitch deck is live — 20 slides at 1920×1080, friendly SMB tone with light hero / dark proof sections.
 
 **Highlights:**
-- Cover with the PRIAM emblem + "Risk visibility, without the GRC team."
+- Cover with the PRIAMTIV emblem + "Risk visibility, without the GRC team."
 - 5-card P·R·I·A·M acronym slide as the structural anchor
 - Product screenshots embedded for Policy, Risk results, Incidents, Analytics, Resources, Onboarding
 - Queue diagram for the incident lifecycle, week-in-the-life timeline, multi-tenant + security pillars
@@ -183,7 +183,7 @@ I have the design language. Now let me plan the landing page sections.
 
 **Landing page narrative (SMB-friendly, Notion/Asana feel):**
 
-1. **Nav** — logo, jump-links (Platform / How it works / Why PRIAM / FAQ), "Start free trial" CTA
+1. **Nav** — logo, jump-links (Platform / How it works / Why PRIAMTIV / FAQ), "Start free trial" CTA
 2. **Hero (light)** — "Risk visibility, without the GRC team." sub: simple platform for SMBs to track policies, risks, incidents and assets. CTAs: Start free trial / Book a 20-min walkthrough. Floating product screenshot.
 3. **Problem strip (cream)** — "Lost laptops. Phishing emails. Missed renewals." Three quick incident vignettes.
 4. **The acronym (light)** — P·R·I·A·M five cards, what each does
@@ -191,12 +191,12 @@ I have the design language. Now let me plan the landing page sections.
 6. **Module 2 — Risk Assessment** (cream, screenshot right) — adaptive NAICS questionnaire + score
 7. **Module 3 — Incident Management** (dark proof section) — queue diagram + screenshot
 8. **Module 4 — Asset Management** (light)
-9. **Why PRIAM (dark teal)** — 4 differentiators
+9. **Why PRIAMTIV (dark teal)** — 4 differentiators
 10. **Roles & multi-tenant** (dark) — RBAC pillars
 11. **5-minute setup** (light) — 3-step onboarding
 12. **FAQ** (light) — 6 common questions
 13. **Final CTA (teal gradient)** — "Start tracking risk this week."
-14. **Footer** (dark) — PRIAM nav, copyright
+14. **Footer** (dark) — PRIAMTIV nav, copyright
 
 Tweaks: theme palette + section-header style (matching deck).
 
@@ -224,7 +224,7 @@ _[tool: fork_verifier_agent]_
 
 _[tool: snip]_
 
-The PRIAM marketing landing page is live at `marketing/Landing Page.html`, sharing the deck's visual language (Fraunces display + Inter, cream/teal/navy palette).
+The PRIAMTIV marketing landing page is live at `marketing/Landing Page.html`, sharing the deck's visual language (Fraunces display + Inter, cream/teal/navy palette).
 
 **Page flow:**
 1. Sticky nav with logo + CTAs
@@ -232,7 +232,7 @@ The PRIAM marketing landing page is live at `marketing/Landing Page.html`, shari
 3. Problem strip — three SMB vignettes (lost laptop, phishing click, EOQ compliance)
 4. Platform — five-card P·R·I·A·M acronym
 5. Four module sections — Policy, Risk, Incident (dark), Analytics (dark), Asset — alternating image/copy with adaptive features
-6. "Why PRIAM" on teal gradient — four differentiators
+6. "Why PRIAMTIV" on teal gradient — four differentiators
 7. Roles + multi-tenant pillars on navy
 8. Five-minute setup — three numbered steps
 9. FAQ — six expandable questions
@@ -241,7 +241,7 @@ The PRIAM marketing landing page is live at `marketing/Landing Page.html`, shari
 
 **Tweaks (top-right):** Theme (Forest / Navy / Warm) and Section header style (Inline / Bar / Dot) — same controls as the deck so they feel like a system.
 
-Both deliverables — `deck/PRIAM Pitch Deck.html` and `marketing/Landing Page.html` — share assets and tweak vocabulary. Ready for your review.
+Both deliverables — `deck/PRIAMTIV Pitch Deck.html` and `marketing/Landing Page.html` — share assets and tweak vocabulary. Ready for your review.
 
 ## User
 
@@ -399,8 +399,8 @@ Done — added 6 new slides (4 HIPAA Assessment + 2 Platform Administration) wit
 - **Deck additions** (inserted after Asset Management):
   - HIPAA intro · taking the assessment · results & explanations · admin dashboard
   - Platform Admin overview · templates/rules/catalog (4-up screen grid)
-- **One-pager** — US Letter, double-sided. Front: hero + PRIAM acronym + "why" cards. Back: four module rows + multi-tenant pillars + dual CTA. Print with Cmd/Ctrl+P (margins are baked in).
-- **PPTX** — `deck/PRIAM Pitch Deck.pptx` (editable mode, 26 slides, speaker notes attached). Download card is up.
+- **One-pager** — US Letter, double-sided. Front: hero + PRIAMTIV acronym + "why" cards. Back: four module rows + multi-tenant pillars + dual CTA. Print with Cmd/Ctrl+P (margins are baked in).
+- **PPTX** — `deck/PRIAMTIV Pitch Deck.pptx` (editable mode, 26 slides, speaker notes attached). Download card is up.
 
 For Google Slides: upload the .pptx to Drive, right-click → Open with → Google Slides. Let me know if you'd like a screenshots-mode version (pixel-perfect but flat) or a one-pager PDF.
 
