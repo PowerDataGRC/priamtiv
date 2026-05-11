@@ -202,7 +202,7 @@
     justify-content: space-between;
   }
   nav.top .brand { display: flex; align-items: center; gap: 12px; }
-  nav.top .brand img { height: 36px; }
+  nav.top .brand img { height: 63px; }
   nav.top .links { display: flex; align-items: center; gap: 4px; }
   nav.top .links a { font-size: 15px; color: var(--ink-700); padding: 8px 14px; border-radius: 8px; font-weight: 500; }
   nav.top .links a:hover { background: rgba(14,18,22,0.05); color: var(--ink-900); }
@@ -538,6 +538,164 @@
 
   html { scroll-behavior: smooth; }
   section[id] { scroll-margin-top: 100px; }
+
+  /* === HAMBURGER BUTTON === */
+  .menu-btn {
+    display: none;
+    flex-direction: column;
+    justify-content: center;
+    gap: 5px;
+    width: 40px;
+    height: 40px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 8px;
+    border-radius: 8px;
+    flex-shrink: 0;
+  }
+  .menu-btn span {
+    display: block;
+    width: 22px;
+    height: 2px;
+    background: var(--ink-900);
+    border-radius: 2px;
+    transition: transform .2s, opacity .2s;
+  }
+  .menu-btn:hover { background: rgba(14,18,22,0.06); }
+
+  /* === MOBILE NAV OVERLAY === */
+  #nav-overlay {
+    display: none;
+    position: fixed;
+    inset: 0;
+    z-index: 200;
+    background: var(--cream-50);
+    flex-direction: column;
+    padding: 0 28px 48px;
+    overflow-y: auto;
+  }
+  #nav-overlay.open { display: flex; }
+  .overlay-head {
+    height: 76px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-shrink: 0;
+  }
+  .overlay-head img { height: 63px; }
+  .overlay-close {
+    width: 40px; height: 40px;
+    border: none; background: none; cursor: pointer;
+    font-size: 22px; color: var(--ink-700);
+    display: flex; align-items: center; justify-content: center;
+    border-radius: 8px; line-height: 1;
+  }
+  .overlay-close:hover { background: rgba(14,18,22,0.06); }
+  .overlay-links {
+    display: flex;
+    flex-direction: column;
+    margin-top: 12px;
+    flex: 1;
+  }
+  .overlay-links a {
+    font-size: 28px;
+    font-family: var(--font-display);
+    font-weight: 500;
+    color: var(--ink-900);
+    padding: 18px 0;
+    border-bottom: 1px solid rgba(14,18,22,0.07);
+    letter-spacing: -0.012em;
+    transition: color .15s;
+  }
+  .overlay-links a:hover { color: var(--accent); }
+  .overlay-cta {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    margin-top: 32px;
+  }
+  .overlay-cta .btn { height: 56px; font-size: 17px; justify-content: center; width: 100%; }
+
+  /* === RESPONSIVE: TABLET (≤1024px) === */
+  @media (max-width: 1024px) {
+    .hero { padding: 64px 48px 0; }
+    .hero-inner { grid-template-columns: 1fr; gap: 48px; padding-bottom: 72px; }
+    .hero-copy { max-width: 100%; }
+    .hero-visual .float-card.tl { left: 16px; }
+    .hero-visual .float-card.br { right: 16px; }
+
+    .acronym-row { grid-template-columns: repeat(3, 1fr); }
+    .pillars { grid-template-columns: repeat(2, 1fr); }
+
+    footer.foot .row { grid-template-columns: 1fr 1fr; gap: 40px; }
+    footer.foot .brand { grid-column: 1 / -1; }
+  }
+
+  /* === RESPONSIVE: MOBILE (≤768px) === */
+  @media (max-width: 768px) {
+    nav.top .row { padding: 0 20px; }
+    nav.top .links { display: none; }
+    nav.top .cta { display: none; }
+    .menu-btn { display: flex; }
+
+    .section { padding: 72px 24px; }
+    .section.tight { padding: 56px 24px; }
+    .section.huge { padding: 96px 24px; }
+
+    .hero { padding: 48px 24px 0; }
+    .hero-inner { grid-template-columns: 1fr; gap: 36px; padding-bottom: 56px; }
+    .hero-copy { max-width: 100%; gap: 20px; }
+    h1.display { font-size: clamp(38px, 9vw, 56px); }
+    .hero-cta { flex-direction: column; gap: 10px; }
+    .hero-cta .btn { width: 100%; justify-content: center; }
+    .hero-meta { flex-wrap: wrap; gap: 10px 20px; }
+    .hero-visual .float-card { display: none; }
+
+    h2.title { font-size: clamp(30px, 8vw, 44px); }
+    p.lead { font-size: 18px; }
+
+    .problem-grid { grid-template-columns: 1fr; }
+
+    .acronym-row { grid-template-columns: repeat(2, 1fr); }
+    .acronym-card .letter { font-size: 60px; }
+    .acronym-card { min-height: auto; }
+
+    .module { grid-template-columns: 1fr; gap: 36px; }
+    .module.flip .module-copy { order: 0; }
+    .module-copy { max-width: 100%; }
+    .module-copy .feature .body { font-size: 15px; }
+
+    .queue { grid-template-columns: 1fr 1fr; gap: 8px; }
+    .queue-step + .queue-step::before { display: none; }
+    .queue-step .label { font-size: 14px; }
+
+    .diff-grid { grid-template-columns: 1fr; }
+    .diff-card .head { font-size: 26px; }
+
+    .pillars { grid-template-columns: 1fr; }
+    .pillar { min-height: auto; }
+
+    .steps { grid-template-columns: 1fr; }
+    .step { min-height: auto; }
+
+    .faq summary { font-size: 20px; }
+    .faq { padding: 20px 4px; }
+
+    .cta-block .cta-row { flex-direction: column; width: 100%; gap: 10px; }
+    .cta-block .cta-row .btn { width: 100%; justify-content: center; height: 56px; font-size: 16px; padding: 0 20px; }
+
+    footer.foot { padding: 56px 24px 32px; }
+    footer.foot .row { grid-template-columns: 1fr; gap: 36px; }
+    footer.foot .brand { grid-column: auto; max-width: 100%; }
+    footer.foot .legal { flex-direction: column; gap: 8px; text-align: center; }
+  }
+
+  /* === RESPONSIVE: SMALL MOBILE (≤480px) === */
+  @media (max-width: 480px) {
+    .acronym-row { grid-template-columns: 1fr; }
+    .queue { grid-template-columns: 1fr; }
+  }
 </style>
 </head>
 <body>
@@ -558,8 +716,29 @@
       <a class="btn btn-ghost" href="https://powerdatainc.com/hello/">Sign in</a>
       <a class="btn btn-primary" href="https://powerdatainc.com/hello/">Start free trial</a>
     </div>
+    <button class="menu-btn" id="menu-btn" aria-label="Open menu" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
   </div>
 </nav>
+
+<!-- ============== MOBILE NAV OVERLAY ============== -->
+<div id="nav-overlay" role="dialog" aria-modal="true" aria-label="Navigation menu">
+  <div class="overlay-head">
+    <img src="assets/PriamLogo_dark.svg" alt="PRIAMTIV">
+    <button class="overlay-close" id="overlay-close" aria-label="Close menu">✕</button>
+  </div>
+  <nav class="overlay-links">
+    <a href="#platform">Platform</a>
+    <a href="#how">How it works</a>
+    <a href="#why">Why PRIAMTIV</a>
+    <a href="#faq">FAQ</a>
+  </nav>
+  <div class="overlay-cta">
+    <a class="btn btn-secondary" href="https://powerdatainc.com/hello/">Sign in</a>
+    <a class="btn btn-primary" href="https://powerdatainc.com/hello/">Start free trial →</a>
+  </div>
+</div>
 
 <!-- ============== HERO ============== -->
 <section class="hero bg-cream">
@@ -1006,5 +1185,33 @@
   </div>
 </footer>
 
+
+<script>
+  const menuBtn = document.getElementById('menu-btn');
+  const overlay = document.getElementById('nav-overlay');
+  const overlayClose = document.getElementById('overlay-close');
+
+  function openMenu() {
+    overlay.classList.add('open');
+    menuBtn.setAttribute('aria-expanded', 'true');
+    document.body.style.overflow = 'hidden';
+  }
+  function closeMenu() {
+    overlay.classList.remove('open');
+    menuBtn.setAttribute('aria-expanded', 'false');
+    document.body.style.overflow = '';
+  }
+
+  menuBtn.addEventListener('click', openMenu);
+  overlayClose.addEventListener('click', closeMenu);
+
+  overlay.querySelectorAll('a').forEach(link => {
+    link.addEventListener('click', closeMenu);
+  });
+
+  document.addEventListener('keydown', e => {
+    if (e.key === 'Escape') closeMenu();
+  });
+</script>
 </body>
 </html>
