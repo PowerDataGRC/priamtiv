@@ -71,16 +71,16 @@ _[tool: snip]_
 I have everything I need. Let me set up the project and plan the deck.
 
 **Design system observations:**
-- Logo: PRIAMTIV emblem with 4 teal nodes (P, R, I, A) + center M circle, dashed orange ring. Brand colors: deep teal `#0F6E56`, mint `#9FE1CB`, orange accent `#FB923C`.
+- Logo: PRIAM emblem with 4 teal nodes (P, R, I, A) + center M circle, dashed orange ring. Brand colors: deep teal `#0F6E56`, mint `#9FE1CB`, orange accent `#FB923C`.
 - Product UI: dark navy backgrounds, blue primary `#3B82F6`, status pill colors (green/orange/red/yellow). Inter-style sans.
 - Tone: friendly, approachable, SMB-focused (think Notion/Asana). Light hero sections with dark detail/proof sections.
 
 **Title sequence (action titles, sentence case — the speaker leads with each as a chapter intro):**
 
-1. PRIAMTIV — Risk & Asset Management for small businesses (cover)
+1. PRIAM — Risk & Asset Management for small businesses (cover)
 2. The risks SMBs face every day
 3. Why most small businesses go without a risk program
-4. What PRIAMTIV does
+4. What PRIAM does
 5. The four pieces, working together (P·R·I·A·M)
 6. Policy management — Living documents, not binders
 7. Risk assessment — Adaptive questionnaires by industry
@@ -90,7 +90,7 @@ I have everything I need. Let me set up the project and plan the deck.
 11. Asset management — People, customers, suppliers, devices, vehicles
 12. Built-in roles and approval workflows
 13. Onboarding in minutes
-14. A typical week with PRIAMTIV
+14. A typical week with PRIAM
 15. Built for small businesses (differentiators)
 16. Multi-tenant by design
 17. Security & data handling
@@ -126,10 +126,10 @@ _[tool: snip]_
 
 _[tool: fork_verifier_agent]_
 
-The PRIAMTIV pitch deck is live — 20 slides at 1920×1080, friendly SMB tone with light hero / dark proof sections.
+The PRIAM pitch deck is live — 20 slides at 1920×1080, friendly SMB tone with light hero / dark proof sections.
 
 **Highlights:**
-- Cover with the PRIAMTIV emblem + "Risk visibility, without the GRC team."
+- Cover with the PRIAM emblem + "Risk visibility, without the GRC team."
 - 5-card P·R·I·A·M acronym slide as the structural anchor
 - Product screenshots embedded for Policy, Risk results, Incidents, Analytics, Resources, Onboarding
 - Queue diagram for the incident lifecycle, week-in-the-life timeline, multi-tenant + security pillars
