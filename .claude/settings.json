@@ -1,0 +1,8 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(git -C /home/max/codeRepo/priamtiv add assets/logo.png assets/logo-light.png index.html)",
+      "Bash(git -C /home/max/codeRepo/priamtiv commit -m ' *)"
+    ]
+  }
+}
