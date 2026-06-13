@@ -1,0 +1,14 @@
+# OS / editor artifacts
+.DS_Store
+Thumbs.db
+*.swp
+*.swo
+.idea/
+.vscode/
+
+# Node (if you ever run build tools locally)
+node_modules/
+
+# Compiled assets — commit the source, not the build output
+assets/*.min.js
+assets/*.min.css
