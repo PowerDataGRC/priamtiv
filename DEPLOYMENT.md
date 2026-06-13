@@ -9,7 +9,7 @@
 | Genesis parent theme | `~/domains/priamtiv.com/public_html/wp-content/themes/genesis/` |
 | Secrets file | `~/priamtiv.wp-config-local.php` (outside git, never overwritten by deploy) |
 | PHP version | 8.3 |
-| Database | MySQL on `localhost` |
+| Database | MySQL on `localhost` — `u891148405_nFdBt` |
 
 **This git repo** (`PowerDataGRC/priamtiv`) is deployed only to the child theme directory.
 WordPress core and Genesis live in `public_html/` and are managed separately (WP-CLI or admin).
@@ -42,13 +42,12 @@ cd ~/domains/priamtiv.com/public_html
 Hostinger has WP-CLI available. Use it to install WordPress into the existing MySQL database:
 
 ```bash
-# Confirm the DB name, user, and password from hPanel → Databases
-# Replace the placeholders below with your actual values
+# DB name is u891148405_nFdBt — get the user and password from hPanel → Databases
 
 wp core download --path=~/domains/priamtiv.com/public_html
 
 wp config create \
-  --dbname=DB_NAME \
+  --dbname=u891148405_nFdBt \
   --dbuser=DB_USER \
   --dbpass=DB_PASSWORD \
   --dbhost=localhost \
@@ -161,6 +160,34 @@ Go to **Pages → Add New** and create these four pages:
 | Contact | `contact` | Paste `page-contact-blocks.html` (see step 10) |
 | Consulting | `consulting` | Leave blank (placeholder for future) |
 | Training | `training` | Leave blank (placeholder for future) |
+| Privacy Policy | `privacy-policy` | Paste placeholder content (see below) |
+| Terms | `terms` | Paste placeholder content (see below) |
+
+**Privacy Policy placeholder content** (paste into Code Editor):
+```html
+<!-- wp:html -->
+<section class="pd-section-tight" style="padding-top:clamp(48px,7vw,84px);">
+  <div class="pd-wrap" style="max-width:720px;margin:0 auto;">
+    <h1>Privacy Policy</h1>
+    <p style="color:var(--muted);margin-top:8px;">Last updated: June 2026</p>
+    <p class="lede" style="margin-top:24px;">This page is under construction. Please contact us at <a href="mailto:hello@priamtiv.com">hello@priamtiv.com</a> with any privacy-related questions.</p>
+  </div>
+</section>
+<!-- /wp:html -->
+```
+
+**Terms placeholder content** (paste into Code Editor):
+```html
+<!-- wp:html -->
+<section class="pd-section-tight" style="padding-top:clamp(48px,7vw,84px);">
+  <div class="pd-wrap" style="max-width:720px;margin:0 auto;">
+    <h1>Terms of Service</h1>
+    <p style="color:var(--muted);margin-top:8px;">Last updated: June 2026</p>
+    <p class="lede" style="margin-top:24px;">This page is under construction. Please contact us at <a href="mailto:hello@priamtiv.com">hello@priamtiv.com</a> with any questions about our terms.</p>
+  </div>
+</section>
+<!-- /wp:html -->
+```
 
 For the PRIAM Platform page:
 - Check **Hide page title** in the Page Options sidebar box (hides the Genesis page title since the hero has its own H1)
