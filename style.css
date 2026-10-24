@@ -73,6 +73,7 @@ Text Domain:       powerdata-theme
    ============================================================ */
 *, *::before, *::after { box-sizing: border-box; }
 html { scroll-behavior: smooth; }
+section[id] { scroll-margin-top: var(--header-h, 76px); }
 
 body {
   margin: 0;

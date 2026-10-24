@@ -14,10 +14,9 @@ define( 'POWERDATA_SITE_NAME', 'PRIAM' );
 define( 'POWERDATA_SITE_URL',  'https://priamtiv.com' );
 
 // Primary call to action: "Book a walkthrough" (#3).
-// Override in ~/priamtiv.wp-config-local.php with the Microsoft Bookings page URL once it's live:
-//   define( 'PRIAM_WALKTHROUGH_URL', 'https://outlook.office.com/book/...' );
+// Microsoft Bookings page; can be overridden in ~/priamtiv.wp-config-local.php.
 if ( ! defined( 'PRIAM_WALKTHROUGH_URL' ) ) {
-	define( 'PRIAM_WALKTHROUGH_URL', POWERDATA_SITE_URL . '/contact/' );
+	define( 'PRIAM_WALKTHROUGH_URL', 'https://bookings.cloud.microsoft/book/PRIAMbyPowerDataSolutions@powerdatainc.com/' );
 }
 
 // ── 2. GENESIS SETUP ─────────────────────────────────────────────────────────
@@ -280,7 +279,7 @@ function powerdata_json_ld() {
 				'contactPoint'        => [
 					'@type'       => 'ContactPoint',
 					'contactType' => 'customer service',
-					'url'         => POWERDATA_SITE_URL . '/contact/',
+					'url'         => POWERDATA_SITE_URL . '/hello/',
 				],
 			],
 			[
@@ -397,7 +396,7 @@ function powerdata_mobile_menu() {
 			'theme_location' => 'primary',
 			'container'      => false,
 		] ); ?>
-		<a class="btn btn-primary" href="<?php echo esc_url( PRIAM_WALKTHROUGH_URL ); ?>" style="margin-top:16px;width:100%;justify-content:center;display:inline-flex;">Book a walkthrough →</a>
+		<a class="btn btn-primary" href="<?php echo esc_url( PRIAM_WALKTHROUGH_URL ); ?>" target="_blank" rel="noopener" style="margin-top:16px;width:100%;justify-content:center;display:inline-flex;">Book a walkthrough →</a>
 	</nav>
 	<?php
 }
@@ -428,18 +427,18 @@ function powerdata_custom_footer() {
 					</div>
 					<p class="pd-foot-desc">Policy · Risk · Incident · Asset Management, made for the organizations that can't afford a GRC department.</p>
 					<p style="margin-top:20px;">
-						<a class="btn btn-sm btn-outline-light" href="<?php echo esc_url( PRIAM_WALKTHROUGH_URL ); ?>">Book a walkthrough →</a>
+						<a class="btn btn-sm btn-outline-light" href="<?php echo esc_url( PRIAM_WALKTHROUGH_URL ); ?>" target="_blank" rel="noopener">Book a walkthrough →</a>
 					</p>
 				</div>
 
 				<div>
 					<h5>Platform</h5>
 					<ul>
-						<li><a href="<?php echo esc_url( home_url( '/priam/#platform' ) ); ?>">Platform</a></li>
-						<li><a href="<?php echo esc_url( home_url( '/priam/#how' ) ); ?>">How it works</a></li>
-						<li><a href="<?php echo esc_url( home_url( '/priam/#why-priam' ) ); ?>">Why PRIAM</a></li>
-						<li><a href="<?php echo esc_url( home_url( '/priam/#faq' ) ); ?>">FAQ</a></li>
-						<li><a href="<?php echo esc_url( home_url( '/contact/' ) ); ?>">Contact</a></li>
+						<li><a href="<?php echo esc_url( home_url( '/#platform' ) ); ?>">Platform</a></li>
+						<li><a href="<?php echo esc_url( home_url( '/#howitworks' ) ); ?>">How it works</a></li>
+						<li><a href="<?php echo esc_url( home_url( '/#whyPRIAM' ) ); ?>">Why PRIAM</a></li>
+						<li><a href="<?php echo esc_url( home_url( '/#faq' ) ); ?>">FAQ</a></li>
+						<li><a href="<?php echo esc_url( home_url( '/hello/' ) ); ?>">Contact</a></li>
 					</ul>
 				</div>
 
@@ -447,7 +446,7 @@ function powerdata_custom_footer() {
 					<h5>Company</h5>
 					<ul>
 						<li><a href="https://powerdatainc.com" target="_blank" rel="noopener">PowerData ↗</a></li>
-						<li><a href="<?php echo esc_url( home_url( '/contact/' ) ); ?>">Contact</a></li>
+						<li><a href="<?php echo esc_url( home_url( '/hello/' ) ); ?>">Contact</a></li>
 					</ul>
 				</div>
 
