@@ -335,7 +335,8 @@ h1, h2, h3, h4, h5, h6 {
 /* Dark band */
 .band-ink { background: var(--ink); color: #DCE3EC; }
 .band-ink h1, .band-ink h2, .band-ink h3 { color: #fff; }
-.band-ink .lede { color: #AEB9C8; }
+.band-ink .lede,
+.pd-handoff .lede { color: #AEB9C8; } /* #1: readable lede on dark bands */
 
 /* Check list */
 .check { display: flex; align-items: flex-start; gap: 11px; }

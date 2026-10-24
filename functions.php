@@ -7,11 +7,18 @@
  */
 
 // ── 1. CONSTANTS ─────────────────────────────────────────────────────────────
-define( 'POWERDATA_VERSION',   '1.1.0' );
+define( 'POWERDATA_VERSION',   '1.1.1' );
 define( 'POWERDATA_DIR',       get_stylesheet_directory() );
 define( 'POWERDATA_URI',       get_stylesheet_directory_uri() );
 define( 'POWERDATA_SITE_NAME', 'PRIAM' );
 define( 'POWERDATA_SITE_URL',  'https://priamtiv.com' );
+
+// Primary call to action: "Book a walkthrough" (#3).
+// Override in ~/priamtiv.wp-config-local.php with the Microsoft Bookings page URL once it's live:
+//   define( 'PRIAM_WALKTHROUGH_URL', 'https://outlook.office.com/book/...' );
+if ( ! defined( 'PRIAM_WALKTHROUGH_URL' ) ) {
+	define( 'PRIAM_WALKTHROUGH_URL', POWERDATA_SITE_URL . '/contact/' );
+}
 
 // ── 2. GENESIS SETUP ─────────────────────────────────────────────────────────
 add_action( 'genesis_setup', 'powerdata_genesis_setup', 15 );
@@ -268,11 +275,7 @@ function powerdata_json_ld() {
 				'url'                 => POWERDATA_SITE_URL,
 				'applicationCategory' => 'BusinessApplication',
 				'operatingSystem'     => 'Web',
-				'description'         => 'The simple GRC platform for small businesses — policies, risk, incidents, and assets in one place from day one.',
-				'offers'              => [
-					'@type'       => 'Offer',
-					'description' => 'Free trial available. No credit card required.',
-				],
+				'description'         => 'The compliance operations workspace for small and mid-sized organizations: policies, risk assessments, assets and incidents in one secure place.',
 				'provider'            => [ '@id' => 'https://powerdatainc.com/#organization' ],
 				'contactPoint'        => [
 					'@type'       => 'ContactPoint',
@@ -394,7 +397,7 @@ function powerdata_mobile_menu() {
 			'theme_location' => 'primary',
 			'container'      => false,
 		] ); ?>
-		<a class="btn btn-primary" href="<?php echo esc_url( home_url( '/contact/' ) ); ?>" style="margin-top:16px;width:100%;justify-content:center;display:inline-flex;">Let's Talk →</a>
+		<a class="btn btn-primary" href="<?php echo esc_url( PRIAM_WALKTHROUGH_URL ); ?>" style="margin-top:16px;width:100%;justify-content:center;display:inline-flex;">Book a walkthrough →</a>
 	</nav>
 	<?php
 }
@@ -423,9 +426,9 @@ function powerdata_custom_footer() {
 							<span style="font-family:var(--font-display);font-weight:700;font-size:22px;color:#fff;">PRIAM</span>
 						<?php endif; ?>
 					</div>
-					<p class="pd-foot-desc">The simple GRC platform for small businesses — policies, risk, incidents, and assets in one place from day one.</p>
+					<p class="pd-foot-desc">Policy · Risk · Incident · Asset Management, made for the organizations that can't afford a GRC department.</p>
 					<p style="margin-top:20px;">
-						<a class="btn btn-sm btn-outline-light" href="<?php echo esc_url( home_url( '/contact/' ) ); ?>">Let's Talk →</a>
+						<a class="btn btn-sm btn-outline-light" href="<?php echo esc_url( PRIAM_WALKTHROUGH_URL ); ?>">Book a walkthrough →</a>
 					</p>
 				</div>
 
