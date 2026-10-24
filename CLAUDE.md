@@ -16,7 +16,7 @@ This repo was created in June 2026 when the site was migrated from Drupal (repo:
 | Parent theme | Genesis 3.6.2 |
 | Child theme | `powerdata-theme` (this repo) |
 | Contact form spam protection | Cloudflare Turnstile |
-| SMTP | Hostinger (`smtp.hostinger.com:465 SSL`) |
+| SMTP | SendPulse (`smtp-pulse.com:465 SSL`) |
 | Hosting | Hostinger shared hosting |
 | PHP | 8.3 |
 | Database | MySQL — `u891148405_nFdBt` |
@@ -56,7 +56,8 @@ Credentials are stored outside `public_html/` in a file that is never overwritte
 <?php
 define( 'CF_TURNSTILE_SITE_KEY',   '...' );
 define( 'CF_TURNSTILE_SECRET_KEY', '...' );
-define( 'SMTP_PASSWORD',           '...' );  // hello@priamtiv.com Hostinger password
+define( 'SENDPULSE_SMTP_USER',      '...' );  // SendPulse → Settings → SMTP
+define( 'SENDPULSE_SMTP_PASS',      '...' );  // generated SMTP password on that page
 ```
 
 `wp-config.php` (in `public_html/`) includes this file at runtime.
@@ -100,7 +101,7 @@ define( 'SMTP_PASSWORD',           '...' );  // hello@priamtiv.com Hostinger pas
 - Handled via WordPress AJAX (`wp-admin/admin-ajax.php`, action `pd_contact_form`)
 - Spam protection: Cloudflare Turnstile (`[pd_turnstile]` shortcode)
 - Email sent to: WordPress admin email (`Settings → General → Administration email address`)
-- SMTP: `smtp.hostinger.com:465` SSL, username `hello@priamtiv.com`, password from secrets file
+- SMTP: SendPulse `smtp-pulse.com:465` SSL, credentials from secrets file; sent from the verified sender `notalking@notify.priamtiv.com`, Reply-To the visitor
 - Confirmation message: "Message sent! We will be in touch within one business day."
 
 ---

@@ -81,7 +81,8 @@ cat > ~/priamtiv.wp-config-local.php << 'EOF'
 <?php
 define( 'CF_TURNSTILE_SITE_KEY',   'YOUR_TURNSTILE_SITE_KEY' );
 define( 'CF_TURNSTILE_SECRET_KEY', 'YOUR_TURNSTILE_SECRET_KEY' );
-define( 'SMTP_PASSWORD',           'YOUR_SMTP_PASSWORD' );   // hello@priamtiv.com Hostinger password
+define( 'SENDPULSE_SMTP_USER',      'YOUR_SENDPULSE_USER' );  // SendPulse → Settings → SMTP
+define( 'SENDPULSE_SMTP_PASS',      'YOUR_SENDPULSE_PASS' );
 EOF
 
 chmod 600 ~/priamtiv.wp-config-local.php
@@ -93,7 +94,7 @@ Replace placeholder values:
 |---|---|
 | `YOUR_TURNSTILE_SITE_KEY` | Cloudflare Turnstile dashboard |
 | `YOUR_TURNSTILE_SECRET_KEY` | Cloudflare Turnstile dashboard |
-| `YOUR_SMTP_PASSWORD` | hPanel → Email → Manage → hello@priamtiv.com |
+| `YOUR_SENDPULSE_USER` / `YOUR_SENDPULSE_PASS` | SendPulse → Settings → SMTP |
 
 ### 4. Install Genesis parent theme
 
@@ -228,7 +229,7 @@ For PRIAM Platform and Contact pages:
 
 ### 12. Configure SMTP
 
-SMTP is wired in `functions.php` (Hostinger, port 465 SSL, `hello@priamtiv.com`).
+SMTP is wired in `functions.php` (SendPulse `smtp-pulse.com`, port 465 SSL, from `notalking@notify.priamtiv.com`).
 The password is loaded from `~/priamtiv.wp-config-local.php` (created in step 3).
 
 To test email after deploy:
@@ -342,7 +343,7 @@ wp plugin update --all --path=~/domains/priamtiv.com/public_html
 |---|---|---|
 | Turnstile site key | `~/priamtiv.wp-config-local.php` | `define( 'CF_TURNSTILE_SITE_KEY', '...' )` |
 | Turnstile secret key | `~/priamtiv.wp-config-local.php` | `define( 'CF_TURNSTILE_SECRET_KEY', '...' )` |
-| SMTP password | `~/priamtiv.wp-config-local.php` | `define( 'SMTP_PASSWORD', '...' )` |
+| SendPulse SMTP login | `~/priamtiv.wp-config-local.php` | `define( 'SENDPULSE_SMTP_USER' / 'SENDPULSE_SMTP_PASS', '...' )` |
 | WP DB credentials | `wp-config.php` (set during install) | standard WP config |
 
 ---

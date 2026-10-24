@@ -119,7 +119,8 @@ The secrets file format:
 <?php
 define( 'CF_TURNSTILE_SITE_KEY',   'your-site-key' );
 define( 'CF_TURNSTILE_SECRET_KEY', 'your-secret-key' );
-define( 'SMTP_PASSWORD',           'your-smtp-password' );
+define( 'SENDPULSE_SMTP_USER',      'your-sendpulse-smtp-login' );
+define( 'SENDPULSE_SMTP_PASS',      'your-sendpulse-smtp-password' );
 ```
 
 ---
@@ -212,7 +213,7 @@ Check that `wp-config.php` exists in `public_html/` and that the secrets file pa
    wp eval "wp_mail('hello@priamtiv.com','Test','SMTP test from WP-CLI');" \
      --path=~/domains/priamtiv.com/public_html
    ```
-   If that returns `false`, check the SMTP password in the secrets file and confirm `smtp.hostinger.com:465` is accessible.
+   If that returns `false`, check the SendPulse credentials in the secrets file and confirm `smtp-pulse.com:465` is accessible (or switch to STARTTLS on 587).
 
 3. **"Human verification failed" error** — The Turnstile secret key may be wrong, or the domain hasn't been added to your Cloudflare Turnstile dashboard allowed-hostnames list.
 
@@ -227,7 +228,7 @@ Check that `wp-config.php` exists in `public_html/` and that the secrets file pa
 | Navigation menu | WordPress database | Appearance → Menus |
 | Logo | WordPress media library | Appearance → Customize → Site Identity |
 | Turnstile keys | `~/priamtiv.wp-config-local.php` | SSH → nano |
-| SMTP password | `~/priamtiv.wp-config-local.php` | SSH → nano |
+| SendPulse SMTP login | `~/priamtiv.wp-config-local.php` | SSH → nano |
 | DB credentials | `wp-config.php` in `public_html/` | SSH → nano (rarely needed) |
 | Media uploads | `wp-content/uploads/` | WP admin → Media |
 | WordPress core | `public_html/` | WP-CLI or WP admin |

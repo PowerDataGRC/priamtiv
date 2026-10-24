@@ -209,14 +209,15 @@ function powerdata_handle_contact_form() {
 		wp_send_json_error( [ 'message' => 'Please fill in all required fields.' ] );
 	}
 
-	$to      = get_option( 'admin_email' );
-	$subject = 'PRIAM — New walkthrough request from ' . $name;
+	$to      = 'hello@priamtiv.com';
+	$subject = 'New contact form submission — priamtiv.com';
 	$body    = "Name: {$name}\nEmail: {$email}";
 	if ( $company ) $body .= "\nCompany: {$company}";
 	$body .= "\n\nMessage:\n{$message}";
+	// From is the verified SendPulse sender (see 5b); replies go to the visitor.
 	$headers = [
 		'Content-Type: text/plain; charset=UTF-8',
-		'From: PRIAM <noreply@priamtiv.com>',
+		'From: PRIAM Contact <' . POWERDATA_MAIL_FROM . '>',
 		'Reply-To: ' . $name . ' <' . $email . '>',
 	];
 
@@ -230,17 +231,27 @@ function powerdata_handle_contact_form() {
 }
 
 // ── 5b. OUTBOUND SMTP ────────────────────────────────────────────────────────
-// Define in wp-config.php (outside git):
-//   define( 'SMTP_PASSWORD', '...' );
+// SendPulse SMTP. Define in ~/priamtiv.wp-config-local.php (outside git),
+// using the values from SendPulse → Settings → SMTP:
+//   define( 'SENDPULSE_SMTP_USER', '...' );
+//   define( 'SENDPULSE_SMTP_PASS', '...' );
+// If port 465 is blocked, use ENCRYPTION_STARTTLS on port 587 (or 2525).
+define( 'POWERDATA_MAIL_FROM', 'notalking@notify.priamtiv.com' ); // verified SendPulse sender
+
 add_action( 'phpmailer_init', 'powerdata_smtp_config' );
 function powerdata_smtp_config( $phpmailer ) {
 	$phpmailer->isSMTP();
-	$phpmailer->Host       = 'smtp.hostinger.com';
+	$phpmailer->Host       = 'smtp-pulse.com';
 	$phpmailer->SMTPAuth   = true;
+	$phpmailer->Username   = defined( 'SENDPULSE_SMTP_USER' ) ? SENDPULSE_SMTP_USER : '';
+	$phpmailer->Password   = defined( 'SENDPULSE_SMTP_PASS' ) ? SENDPULSE_SMTP_PASS : '';
+	$phpmailer->SMTPSecure = PHPMailer\PHPMailer\PHPMailer::ENCRYPTION_SMTPS;
 	$phpmailer->Port       = 465;
-	$phpmailer->SMTPSecure = 'ssl';
-	$phpmailer->Username   = 'hello@priamtiv.com';
-	$phpmailer->Password   = defined( 'SMTP_PASSWORD' ) ? SMTP_PASSWORD : '';
+
+	// Always send from the verified sender and keep the Return-Path on our domain,
+	// never the visitor's address.
+	$phpmailer->setFrom( POWERDATA_MAIL_FROM, $phpmailer->FromName, false );
+	$phpmailer->Sender = POWERDATA_MAIL_FROM;
 }
 
 // ── 6. LOCALIZE AJAX DATA FOR JS ─────────────────────────────────────────────
