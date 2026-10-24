@@ -2,7 +2,7 @@
 
 ## What this repo is
 
-This is the WordPress child theme (Genesis framework) for **priamtiv.com**, the marketing and product page for PRIAM — PowerData's GRC SaaS product for small businesses.
+This is the WordPress child theme (Genesis framework) for **priamtiv.com**, the marketing and product page for PRIAM — PowerData's compliance software for small businesses.
 
 This repo was created in June 2026 when the site was migrated from Drupal (repo: `priamtiv-drupal`) to WordPress.
 
