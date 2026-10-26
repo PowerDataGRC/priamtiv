@@ -5,7 +5,7 @@ Description:       PowerData Solutions Genesis child theme. Replaces Altitude Pr
 Author:            PowerData Solutions Inc.
 Author URI:        https://powerdatainc.com
 Template:          genesis
-Version:           1.2.0
+Version:           1.2.1
 Tags:              genesis, essential-blocks, gutenberg, small-business
 License:           Private
 Text Domain:       powerdata-theme
@@ -1150,3 +1150,16 @@ h1, h2, h3, h4, h5, h6 {
 .nav-primary .genesis-nav-menu li:focus-within > .sub-menu { opacity: 1; visibility: visible; transform: none; }
 .nav-primary .genesis-nav-menu .sub-menu a { display: block; white-space: nowrap; }
 #pd-mobile-menu .sub-menu a { padding-left: 20px; font-size: 16px; color: #AEB9C8; }
+/* Third level (Platform ▾ → Policies ▾ → How policies work) opens to the side */
+.nav-primary .genesis-nav-menu .sub-menu li { position: relative; }
+.nav-primary .genesis-nav-menu .sub-menu .sub-menu { top: -9px; left: 100%; margin-left: 6px; }
+.nav-primary .genesis-nav-menu .sub-menu .menu-item-has-children > a { display: flex; align-items: center; justify-content: space-between; }
+.nav-primary .genesis-nav-menu .sub-menu .menu-item-has-children > a::after { transform: rotate(-45deg); margin-left: 14px; }
+#pd-mobile-menu .sub-menu .sub-menu a { padding-left: 36px; font-size: 15px; color: #9AA7B8; }
+/* Keep top-level labels on one line. A menu with dropdowns (the Platform menu)
+   has six items, so it switches to the mobile toggle below 1200px instead of 921px. */
+.nav-primary .genesis-nav-menu > li > a { white-space: nowrap; }
+@media (min-width: 921px) and (max-width: 1199px) {
+  .site-header:has(.nav-primary .menu-item-has-children) .nav-primary { display: none; }
+  .site-header:has(.nav-primary .menu-item-has-children) .pd-nav-toggle { display: inline-flex; }
+}
