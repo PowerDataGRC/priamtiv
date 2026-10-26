@@ -986,3 +986,167 @@ h1, h2, h3, h4, h5, h6 {
 #pd-mobile-menu .btn { margin-top: 16px; width: 100%; justify-content: center; }
 #pd-mobile-menu ul { list-style: none; padding: 0; margin: 0; }
 #pd-mobile-menu li { display: block; }
+
+/* ============================================================
+   30. MODULE PAGES (pattern "PRIAM module page", #15)
+   Built from native blocks, so pages stay editable in the
+   visual editor. Each section is a Group with a class below,
+   holding an inner Group with the class "pd-wrap".
+   ============================================================ */
+.pd-mod-hero    { padding: clamp(48px,7vw,96px) 0 clamp(36px,5vw,64px); }
+.pd-mod-hero .h-display { max-width: 14ch; margin: 0; }
+.pd-mod-hero .lede      { max-width: 620px; margin-top: 22px; }
+.pd-mod-section { padding: clamp(44px,6vw,80px) 0; }
+.pd-mod-section.alt { background: var(--surface-2); border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); }
+.pd-mod-section .h-section { margin: 0 0 28px; max-width: 22ch; }
+
+/* The problem: three short bullets */
+.pd-mod-problem { list-style: none; padding: 0; margin: 0; display: grid; gap: 14px; max-width: 760px; }
+.pd-mod-problem li {
+  position: relative;
+  padding: 16px 18px 16px 48px;
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  font-size: 17px;
+  color: var(--ink-soft);
+}
+.pd-mod-problem li::before {
+  content: "";
+  position: absolute; left: 20px; top: 24px;
+  width: 12px; height: 2px;
+  background: var(--red);
+}
+
+/* How it works: step rows (text + screenshot). Core Columns stack below 782px. */
+.pd-mod-step { gap: clamp(24px,4vw,56px) !important; align-items: center !important; margin: 0 0 clamp(36px,5vw,64px) !important; }
+.pd-mod-step:last-child { margin-bottom: 0 !important; }
+.pd-mod-step.solo { max-width: 620px; }
+.pd-mod-step > .wp-block-column:first-child { flex-basis: 38% !important; }
+.pd-mod-step > .wp-block-column:last-child  { flex-basis: 62% !important; }
+@media (min-width: 782px) {
+  .pd-mod-step.is-reversed { flex-direction: row-reverse; }
+}
+.pd-mod-step .pd-step-n {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 13px;
+  letter-spacing: .14em;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin: 0 0 10px;
+}
+.pd-mod-step h3 { font-family: var(--font-display); font-size: clamp(21px,2.2vw,26px); margin: 0 0 10px; letter-spacing: -.01em; }
+.pd-mod-step p  { color: var(--ink-soft); font-size: 16.5px; line-height: 1.6; }
+
+/* Screenshot frame */
+.pd-shot { margin: 0; }
+.pd-shot img {
+  display: block;
+  width: 100%;
+  height: auto;
+  border-radius: var(--radius);
+  border: 1px solid rgba(15,27,45,.12);
+  box-shadow: var(--shadow-md);
+  background: var(--ink);
+}
+.pd-shot figcaption { font-size: 13.5px; color: var(--muted); margin-top: 10px; text-align: left; }
+
+/* Responsive 16:9 video embed */
+.pd-video { margin: 0 auto; max-width: 960px; }
+.pd-video .wp-block-embed__wrapper { position: relative; aspect-ratio: 16 / 9; border-radius: var(--radius); overflow: hidden; box-shadow: var(--shadow-md); background: var(--ink); }
+.pd-video .wp-block-embed__wrapper::before { display: none; }
+.pd-video iframe { position: absolute; inset: 0; width: 100%; height: 100%; border: 0; }
+
+/* Who uses it: role chips */
+.pd-mod-roles { list-style: none; padding: 0; margin: 0; display: grid; gap: 12px; grid-template-columns: 1fr; }
+@media (min-width: 761px) { .pd-mod-roles { grid-template-columns: repeat(3, 1fr); } }
+.pd-mod-roles li {
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  padding: 18px 20px;
+  font-size: 15.5px;
+  color: var(--ink-soft);
+}
+.pd-mod-roles li strong { display: block; font-family: var(--font-display); color: var(--ink); font-size: 17px; margin-bottom: 4px; }
+
+/* FAQ with the core Details block (reuses .pd-faq-item from section 22) */
+.wp-block-details.pd-faq-item { max-width: 800px; }
+.wp-block-details.pd-faq-item summary::after {
+  content: "+";
+  flex: none;
+  width: 26px; height: 26px;
+  border-radius: 50%;
+  border: 1px solid var(--line-strong);
+  display: grid; place-items: center;
+  font-weight: 500;
+  transition: transform .2s, background .2s;
+}
+.wp-block-details.pd-faq-item[open] summary::after { transform: rotate(45deg); background: var(--accent); border-color: var(--accent); color: #fff; }
+.wp-block-details.pd-faq-item > :not(summary) { margin-top: 12px; color: var(--ink-soft); }
+
+/* Buttons from the core Buttons block */
+.wp-block-button.pd-cta .wp-block-button__link {
+  font-family: var(--font-body);
+  font-weight: 600;
+  font-size: 16.5px;
+  border-radius: 999px;
+  padding: 16px 30px;
+  background: var(--accent);
+  color: #fff;
+  box-shadow: 0 6px 18px rgba(14,122,90,.28);
+  transition: transform .15s ease, background .15s ease;
+}
+.wp-block-button.pd-cta .wp-block-button__link:hover { background: var(--accent-deep); transform: translateY(-1px); }
+.pd-mod-hero .wp-block-buttons,
+.pd-mod-cta .wp-block-buttons { margin-top: 30px; }
+
+/* Final CTA band */
+.pd-mod-cta { text-align: center; padding: clamp(56px,7vw,96px) 0; }
+.pd-mod-cta .h-section { margin: 0 auto; max-width: 20ch; }
+.pd-mod-cta .lede { margin: 16px auto 0; max-width: 560px; }
+.pd-mod-cta .wp-block-buttons { justify-content: center; }
+
+/* "See how … works →" links from the homepage and overview */
+.pd-mod-links { list-style: none; padding: 0; margin: 0; display: grid; gap: 16px; grid-template-columns: 1fr; }
+@media (min-width: 761px) { .pd-mod-links { grid-template-columns: repeat(2, 1fr); } }
+@media (min-width: 1081px) { .pd-mod-links { grid-template-columns: repeat(3, 1fr); } }
+.pd-mod-links li { background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius-lg); padding: 22px 24px; color: var(--ink-soft); font-size: 15.5px; }
+.pd-mod-links li a { display: block; font-family: var(--font-display); font-weight: 700; font-size: 19px; color: var(--ink); margin-bottom: 6px; }
+.pd-mod-links li a:hover { color: var(--accent-deep); }
+
+/* ============================================================
+   31. NAV DROPDOWN (Platform ▾)
+   ============================================================ */
+.nav-primary .genesis-nav-menu > li { position: relative; }
+.nav-primary .genesis-nav-menu .menu-item-has-children > a::after {
+  content: "";
+  display: inline-block;
+  width: 6px; height: 6px;
+  margin-left: 8px;
+  border-right: 1.5px solid currentColor;
+  border-bottom: 1.5px solid currentColor;
+  transform: translateY(-3px) rotate(45deg);
+}
+.nav-primary .genesis-nav-menu .sub-menu {
+  list-style: none;
+  position: absolute;
+  top: 100%; left: 0;
+  min-width: 260px;
+  margin: 0;
+  padding: 8px;
+  background: #0B1530;
+  border: 1px solid rgba(255,255,255,.1);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow-lg);
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(6px);
+  transition: opacity .15s, transform .15s, visibility .15s;
+  z-index: 60;
+}
+.nav-primary .genesis-nav-menu li:hover > .sub-menu,
+.nav-primary .genesis-nav-menu li:focus-within > .sub-menu { opacity: 1; visibility: visible; transform: none; }
+.nav-primary .genesis-nav-menu .sub-menu a { display: block; white-space: nowrap; }
+#pd-mobile-menu .sub-menu a { padding-left: 20px; font-size: 16px; color: #AEB9C8; }

@@ -322,8 +322,20 @@ function powerdata_json_ld() {
 }
 
 // ── 8. SEO META TAGS (Open Graph + Twitter Card) ─────────────────────────────
+// With Yoast SEO active, Yoast prints these tags (using each page's featured
+// image), and the theme only supplies og-default.png when a page has none.
+// Without Yoast, the theme prints them itself.
+add_filter( 'wpseo_add_opengraph_additional_images', 'powerdata_og_default_image' );
+function powerdata_og_default_image( $images ) {
+	if ( is_object( $images ) && method_exists( $images, 'has_images' ) && ! $images->has_images() ) {
+		$images->add_image_by_url( POWERDATA_URI . '/assets/og-default.png' );
+	}
+	return $images;
+}
+
 add_action( 'wp_head', 'powerdata_og_meta', 2 );
 function powerdata_og_meta() {
+	if ( defined( 'WPSEO_VERSION' ) ) return;
 	global $post;
 
 	$title       = wp_get_document_title();
@@ -351,6 +363,14 @@ function powerdata_og_meta() {
 <meta name="twitter:description" content="<?php echo esc_attr( $description ); ?>">
 <meta name="twitter:image"       content="<?php echo esc_url( $image ); ?>">
 	<?php
+}
+
+// ── 8b. PRIVACY-FRIENDLY YOUTUBE EMBEDS ──────────────────────────────────────
+// Module pages embed clips from the PRIAM YouTube channel; serve them from
+// youtube-nocookie.com so no tracking cookies are set before playback.
+add_filter( 'embed_oembed_html', 'powerdata_youtube_nocookie' );
+function powerdata_youtube_nocookie( $html ) {
+	return str_replace( 'www.youtube.com/embed/', 'www.youtube-nocookie.com/embed/', $html );
 }
 
 // ── 9. REGISTER BLOCK PATTERNS ───────────────────────────────────────────────

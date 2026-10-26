@@ -92,6 +92,25 @@ Changes are live immediately.
 2. Set "Homepage" to the desired page
 3. Save
 
+**To add a module page (under /platform/):**
+1. **Pages → Add New**, set the title, and choose **Platform** as the parent page (Page → Parent).
+2. In the editor: **+ → Patterns → PowerData → PRIAM module page**.
+3. Replace every `[bracketed]` placeholder. Everything is a normal block (headings, paragraphs, lists, images, columns), so no code is needed.
+4. Swap each sample screenshot: select the image → **Replace** → Media Library.
+5. Video: paste the clip's YouTube link into the video block, or delete that section until the clip is on YouTube.
+6. Set a **Featured image** (the page's first screenshot). It becomes the image shown when the page is shared.
+7. Check **Hide page title** (the hero already has the headline), write an excerpt, and publish.
+
+### Module page media
+
+- **Per page:** at most 3 screenshots and 1 short clip, from SharePoint `PRIAM Marketing/General/00 Assets`. Keep the site to about 15 product images in total.
+- **Which frames:** the `-final.png` frames or the numbered step frames named in the page's issue. They show the fictional demo tenant "Harborview Family Services"; never use real customer data.
+- **Export:** WebP, quality about 80, at the capture's own width (1376 px; don't upscale). Each file should be under about 60 KB.
+- **Alt text:** say what the screenshot shows, in a sentence (for example "PRIAM risk assessment results: overall risk score, heatmap and risk by category"). Set it when uploading.
+- **Lazy loading:** WordPress adds `loading="lazy"` and responsive sizes automatically for images inserted from the Media Library. Don't paste image HTML by hand.
+- **Clips:** upload to the PRIAM YouTube channel, keep them under about 60 seconds, and paste the YouTube link into a video block. The theme serves embeds from `youtube-nocookie.com`. Don't upload MP4s to WordPress; shared hosting serves them slowly.
+- **Shown features:** only features marked *Shipped* in `Product-Features.csv`, and nothing role-restricted shown as available to everyone. Don't show screens for features still waiting on production (for example recommendations linked to answers).
+
 ---
 
 ## Updating contact form email destination
